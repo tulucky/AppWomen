@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -22,8 +23,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import Controllner.AdapterZezo;
-import Controllner.Adapterthree;
+import Model.AdapterZezo;
+import Model.Adapterthree;
 import Model.Itemthree;
 import Model.MySingleton;
 
@@ -48,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         carouselView = (CarouselView) findViewById(R.id.carouselView);
         carouselView.setPageCount(sampleImages.length);
         carouselView.setImageListener(imageListener);
-
 
     }
 

@@ -1,4 +1,4 @@
-package Controllner;
+package Model;
 
 import android.content.Context;
 import android.graphics.Paint;
@@ -16,7 +16,6 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.Itemthree;
 import lucky.dev.tu.devandroid.R;
 
 public class Adapterthree extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

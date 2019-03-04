@@ -5,9 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".MainActivity">
+    <include layout="@layout/action_bar"/>
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -87,7 +89,7 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="160dp"
                 android:src="@drawable/lolo" />
 
             <LinearLayout
@@ -136,7 +138,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="20dp">
 
             <ImageView
                 android:id="@+id/seperate"
@@ -177,14 +179,14 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="8dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:background="#e2dede" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/helveticaheue_medium"
             android:text="Phổ Biến"
             android:textColor="#0b0b0b"
@@ -235,17 +237,19 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="8dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:background="#e2dede" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="110dp"
-            android:src="@drawable/sale" />
+            android:src="@drawable/sale"
+            android:layout_marginTop="15dp"/>
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:src="@drawable/das"/>
+            android:src="@drawable/das"
+            android:layout_marginTop="15dp"/>
 
         <ImageView
             android:layout_width="match_parent"
@@ -275,7 +279,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/helveticaheue_medium"
             android:text="Bạn Có Thể Xem"
             android:textColor="#0b0b0b"
