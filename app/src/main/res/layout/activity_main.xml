@@ -151,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/seperate"
                 android:layout_marginTop="15dp"
-                android:fontFamily="@font/helveticaheue_medium"
+                android:fontFamily="@font/sans_prob"
                 android:text="Giảm Giá Đặc Biệt "
                 android:textColor="#0b0b0b"
                 android:textSize="20sp" />
@@ -187,9 +187,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
-            android:fontFamily="@font/helveticaheue_medium"
-            android:text="Phổ Biến"
+            android:fontFamily="@font/sans_prob"
             android:textColor="#0b0b0b"
+            android:text="Phổ Biến"
             android:textSize="20sp"
 
             />
@@ -262,7 +262,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
-            android:fontFamily="@font/helveticaheue_medium"
+            android:fontFamily="@font/sans_prob"
             android:text="What's Hot"
             android:textColor="#0b0b0b"
             android:textSize="20sp" />
@@ -280,7 +280,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
-            android:fontFamily="@font/helveticaheue_medium"
+            android:fontFamily="@font/sans_prob"
             android:text="Bạn Có Thể Xem"
             android:textColor="#0b0b0b"
             android:textSize="20sp" />
@@ -312,6 +312,8 @@
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="56dp"
+        app:itemIconTint="@drawable/bootom_navigation"
+        app:labelVisibilityMode="labeled"
         android:layout_gravity="bottom"
         app:menu="@menu/my_navigation_items"
         android:background="#ffffff"/>

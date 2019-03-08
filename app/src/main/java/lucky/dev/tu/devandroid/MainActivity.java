@@ -13,6 +13,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bumptech.glide.Glide;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
@@ -37,8 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String urlData0 ="http://192.168.0.101/ted/ka.php";
     private static final String urlData3 ="http://192.168.0.101/ted/ka.php";
 
-    int[] sampleImages = {R.drawable.image_3, R.drawable.lko, R.drawable.image_4, R.drawable.image_2, R.drawable.image_3};
-
+   int[] sampleImages = {R.drawable.image_3, R.drawable.lko, R.drawable.image_4, R.drawable.image_2, R.drawable.image_3};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         getDataRecyThree();
         //cu truy cap tai nguen la phai r
         carouselView = (CarouselView) findViewById(R.id.carouselView);
-        carouselView.setPageCount(sampleImages.length);
+      carouselView.setPageCount(sampleImages.length);
         carouselView.setImageListener(imageListener);
 
     }
@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
     ImageListener imageListener = new ImageListener() {
         @Override
         public void setImageForPosition(int position, ImageView imageView) {
-            imageView.setImageResource(sampleImages[position]);
+         //   imageView.setImageResource(sampleImages[position]);
         }
     };
 
