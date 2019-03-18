@@ -1,0 +1,25 @@
+apply plugin: 'com.android.library'
+apply plugin: 'android-maven'
+
+group 'com.antonyt.infiniteviewpager'
+
+android {
+    compileSdkVersion 27
+
+    defaultConfig {
+        targetSdkVersion 19
+        minSdkVersion 14
+        versionName project.VERSION_NAME
+        versionCode Integer.parseInt(project.VERSION_CODE)
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-core-ui:27.1.1'
+    compile 'com.android.support:support-fragment:27.1.1'
+}

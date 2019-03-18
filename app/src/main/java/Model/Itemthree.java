@@ -1,24 +1,24 @@
 package Model;
 
 public class Itemthree {
-    private String Image;
-    private String Price;
+    private String image;
+    private String price;
     private String giaGoc;
     private String phanTram;
 
     public Itemthree(String image, String price, String giaGoc, String phanTram) {
-        Image = image;
-        Price = price;
+        image = image;
+        price = price;
         this.giaGoc = giaGoc;
         this.phanTram = phanTram;
     }
 
     public String getImage() {
-        return Image;
+        return image;
     }
 
     public String getPrice() {
-        return Price;
+        return price;
     }
 
     public String getGiaGoc() {

@@ -2,13 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="15dp">
+    android:layout_marginBottom="15dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
     //chu y de height cua root la content do no match parent
     <ImageView
         android:id="@+id/image"
         android:layout_width="180dp"
         android:layout_height="230dp"
-        android:src="@drawable/vay1"/>
+        android:src="@drawable/vay1" />
     <TextView
         android:id="@+id/price"
         android:layout_width="wrap_content"

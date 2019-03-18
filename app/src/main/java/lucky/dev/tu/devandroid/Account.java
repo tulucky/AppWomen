@@ -21,6 +21,7 @@ public class Account extends AppCompatActivity {
  TabLayout tabLayout;
  ViewPager viewPager;
  StickyNestedScrollView a;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

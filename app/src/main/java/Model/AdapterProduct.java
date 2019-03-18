@@ -18,17 +18,15 @@ import java.util.List;
 
 import lucky.dev.tu.devandroid.R;
 
-public class Adapterthree extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-   public List<Itemthree> mitem;
+public class AdapterProduct extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+   public List<Product> listProduct;
     public Context mcontext;
 
-    public Adapterthree(List<Itemthree> mitems, Context mcontext) {
-        Log.i("a", "" + mitem);
-        mitem = new ArrayList<>();
-        this.mitem = mitems;
-        this.mcontext = mcontext;
+    public AdapterProduct(Context context,List<Product> products) {
+        listProduct = new ArrayList<>();
+        this.listProduct = products;
+        this.mcontext = context;
     }
-
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
@@ -39,21 +37,21 @@ public class Adapterthree extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        Log.i("a",""+mitem.get(position).getImage());
+        Log.i("a",""+listProduct.get(position).getImage());
         MyHolder mholder = (MyHolder) holder;
         Glide.with(mcontext)
-                .load(mitem.get(position).getImage())
+                .load(listProduct.get(position).getImage())
                 .into(mholder.mImage);
-        mholder.mPrice.setText(mitem.get(position).getPrice());
-        mholder.mGiaGoc.setText(mitem.get(position).getGiaGoc());
-        mholder.phanTram.setText(mitem.get(position).getPhanTram());
+        mholder.mPrice.setText(listProduct.get(position).getPrice());
+        mholder.mGiaGoc.setText(listProduct.get(position).getGiaGoc());
+        mholder.phanTram.setText(listProduct.get(position).getPhanTram());
         mholder.mGiaGoc.setPaintFlags( mholder.mGiaGoc.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
     }
 
     @Override
     public int getItemCount() {
-        return mitem.size();
+        return listProduct.size();
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {

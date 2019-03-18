@@ -1,19 +1,21 @@
 package lucky.dev.tu.devandroid;
 
+import android.graphics.Point;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Display;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.bumptech.glide.Glide;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
@@ -25,16 +27,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Model.AdapterZezo;
-import Model.Adapterthree;
+import Model.AdapterProduct;
 import Model.Itemthree;
 import Model.MySingleton;
+import Model.Product;
 
 public class MainActivity extends AppCompatActivity {
- List<Itemthree> containerThree;
+ List<Product> containerThree;
  List<Itemthree> containerZezo;
     CarouselView carouselView;
     RecyclerView mRecycleThree;
     RecyclerView mRecycleZezo;
+    FrameLayout frameLayout;
     private static final String urlData0 ="http://192.168.0.101/ted/ka.php";
     private static final String urlData3 ="http://192.168.0.101/ted/ka.php";
 
@@ -43,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        frameLayout = findViewById(R.id.toptop);
         getDataRecyZezo();
         getDataRecyThree();
         //cu truy cap tai nguen la phai r
@@ -115,14 +120,21 @@ public class MainActivity extends AppCompatActivity {
                             for (int i = 0; i < aray.length(); i++) {
                                 // chu y du lieu tra ve tu url len de la acsoc thi ta moi getdc jsonobject
                                 JSONObject a = aray.getJSONObject(i);
-                                containerThree.add(new Itemthree(a.getString("Anh"),
+                                containerThree.add(new Product(a.getString("Anh"),
                                         a.getString("Price"),
                                         a.getString("GiaGoc"),
                                         a.getString("PhanTram"))
                                 );
                             }
-                            Adapterthree madapter = new Adapterthree(containerThree,MainActivity.this);
+                            AdapterProduct madapter = new AdapterProduct(MainActivity.this,containerThree);
                             mRecycleThree.setAdapter(madapter);
+                            Display display = getWindowManager().getDefaultDisplay();
+                            Point size = new Point();
+                            display.getSize(size);
+                            int width = size.x;
+                            int height = size.y;
+                            Log.e("Width", "" + width);
+                            Log.e("height", "" + height);
 
                         Log.i("ko", "" + containerThree);
                     }

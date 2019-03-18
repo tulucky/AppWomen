@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">DevAndroid</string>
     <string name="StrikePrice"><strike>600.000đ</strike></string>
+    <string name="singup">Tôi đồng ý với<u><b> điều khoản</b></u> và<u><b> chính sách</b></u> </string>
 </resources>
