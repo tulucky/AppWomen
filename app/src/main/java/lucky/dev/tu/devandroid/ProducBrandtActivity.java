@@ -1,12 +1,12 @@
 package lucky.dev.tu.devandroid;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -21,6 +21,7 @@ import Model.AdapterProduct;
 import Model.Product;
 import Model.ProductBrand.AdapterMenu;
 
+import Model.ProductBrand.MenuList;
 import Model.Service;
 import me.didik.component.StickyNestedScrollView;
 
@@ -29,7 +30,7 @@ public class ProducBrandtActivity extends AppCompatActivity {
     FrameLayout theLoai;
     RecyclerView recyclerView;
     RecyclerView product;
-    List<String> mlist;
+    List<MenuList> mlist;
     StickyNestedScrollView mscroll;
     ImageView iconTheLoai;
 
@@ -44,9 +45,9 @@ public class ProducBrandtActivity extends AppCompatActivity {
        iconTheLoai=findViewById(R.id.icon_theloai);
         product= findViewById(R.id.product_rec);
        mlist= new ArrayList<>();
-       mlist.add("Dress");
-       mlist.add("Tops");
-       mlist.add("Bottoms");
+       mlist.add(new MenuList("Dress", Color.BLACK));
+       mlist.add(new MenuList("Tops", Color.BLACK));
+       mlist.add(new MenuList("Bottoms", Color.BLACK));
        int a= theLoai.getTop();
        Log.i("mn",""+a);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

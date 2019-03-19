@@ -24,11 +24,11 @@ import lucky.dev.tu.devandroid.R;
 public class AdapterMenu extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     View view;
     Context mcontext;
-    List<String> menuListItem;
+    List<MenuList> menuListItem;
     RecyclerView recyclerV;
     KProgressHUD kProgressHUD;
 
-    public AdapterMenu(Context mcontext, List<String> menuList,RecyclerView recyclerView) {
+    public AdapterMenu(Context mcontext, List<MenuList> menuList,RecyclerView recyclerView) {
         this.mcontext = mcontext;
         menuListItem= new ArrayList<>();
         this.menuListItem = menuList;
@@ -45,12 +45,21 @@ public class AdapterMenu extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
-       MyHolderMenu holder = (MyHolderMenu) viewHolder;
-       holder.textView.setText(menuListItem.get(i));
+       final MyHolderMenu holder = (MyHolderMenu) viewHolder;
+       holder.textView.setText(menuListItem.get(i).getText());
+       holder.textView.setTextColor(menuListItem.get(i).getColor());
        holder.textView.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                recyclerV.setVisibility(View.GONE);
+               for(int k=0;k<menuListItem.size();k++){
+                   if(k==i){
+                       menuListItem.get(k).setColor(Color.RED);
+                   }
+                   else
+                   menuListItem.get(k).setColor(Color.BLACK);
+               }
+                notifyDataSetChanged();
                switch (i){
                    case 0:
                        new Asyn().execute(1);
