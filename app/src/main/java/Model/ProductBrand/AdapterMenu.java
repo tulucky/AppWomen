@@ -1,6 +1,8 @@
 package Model.ProductBrand;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,9 +12,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.kaopiz.kprogresshud.KProgressHUD;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import Model.Service;
+import lucky.dev.tu.devandroid.MainActivity;
 import lucky.dev.tu.devandroid.R;
 
 public class AdapterMenu extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -20,6 +26,7 @@ public class AdapterMenu extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context mcontext;
     List<String> menuListItem;
     RecyclerView recyclerV;
+    KProgressHUD kProgressHUD;
 
     public AdapterMenu(Context mcontext, List<String> menuList,RecyclerView recyclerView) {
         this.mcontext = mcontext;
@@ -43,14 +50,46 @@ public class AdapterMenu extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
        holder.textView.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               Toast.makeText(mcontext, "da click"+ i, Toast.LENGTH_LONG).show();
                recyclerV.setVisibility(View.GONE);
-
-
+               switch (i){
+                   case 0:
+                       new Asyn().execute(1);
+               }
 
            }
        });
     }
+    public class Asyn extends AsyncTask<Integer,Void,Void>{
+        @Override
+        protected void onPreExecute() {
+           kProgressHUD =  KProgressHUD.create(mcontext)
+                    .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                    .setCancellable(true)
+                    .setAnimationSpeed(2)
+                    .setDimAmount(0.5f)
+                    .setBackgroundColor(Color.DKGRAY)
+                    .show();
+        }
+        @Override
+        protected Void doInBackground(Integer... integers) {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Service.Request(integers[0]);
+           return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            kProgressHUD.dismiss();
+
+        }
+
+
+    }
+
 
     @Override
     public int getItemCount() {

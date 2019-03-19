@@ -8,4 +8,10 @@ import retrofit2.http.GET;
 public interface ServiceApi {
     @GET("ka.php")
     Call<List<Product>> getProduct();
+    @GET("dress.php")
+    Call<List<Product>> getDress();
+    @GET("tops")
+    Call<List<Product>> getTops();
+    @GET("bottoms")
+    Call<List<Product>> getBottoms();
 }

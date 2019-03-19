@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -21,12 +20,10 @@ import java.util.List;
 import Model.AdapterProduct;
 import Model.Product;
 import Model.ProductBrand.AdapterMenu;
-import Model.RetrofitO;
-import Model.ServiceApi;
+
+import Model.Service;
 import me.didik.component.StickyNestedScrollView;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+
 
 public class ProducBrandtActivity extends AppCompatActivity {
     FrameLayout theLoai;
@@ -45,6 +42,7 @@ public class ProducBrandtActivity extends AppCompatActivity {
        recyclerView= findViewById(R.id.menu_list);
        mscroll=findViewById(R.id.stickyone);
        iconTheLoai=findViewById(R.id.icon_theloai);
+        product= findViewById(R.id.product_rec);
        mlist= new ArrayList<>();
        mlist.add("Dress");
        mlist.add("Tops");
@@ -98,31 +96,10 @@ public class ProducBrandtActivity extends AppCompatActivity {
                 popup.show();
             }
         });*/
-        ServiceApi mService = RetrofitO.getmRetrofit().create(ServiceApi.class);
-        Call<List<Product>> call = mService.getProduct();
-        call.enqueue(new Callback<List<Product>>() {
-            @Override
-            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                showContent(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<List<Product>> call, Throwable t) {
-
-            }
-        });
-
+       Service service= new Service(this,product);
+       service.Request(0);
 
     }
 
-    private void showContent(List<Product> body) {
-        product= findViewById(R.id.product_rec);
-        product.setNestedScrollingEnabled(false);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
-        product.setLayoutManager(gridLayoutManager);
-        AdapterProduct adapter = new AdapterProduct(this,body);
-        product.setAdapter(adapter);
-        Log.i("m",""+mscroll.getHeight());
 
-    }
 }
