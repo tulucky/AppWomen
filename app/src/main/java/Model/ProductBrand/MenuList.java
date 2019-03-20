@@ -3,6 +3,16 @@ package Model.ProductBrand;
 public class MenuList {
     String text;
     int color;
+    int imageicon;
+
+    public void setImageicon(int imageicon) {
+        this.imageicon = imageicon;
+    }
+
+    public int getImageicon() {
+
+        return imageicon;
+    }
 
     public String getText() {
         return text;
@@ -20,9 +30,9 @@ public class MenuList {
         this.color = color;
     }
 
-    public MenuList(String text, int color) {
-
+    public MenuList(String text, int color, int imageicon) {
         this.text = text;
         this.color = color;
+        this.imageicon = imageicon;
     }
 }

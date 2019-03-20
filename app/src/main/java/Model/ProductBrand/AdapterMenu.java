@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,12 +28,14 @@ public class AdapterMenu extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     List<MenuList> menuListItem;
     RecyclerView recyclerV;
     KProgressHUD kProgressHUD;
+    ImageView iconMenu;
 
-    public AdapterMenu(Context mcontext, List<MenuList> menuList,RecyclerView recyclerView) {
+    public AdapterMenu(Context mcontext, List<MenuList> menuList,RecyclerView recyclerView,ImageView imageView) {
         this.mcontext = mcontext;
         menuListItem= new ArrayList<>();
         this.menuListItem = menuList;
         this.recyclerV= recyclerView;
+        this.iconMenu =imageView;
     }
 
     @NonNull
@@ -48,6 +51,7 @@ public class AdapterMenu extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
        final MyHolderMenu holder = (MyHolderMenu) viewHolder;
        holder.textView.setText(menuListItem.get(i).getText());
        holder.textView.setTextColor(menuListItem.get(i).getColor());
+       holder.imageIcon.setImageResource(menuListItem.get(i).getImageicon());
        holder.textView.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -55,11 +59,13 @@ public class AdapterMenu extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                for(int k=0;k<menuListItem.size();k++){
                    if(k==i){
                        menuListItem.get(k).setColor(Color.RED);
-                   }
-                   else
-                   menuListItem.get(k).setColor(Color.BLACK);
+                       menuListItem.get(k).setImageicon(R.drawable.ic_check_black_24dp);
                }
-                notifyDataSetChanged();
+                   else{
+                   menuListItem.get(k).setColor(Color.BLACK);
+                   menuListItem.get(k).setImageicon(0);}
+               }
+                   notifyDataSetChanged();
                switch (i){
                    case 0:
                        new Asyn().execute(1);
@@ -92,6 +98,7 @@ public class AdapterMenu extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         @Override
         protected void onPostExecute(Void aVoid) {
+            iconMenu.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
             kProgressHUD.dismiss();
 
         }
@@ -107,9 +114,11 @@ public class AdapterMenu extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private class MyHolderMenu extends RecyclerView.ViewHolder {
         TextView textView;
+        ImageView imageIcon;
         public MyHolderMenu(View view) {
             super(view);
             textView= view.findViewById(R.id.text_menu_list);
+            imageIcon= view.findViewById(R.id.image_menu_list);
         }
     }
 }

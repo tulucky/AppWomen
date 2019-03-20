@@ -8,7 +8,7 @@
     android:scrollbars="vertical">
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/textView16"
@@ -252,6 +252,7 @@
                     android:textSize="18sp" />
 
                 <ImageView
+                    android:id="@+id/image_sort"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
