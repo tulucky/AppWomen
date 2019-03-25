@@ -34,7 +34,7 @@ public class ViewPagerProduct extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         LayoutInflater myLayoutInflater = LayoutInflater.from(mcontext);
-        view = myLayoutInflater.inflate(R.layout.brand_detail_pone,container,false);
+        view = myLayoutInflater.inflate(R.layout.itemviewpager_detail,container,false);
       imageView =view.findViewById(R.id.slide_product);
       imageView.setImageResource(list[position]);
         container.addView(view);
