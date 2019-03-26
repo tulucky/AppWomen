@@ -1,9 +1,11 @@
 package lucky.dev.tu.devandroid;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
@@ -49,6 +51,8 @@ import Model.Itemthree;
 import Model.MySingleton;
 import Model.Product;
 
+import android.view.MotionEvent;
+
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
@@ -66,6 +70,8 @@ public class ProductDetail extends AppCompatActivity {
     ConstraintLayout bottomsheet;
     ImageView backgroun;
    ImageView sub;
+    TextView bootom;
+    CollapsingToolbarLayout collapsingToolbarLayout;
     private static final String urlData0 ="http://192.168.0.100/ted/ka.php";
     int[] daTa = {R.drawable.vay1,R.drawable.android_apple_fight,R.drawable.lko  };
 
@@ -87,20 +93,15 @@ public class ProductDetail extends AppCompatActivity {
         detalBottom = findViewById(R.id.detail_bottom);
         final Toolbar toolbar1 = findViewById(R.id.toolbar);
         bottomsheet = findViewById(R.id.boottom_sheet);
-        backgroun = findViewById(R.id.cancel_d);
+        bootom = findViewById(R.id.bottom);
+        backgroun = findViewById(R.id.backgroun);
+        collapsingToolbarLayout = findViewById(R.id.collapsing);
         sub = findViewById(R.id.sub);
         bottomsheet.setVisibility(GONE);
+
         ViewPagerProduct adapter = new ViewPagerProduct(this,daTa);
         PagerAdapter wrappedAdapter = new InfinitePagerAdapter(adapter);
         viewPager.setAdapter(wrappedAdapter);
-        bottomsheet.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                v.getParent().requestDisallowInterceptTouchEvent(true);
-                return true;
-            }
-        });
-
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
@@ -119,6 +120,12 @@ public class ProductDetail extends AppCompatActivity {
 
             }
         });
+      /*  collapsingToolbarLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction()==MotionEvent.ACTION_OUTSIDE)
+            }
+        });*/
         scrollDetail.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView nestedScrollView, int i, int i1, int i2, int i3) {
@@ -151,9 +158,14 @@ public class ProductDetail extends AppCompatActivity {
                 Animation animation = AnimationUtils.loadAnimation(ProductDetail.this,R.anim.test);
                 bottomsheet.startAnimation(animation);
                 bottomsheet.setVisibility(VISIBLE);
-                scrollDetail.setVerticalScrollBarEnabled(false);
-                scrollDetail.setNestedScrollingEnabled(false);
 
+            }
+        });
+        bottomsheet.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+                //the listener has consumed the event so that parent dont have it
             }
         });
         sub.setOnClickListener(new View.OnClickListener() {
@@ -168,6 +180,13 @@ public class ProductDetail extends AppCompatActivity {
                 bottomsheet.setVisibility(GONE);
 
             }
+        });
+        bootom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ProductDetail.this, "add zozoz", Toast.LENGTH_SHORT).show();
+            }
+
         });
  getDataRecyZezo();
   setSupportActionBar(toolbar1);

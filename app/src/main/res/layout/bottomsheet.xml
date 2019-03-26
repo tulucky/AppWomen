@@ -5,13 +5,16 @@
     android:id="@+id/boottom_sheet"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ImageView
         android:id="@+id/backgroun"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="0dp"
         android:background="#4D000000"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout0"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout0"
         android:layout_width="match_parent"
