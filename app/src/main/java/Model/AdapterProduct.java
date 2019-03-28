@@ -40,7 +40,7 @@ public class AdapterProduct extends RecyclerView.Adapter<RecyclerView.ViewHolder
         Log.i("a",""+listProduct.get(position).getImage());
         MyHolder mholder = (MyHolder) holder;
         Glide.with(mcontext)
-                .load(listProduct.get(position).getImage())
+                .load("http://192.168.0.100/wmshop/" + listProduct.get(position).getImage())
                 .into(mholder.mImage);
         mholder.mPrice.setText(listProduct.get(position).getPrice());
         mholder.mGiaGoc.setText(listProduct.get(position).getGiaGoc());

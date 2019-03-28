@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitO {
     private static Retrofit mRetrofit = null;
-    private static final String url = "http://192.168.0.101/ted/";
+    private static final String url = "http://192.168.0.100/wmshop/";
 
     public RetrofitO() {
     }

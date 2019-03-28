@@ -9,16 +9,16 @@ public class Product {
     @SerializedName("Id")
     @Expose
     private String id;
-    @SerializedName("Anh")
+    @SerializedName("image")
     @Expose
     private String image;
-    @SerializedName("Price")
+    @SerializedName("name")
     @Expose
     private String price;
-    @SerializedName("GiaGoc")
+    @SerializedName("originprice")
     @Expose
     private String giaGoc;
-    @SerializedName("PhanTram")
+    @SerializedName("sale")
     @Expose
     private String phanTram;
 
