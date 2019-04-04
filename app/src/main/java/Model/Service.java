@@ -42,6 +42,7 @@ public class Service {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 showContent(response.body());
+                Log.i("aa", " " + response);
             }
 
             @Override

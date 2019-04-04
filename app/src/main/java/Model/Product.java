@@ -6,35 +6,96 @@ import com.google.gson.annotations.SerializedName;
 
 public class Product {
 
-    @SerializedName("Id")
+    @SerializedName("id")
     @Expose
-    private String id;
+    private int id;
+    @SerializedName("idbrand")
+    @Expose
+    private String idbrand;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("originprice")
+    @Expose
+    private String originprice;
+    @SerializedName("sale")
+    @Expose
+    private String sale;
     @SerializedName("image")
     @Expose
     private String image;
-    @SerializedName("name")
+    @SerializedName("description")
     @Expose
-    private String price;
-    @SerializedName("originprice")
+    private String description;
+    @SerializedName("title")
     @Expose
-    private String giaGoc;
-    @SerializedName("sale")
+    private String title;
+    @SerializedName("destile")
     @Expose
-    private String phanTram;
+    private String destile;
+    @SerializedName("rate")
+    @Expose
+    private String rate;
+    @SerializedName("satus")
+    @Expose
+    private String satus;
+    @SerializedName("create_at")
+    @Expose
+    private String createAt;
+    @SerializedName("update_at")
+    @Expose
+    private String updateAt;
 
-    public Product(String image, String price, String giaGoc, String phanTram) {
-        this.image = image;
-        this.price = price;
-        this.giaGoc = giaGoc;
-        this.phanTram = phanTram;
+    public Product() {
     }
 
-    public String getId() {
+    public Product(int id, String image, String name, String originprice, String sale) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.originprice = originprice;
+        this.sale = sale;
+        this.image = image;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public String getIdbrand() {
+        return idbrand;
+    }
+
+    public void setIdbrand(String idbrand) {
+        this.idbrand = idbrand;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getOriginprice() {
+        return originprice;
+    }
+
+    public void setOriginprice(String originprice) {
+        this.originprice = originprice;
+    }
+
+    public String getSale() {
+        return sale;
+    }
+
+    public void setSale(String sale) {
+        this.sale = sale;
     }
 
     public String getImage() {
@@ -45,28 +106,60 @@ public class Product {
         this.image = image;
     }
 
-    public String getPrice() {
-        return price;
+    public String getDescription() {
+        return description;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getGiaGoc() {
-        return giaGoc;
+    public String getTitle() {
+        return title;
     }
 
-    public void setGiaGoc(String giaGoc) {
-        this.giaGoc = giaGoc;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getPhanTram() {
-        return phanTram;
+    public String getDestile() {
+        return destile;
     }
 
-    public void setPhanTram(String phanTram) {
-        this.phanTram = phanTram;
+    public void setDestile(String destile) {
+        this.destile = destile;
+    }
+
+    public String getRate() {
+        return rate;
+    }
+
+    public void setRate(String rate) {
+        this.rate = rate;
+    }
+
+    public String getSatus() {
+        return satus;
+    }
+
+    public void setSatus(String satus) {
+        this.satus = satus;
+    }
+
+    public String getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(String createAt) {
+        this.createAt = createAt;
+    }
+
+    public String getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(String updateAt) {
+        this.updateAt = updateAt;
     }
 
 }

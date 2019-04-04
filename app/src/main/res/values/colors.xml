@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="button_sign">#dc354e</color>
     <color name="toolbar">#ffffff</color>
+    <color name="main_textcolor_bottom">#000000</color>
 </resources>

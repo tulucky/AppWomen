@@ -7,22 +7,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+
+import java.util.List;
+
+import Model.RetrofitO;
 import lucky.dev.tu.devandroid.R;
 
 public class ViewPagerProduct extends PagerAdapter {
     Context mcontext;
-   int[]  list;
+    List<String> images;
    View view;
     ImageView imageView;
 
-    public ViewPagerProduct(Context mcontext, int[] list) {
+    public ViewPagerProduct(Context mcontext, List<String> images) {
         this.mcontext = mcontext;
-        this.list = list;
+        this.images = images;
     }
 
     @Override
     public int getCount() {
-        return list.length;
+        return images.size();
     }
 
     @Override
@@ -36,7 +41,7 @@ public class ViewPagerProduct extends PagerAdapter {
         LayoutInflater myLayoutInflater = LayoutInflater.from(mcontext);
         view = myLayoutInflater.inflate(R.layout.itemviewpager_detail,container,false);
       imageView =view.findViewById(R.id.slide_product);
-      imageView.setImageResource(list[position]);
+        Glide.with(mcontext).load(RetrofitO.url + images.get(position)).into(imageView);
         container.addView(view);
         return  view;
 

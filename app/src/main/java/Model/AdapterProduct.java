@@ -1,6 +1,7 @@
 package Model;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
+import lucky.dev.tu.devandroid.ProductDetail;
 import lucky.dev.tu.devandroid.R;
 
 public class AdapterProduct extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -36,17 +38,26 @@ public class AdapterProduct extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         Log.i("a",""+listProduct.get(position).getImage());
         MyHolder mholder = (MyHolder) holder;
         Glide.with(mcontext)
-                .load("http://192.168.0.100/wmshop/" + listProduct.get(position).getImage())
+                .load(RetrofitO.url + listProduct.get(position).getImage())
                 .into(mholder.mImage);
-        mholder.mPrice.setText(listProduct.get(position).getPrice());
-        mholder.mGiaGoc.setText(listProduct.get(position).getGiaGoc());
-        mholder.phanTram.setText(listProduct.get(position).getPhanTram());
+        mholder.mPrice.setText(listProduct.get(position).getName());
+        mholder.mGiaGoc.setText(listProduct.get(position).getOriginprice());
+        mholder.phanTram.setText(listProduct.get(position).getSale());
         mholder.mGiaGoc.setPaintFlags( mholder.mGiaGoc.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-
+        mholder.mImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mcontext, ProductDetail.class);
+                intent.putExtra("id", listProduct.get(position).getId());
+                intent.putExtra("image", listProduct.get(position).getImage());
+                Log.i("d", " " + listProduct.get(position).getId());
+                mcontext.startActivity(intent);
+            }
+        });
     }
 
     @Override

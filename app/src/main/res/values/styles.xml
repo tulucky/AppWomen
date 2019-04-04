@@ -11,4 +11,10 @@
         <item name="android:background">@color/toolbar</item>
     </style>
 
+    <style name="main_Abottom" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="android:fontFamily">@font/sans_prob</item>
+        <item name="android:textColor">@color/main_textcolor_bottom</item>
+    </style>
+
 </resources>

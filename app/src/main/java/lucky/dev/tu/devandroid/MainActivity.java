@@ -1,6 +1,8 @@
 package lucky.dev.tu.devandroid;
 
+import android.content.Intent;
 import android.graphics.Point;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,8 +11,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Display;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Switch;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -32,15 +36,16 @@ import Model.Itemthree;
 import Model.MySingleton;
 import Model.Product;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
  List<Product> containerThree;
  List<Itemthree> containerZezo;
     CarouselView carouselView;
     RecyclerView mRecycleThree;
     RecyclerView mRecycleZezo;
     FrameLayout frameLayout;
-    private static final String urlData0 ="http://192.168.0.101/ted/ka.php";
-    private static final String urlData3 ="http://192.168.0.101/ted/ka.php";
+    BottomNavigationView bottomNavigationView;
+    private static final String urlData0 = "http://192.168.1.24/wmshop/tops.php";
+    private static final String urlData3 = "http://192.168.1.24/wmshop/tops.php";
 
    int[] sampleImages = {R.drawable.image_3, R.drawable.lko, R.drawable.image_4, R.drawable.image_2, R.drawable.image_3};
     @Override
@@ -48,14 +53,42 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         frameLayout = findViewById(R.id.toptop);
+        bottomNavigationView = findViewById(R.id.navigation);
         getDataRecyZezo();
         getDataRecyThree();
         //cu truy cap tai nguen la phai r
         carouselView = (CarouselView) findViewById(R.id.carouselView);
-      carouselView.setPageCount(sampleImages.length);
+        carouselView.setPageCount(sampleImages.length);
         carouselView.setImageListener(imageListener);
+        findViewById(R.id.home).setOnClickListener(this);
+        findViewById(R.id.brand).setOnClickListener(this);
+        findViewById(R.id.cart).setOnClickListener(this);
+        findViewById(R.id.account).setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Class clas = null;
+        switch (v.getId()) {
+            case R.id.brand:
+                clas = BrandActivity.class;
+                break;
+            case R.id.cart:
+                clas = BagActivity.class;
+                break;
+            case R.id.account:
+                clas = Account.class;
+                break;
+            case R.id.home:
+                clas = MainActivity.class;
+                break;
+        }
+        startActivity(new Intent(MainActivity.this, clas));
 
     }
+
+
+
 
     private void getDataRecyZezo() {
         mRecycleZezo = findViewById(R.id.Recycle_Zezo);
@@ -112,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response) {
-                        Log.i("p", "" + response);
+                        Log.i("l", "" + response);
                         JSONArray aray = null;
                         try {
                             aray = new JSONArray(response);
@@ -120,10 +153,10 @@ public class MainActivity extends AppCompatActivity {
                             for (int i = 0; i < aray.length(); i++) {
                                 // chu y du lieu tra ve tu url len de la acsoc thi ta moi getdc jsonobject
                                 JSONObject a = aray.getJSONObject(i);
-                                containerThree.add(new Product(a.getString("Anh"),
-                                        a.getString("Price"),
-                                        a.getString("GiaGoc"),
-                                        a.getString("PhanTram"))
+                                containerThree.add(new Product(a.getInt("id"), a.getString("image"),
+                                        a.getString("name"),
+                                        a.getString("originprice"),
+                                        a.getString("sale"))
                                 );
                             }
                             AdapterProduct madapter = new AdapterProduct(MainActivity.this,containerThree);

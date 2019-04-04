@@ -13,12 +13,18 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+import Model.RetrofitO;
 import lucky.dev.tu.devandroid.R;
 
 public class BrandAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context mcontext;
     List<BrandModel> listBrand;
     View view;
+
+    public BrandAdapter(Context mcontext, List<BrandModel> listBrand) {
+        this.mcontext = mcontext;
+        this.listBrand = listBrand;
+    }
 
     @NonNull
     @Override
@@ -32,26 +38,26 @@ public class BrandAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         MyHolderBrand holder = (MyHolderBrand)viewHolder;
         Glide.with(mcontext)
-                .load(listBrand.get(i).getImageBrand())
+                .load(RetrofitO.url + listBrand.get(i).getImage())
                 .into(holder.imageBrand);
         Glide.with(mcontext)
-                .load(listBrand.get(i).getLogo())
+                .load(RetrofitO.url + listBrand.get(i).getLogo())
                 .into(holder.logoBrand);
         Glide.with(mcontext)
-                .load(listBrand.get(i).getItem1())
+                .load(RetrofitO.url + listBrand.get(i).getImage1())
                 .into(holder.item1);
         holder.price1.setText(listBrand.get(i).getPrice1());
         holder.sale1.setText(listBrand.get(i).getSale1());
         Glide.with(mcontext)
-                .load(listBrand.get(i).getItem2())
+                .load(RetrofitO.url + listBrand.get(i).getImage2())
                 .into(holder.item2);
-        holder.price1.setText(listBrand.get(i).getPrice2());
-        holder.sale1.setText(listBrand.get(i).getSale2());
+        holder.price2.setText(listBrand.get(i).getPrice2());
+        holder.sale2.setText(listBrand.get(i).getSale2());
         Glide.with(mcontext)
-                .load(listBrand.get(i).getItem3())
+                .load(RetrofitO.url + listBrand.get(i).getImage3())
                 .into(holder.item3);
-        holder.price1.setText(listBrand.get(i).getPrice3());
-        holder.sale1.setText(listBrand.get(i).getSale3());
+        holder.price3.setText(listBrand.get(i).getPrice3());
+        holder.sale3.setText(listBrand.get(i).getSale3());
 
     }
 

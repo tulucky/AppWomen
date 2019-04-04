@@ -1,6 +1,7 @@
 package lucky.dev.tu.devandroid;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -50,6 +51,11 @@ import Model.BrandProductDetal.ViewPagerProduct;
 import Model.Itemthree;
 import Model.MySingleton;
 import Model.Product;
+import Model.RetrofitO;
+import Model.Service;
+import Model.ServiceApi;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 import android.view.MotionEvent;
 
@@ -64,6 +70,7 @@ public class ProductDetail extends AppCompatActivity {
     RecyclerView recInfo;
     List<Product> list;
     List<String> inFor;
+    List<Product> aProduct;
     NestedScrollView scrollDetail;
     ConstraintLayout contrains1;
     TextView detalBottom;
@@ -71,9 +78,14 @@ public class ProductDetail extends AppCompatActivity {
     ImageView backgroun;
    ImageView sub;
     TextView bootom;
+    TextView nameB;
+    TextView aProductDes;
+    TextView aProductName;
+    TextView originPrice;
+    TextView sale;
     CollapsingToolbarLayout collapsingToolbarLayout;
-    private static final String urlData0 ="http://192.168.0.100/ted/ka.php";
-    int[] daTa = {R.drawable.vay1,R.drawable.android_apple_fight,R.drawable.lko  };
+    private static final String urlData0 = "http://192.168.1.24/wmshop/tops.php";
+    List<String> daTa;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -91,6 +103,11 @@ public class ProductDetail extends AppCompatActivity {
         scrollDetail = findViewById(R.id.scroll_dital);
         contrains1 = findViewById(R.id.contrains1);
         detalBottom = findViewById(R.id.detail_bottom);
+        nameB = findViewById(R.id.name_brand);
+        aProductDes = findViewById(R.id.aproduct_des);
+        aProductName = findViewById(R.id.aproduct_name);
+        originPrice = findViewById(R.id.origin_price);
+        sale = findViewById(R.id.sale);
         final Toolbar toolbar1 = findViewById(R.id.toolbar);
         bottomsheet = findViewById(R.id.boottom_sheet);
         bootom = findViewById(R.id.bottom);
@@ -98,15 +115,19 @@ public class ProductDetail extends AppCompatActivity {
         collapsingToolbarLayout = findViewById(R.id.collapsing);
         sub = findViewById(R.id.sub);
         bottomsheet.setVisibility(GONE);
-
-        ViewPagerProduct adapter = new ViewPagerProduct(this,daTa);
-        PagerAdapter wrappedAdapter = new InfinitePagerAdapter(adapter);
-        viewPager.setAdapter(wrappedAdapter);
+        aProduct = new ArrayList<>();
+        daTa = new ArrayList<>();
+        Intent intent = getIntent();
+        int id = intent.getIntExtra("id", 0);
+        String image = intent.getStringExtra("image");
+        Log.i("id", " " + id);
+        getaProduct(id);
+        getImageProduct(id, image);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
               pagePosition=viewPager.getCurrentItem()+1;
-               text.setText(""+pagePosition+"/"+daTa.length);
+                text.setText("" + pagePosition + "/" + daTa.size());
 
             }
 
@@ -197,6 +218,56 @@ toolbar1.setVisibility(GONE);
 
 
     }
+
+    private void getaProduct(int id) {
+        ServiceApi service = RetrofitO.getmRetrofit().create(ServiceApi.class);
+        Call<List<Product>> call = service.getaProduct(id);
+        call.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, retrofit2.Response<List<Product>> response) {
+                aProduct = response.body();
+                Log.i("pd", " " + daTa);
+                // nameB.setText(aProduct.get);
+                aProductDes.setText(aProduct.get(0).getTitle());
+                aProductName.setText(aProduct.get(0).getName());
+                originPrice.setText(aProduct.get(0).getOriginprice());
+                sale.setText(aProduct.get(0).getSale());
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    private void getImageProduct(int id, final String image) {
+        ServiceApi service = RetrofitO.getmRetrofit().create(ServiceApi.class);
+        Call<List<String>> call = service.getColor(id);
+        call.enqueue(new Callback<List<String>>() {
+            @Override
+            public void onResponse(Call<List<String>> call, retrofit2.Response<List<String>> response) {
+                daTa = response.body();
+                Log.i("pd", " " + daTa);
+                if (daTa.contains(image)) {
+                    daTa.remove(daTa.indexOf(image));
+                }
+                daTa.add(0, image);
+                ViewPagerProduct adapter = new ViewPagerProduct(ProductDetail.this, daTa);
+                PagerAdapter wrappedAdapter = new InfinitePagerAdapter(adapter);
+                viewPager.setAdapter(wrappedAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<String>> call, Throwable t) {
+
+            }
+        });
+
+    }
+
     private void getDataRecyZezo() {
         recyclerView = findViewById(R.id.content);
         recyclerView.setHasFixedSize(true);
@@ -216,10 +287,10 @@ toolbar1.setVisibility(GONE);
                             for (int i = 0; i < aray.length(); i++) {
                                 // chu y du lieu tra ve tu url len de la acsoc thi ta moi getdc jsonobject
                                 JSONObject a = aray.getJSONObject(i);
-                                list.add(new Product(a.getString("Anh"),
-                                        a.getString("Price"),
-                                        a.getString("GiaGoc"),
-                                        a.getString("PhanTram"))
+                                list.add(new Product(a.getInt("id"), a.getString("image"),
+                                        a.getString("name"),
+                                        a.getString("originprice"),
+                                        a.getString("sale"))
                                 );
                             }
                             AdapterProduct madapter = new AdapterProduct(ProductDetail.this,list);

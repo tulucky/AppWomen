@@ -12,7 +12,16 @@ import android.widget.TextView;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Model.Brand.BrandAdapter;
+import Model.Brand.BrandModel;
+import Model.RetrofitO;
+import Model.ServiceApi;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class BrandActivity extends AppCompatActivity {
@@ -31,8 +40,26 @@ public class BrandActivity extends AppCompatActivity {
         carouselView =findViewById(R.id.carouselView);
         carouselView.setPageCount(sampleImages.length);
         carouselView.setImageListener(imageListener);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recycleBrand.setLayoutManager(layoutManager);
+        ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
+        Call<List<BrandModel>> call = serviceApi.getListBrand();
+        call.enqueue(new Callback<List<BrandModel>>() {
+            @Override
+            public void onResponse(Call<List<BrandModel>> call, Response<List<BrandModel>> response) {
+                recycleBrand.setNestedScrollingEnabled(false);
+                recycleBrand.setHasFixedSize(true);
+                BrandAdapter brandList = new BrandAdapter(BrandActivity.this, response.body());
+                LinearLayoutManager layoutManager = new LinearLayoutManager(BrandActivity.this);
+                recycleBrand.setLayoutManager(layoutManager);
+                recycleBrand.setAdapter(brandList);
+            }
+
+            @Override
+            public void onFailure(Call<List<BrandModel>> call, Throwable t) {
+
+            }
+        });
+
+
 
 
     }

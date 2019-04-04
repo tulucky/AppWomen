@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toptop"
     android:layout_width="match_parent"
-    android:layout_height="500dp"
+    android:layout_height="wrap_content"
     tools:context=".MainActivity">
     <include layout="@layout/action_bar"/>
     <android.support.v4.widget.NestedScrollView
@@ -317,7 +317,7 @@
         app:labelVisibilityMode="labeled"
         android:layout_gravity="bottom"
         app:menu="@menu/my_navigation_items"
+        style="@style/main_Abottom"
         android:background="#ffffff"/>
-
 
 </FrameLayout>
