@@ -6,10 +6,10 @@ import com.google.gson.annotations.SerializedName;
 public class BrandModel {
     @SerializedName("id")
     @Expose
-    private String id;
+    private int id;
     @SerializedName("nameb")
     @Expose
-    private String name;
+    private String nameb;
     @SerializedName("logo")
     @Expose
     private String logo;
@@ -68,20 +68,20 @@ public class BrandModel {
     public BrandModel() {
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
     public String getName() {
-        return name;
+        return nameb;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.nameb = name;
     }
 
     public String getLogo() {

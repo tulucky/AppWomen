@@ -18,12 +18,18 @@ public interface ServiceApi {
     @GET("bottoms")
     Call<List<Product>> getBottoms();
 
-    @GET("hahi.php")
+    @GET("brand.php")
     Call<List<BrandModel>> getListBrand();
+
+    @GET("getabrand.php")
+    Call<List<BrandModel>> getaBrand(@Query("brand") int id);
 
     @GET("color.php")
     Call<List<String>> getColor(@Query("product") int id);
 
     @GET("aproduct.php")
-    Call<List<Product>> getaProduct(@Query("getaproduct") int id);
+    Call<List<Product>> getaProduct(@Query("aproduct") int id);
+
+    @GET("size.php")
+    Call<List<String>> getaSize(@Query("asize") int id);
 }

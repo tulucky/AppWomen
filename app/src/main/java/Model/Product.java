@@ -45,6 +45,8 @@ public class Product {
     @SerializedName("update_at")
     @Expose
     private String updateAt;
+    @SerializedName("nameb")
+    private String nameB;
 
     public Product() {
     }
@@ -56,6 +58,10 @@ public class Product {
         this.originprice = originprice;
         this.sale = sale;
         this.image = image;
+    }
+
+    public String getNameB() {
+        return nameB;
     }
 
     public int getId() {

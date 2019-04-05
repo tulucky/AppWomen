@@ -35,6 +35,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.antonyt.infiniteviewpager.InfinitePagerAdapter;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +47,8 @@ import java.util.List;
 import Model.AdapterProduct;
 import Model.AdapterZezo;
 import Model.BrandProductDetal.AdapterInfor;
+import Model.BrandProductDetal.BottomAdapImage;
+import Model.BrandProductDetal.BottomAdapSize;
 import Model.BrandProductDetal.DetailFrag;
 import Model.BrandProductDetal.ViewPagerProduct;
 import Model.Itemthree;
@@ -83,6 +86,14 @@ public class ProductDetail extends AppCompatActivity {
     TextView aProductName;
     TextView originPrice;
     TextView sale;
+    TextView priceB;
+    TextView originPriceB;
+    TextView desscriptionB;
+    ImageView imageBotSheet;
+    RecyclerView recColor;
+    RecyclerView sizeRec;
+    Toolbar toolbar;
+    TextView sizeDes;
     CollapsingToolbarLayout collapsingToolbarLayout;
     private static final String urlData0 = "http://192.168.1.24/wmshop/tops.php";
     List<String> daTa;
@@ -108,12 +119,21 @@ public class ProductDetail extends AppCompatActivity {
         aProductName = findViewById(R.id.aproduct_name);
         originPrice = findViewById(R.id.origin_price);
         sale = findViewById(R.id.sale);
+        toolbar = findViewById(R.id.toolbar);
+        priceB = findViewById(R.id.price_b);
+        originPriceB = findViewById(R.id.origin_price_b);
+        desscriptionB = findViewById(R.id.description_b);
+        imageBotSheet = findViewById(R.id.image_botsheet);
         final Toolbar toolbar1 = findViewById(R.id.toolbar);
         bottomsheet = findViewById(R.id.boottom_sheet);
         bootom = findViewById(R.id.bottom);
         backgroun = findViewById(R.id.backgroun);
         collapsingToolbarLayout = findViewById(R.id.collapsing);
         sub = findViewById(R.id.sub);
+        recColor = findViewById(R.id.rec_color);
+        sizeRec = findViewById(R.id.size_rec);
+        sizeDes = findViewById(R.id.size_des);
+        sizeDes.setVisibility(GONE);
         bottomsheet.setVisibility(GONE);
         aProduct = new ArrayList<>();
         daTa = new ArrayList<>();
@@ -123,6 +143,7 @@ public class ProductDetail extends AppCompatActivity {
         Log.i("id", " " + id);
         getaProduct(id);
         getImageProduct(id, image);
+        getImageSize(id);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
@@ -177,6 +198,8 @@ public class ProductDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Animation animation = AnimationUtils.loadAnimation(ProductDetail.this,R.anim.test);
+                toolbar1.setVisibility(GONE);
+                collapsingToolbarLayout.setVisibility(GONE);
                 bottomsheet.startAnimation(animation);
                 bottomsheet.setVisibility(VISIBLE);
 
@@ -198,6 +221,8 @@ public class ProductDetail extends AppCompatActivity {
         backgroun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                toolbar1.setVisibility(VISIBLE);
+                collapsingToolbarLayout.setVisibility(VISIBLE);
                 bottomsheet.setVisibility(GONE);
 
             }
@@ -219,6 +244,28 @@ toolbar1.setVisibility(GONE);
 
     }
 
+    private void getImageSize(int id) {
+        ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
+        Call<List<String>> call = serviceApi.getaSize(id);
+        call.enqueue(new Callback<List<String>>() {
+            @Override
+            public void onResponse(Call<List<String>> call, retrofit2.Response<List<String>> response) {
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(ProductDetail.this, 10);
+                BottomAdapSize adapSize = new BottomAdapSize(ProductDetail.this, response.body());
+                sizeRec.setLayoutManager(gridLayoutManager);
+                sizeRec.setAdapter(adapSize);
+
+            }
+
+            @Override
+            public void onFailure(Call<List<String>> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
     private void getaProduct(int id) {
         ServiceApi service = RetrofitO.getmRetrofit().create(ServiceApi.class);
         Call<List<Product>> call = service.getaProduct(id);
@@ -227,11 +274,14 @@ toolbar1.setVisibility(GONE);
             public void onResponse(Call<List<Product>> call, retrofit2.Response<List<Product>> response) {
                 aProduct = response.body();
                 Log.i("pd", " " + daTa);
-                // nameB.setText(aProduct.get);
+                nameB.setText(aProduct.get(0).getNameB());
                 aProductDes.setText(aProduct.get(0).getTitle());
                 aProductName.setText(aProduct.get(0).getName());
                 originPrice.setText(aProduct.get(0).getOriginprice());
                 sale.setText(aProduct.get(0).getSale());
+                priceB.setText(aProduct.get(0).getName());
+                originPriceB.setText(aProduct.get(0).getOriginprice());
+                desscriptionB.setText(aProduct.get(0).getDestile());
 
             }
 
@@ -258,6 +308,13 @@ toolbar1.setVisibility(GONE);
                 ViewPagerProduct adapter = new ViewPagerProduct(ProductDetail.this, daTa);
                 PagerAdapter wrappedAdapter = new InfinitePagerAdapter(adapter);
                 viewPager.setAdapter(wrappedAdapter);
+                BottomAdapImage adapImage = new BottomAdapImage(ProductDetail.this, daTa);
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(ProductDetail.this, 5);
+                recColor.setLayoutManager(gridLayoutManager);
+                recColor.setAdapter(adapImage);
+                Glide.with(ProductDetail.this)
+                        .load(RetrofitO.url + image)
+                        .into(imageBotSheet);
             }
 
             @Override

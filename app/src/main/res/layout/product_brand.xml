@@ -11,75 +11,59 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView16"
+            android:id="@+id/giagoc3_p"
             android:layout_width="54dp"
             android:layout_height="18dp"
             android:layout_marginTop="8dp"
             android:text="TextView"
-            app:layout_constraintStart_toStartOf="@+id/textView13"
-            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+            app:layout_constraintStart_toStartOf="@+id/gia3_p"
+            app:layout_constraintTop_toBottomOf="@+id/gia3_p" />
 
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/giagoc2_p"
             android:layout_width="54dp"
             android:layout_height="18dp"
             android:layout_marginTop="8dp"
             android:text="TextView"
-            app:layout_constraintStart_toStartOf="@+id/textView12"
-            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+            app:layout_constraintStart_toStartOf="@+id/gia2_p"
+            app:layout_constraintTop_toBottomOf="@+id/gia2_p" />
 
         <TextView
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            app:layout_constraintStart_toStartOf="@+id/imageView7"
-            app:layout_constraintTop_toTopOf="@+id/imageView7" />
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            app:layout_constraintStart_toStartOf="@+id/imageView5"
-            app:layout_constraintTop_toTopOf="@+id/imageView5" />
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            app:layout_constraintStart_toStartOf="@+id/imageView8"
-            app:layout_constraintTop_toTopOf="@+id/imageView8" />
+            app:layout_constraintStart_toStartOf="@+id/image2_p"
+            app:layout_constraintTop_toTopOf="@+id/image2_p" />
 
         <ImageView
-            android:id="@+id/imageView8"
+            android:id="@+id/image3_p"
             android:layout_width="108dp"
             android:layout_height="142dp"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/imageView7"
-            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            app:layout_constraintStart_toEndOf="@+id/image2_p"
+            app:layout_constraintTop_toBottomOf="@+id/des_brand_p"
             app:srcCompat="@drawable/vay1" />
 
         <ImageView
-            android:id="@+id/imageView7"
+            android:id="@+id/image2_p"
             android:layout_width="108dp"
             android:layout_height="142dp"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toStartOf="@+id/imageView8"
+            app:layout_constraintEnd_toStartOf="@+id/image3_p"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/imageView5"
-            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            app:layout_constraintStart_toEndOf="@+id/image1_p"
+            app:layout_constraintTop_toBottomOf="@+id/des_brand_p"
             app:srcCompat="@drawable/vay1" />
-
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/image_brand_p"
             android:layout_width="0dp"
             android:layout_height="210dp"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -87,28 +71,28 @@
             app:srcCompat="@drawable/anh_brad" />
 
         <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="192dp"
-            app:layout_constraintStart_toStartOf="@+id/imageView2"
-            app:layout_constraintTop_toTopOf="@+id/imageView2"
-            app:srcCompat="@drawable/brand1" />
+            android:id="@+id/logo_brand_p"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="160dp"
+            app:layout_constraintStart_toStartOf="@+id/image_brand_p"
+            app:layout_constraintTop_toTopOf="@+id/image_brand_p"
+            android:background="#ffffff" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/name_brand_p"
             android:layout_width="wrap_content"
             android:layout_height="31dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="12dp"
             android:gravity="center"
             android:text="TextView"
-            app:layout_constraintStart_toEndOf="@+id/imageView3"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+            app:layout_constraintStart_toEndOf="@+id/logo_brand_p"
+            app:layout_constraintTop_toBottomOf="@+id/image_brand_p" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/des_brand_p"
             android:layout_width="0dp"
             android:layout_height="27dp"
             android:layout_marginEnd="32dp"
@@ -118,30 +102,49 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+            app:layout_constraintTop_toBottomOf="@+id/logo_brand_p" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/image1_p"
             android:layout_width="108dp"
             android:layout_height="142dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toStartOf="@+id/imageView7"
+            app:layout_constraintEnd_toStartOf="@+id/image2_p"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            app:layout_constraintTop_toBottomOf="@+id/des_brand_p"
             app:srcCompat="@drawable/vay1" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/sale1_p"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_giamgia"
             android:text="TextView"
-            app:layout_constraintStart_toStartOf="@+id/imageView5"
-            app:layout_constraintTop_toTopOf="@+id/imageView5" />
+            app:layout_constraintStart_toStartOf="@+id/image1_p"
+            app:layout_constraintTop_toTopOf="@+id/image1_p" />
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/sale3_p"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_giamgia"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="@+id/image3_p"
+            app:layout_constraintTop_toTopOf="@+id/image3_p" />
+
+        <TextView
+            android:id="@+id/sale2_p"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_giamgia"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="@+id/image2_p"
+            app:layout_constraintTop_toTopOf="@+id/image2_p" />
+
+        <TextView
+            android:id="@+id/gia1_p"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -149,43 +152,43 @@
             android:layout_marginTop="16dp"
             android:gravity="center"
             android:text="TextView"
-            app:layout_constraintEnd_toEndOf="@+id/imageView5"
+            app:layout_constraintEnd_toEndOf="@+id/image1_p"
             app:layout_constraintHorizontal_bias="0.411"
-            app:layout_constraintStart_toStartOf="@+id/imageView5"
-            app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+            app:layout_constraintStart_toStartOf="@+id/image1_p"
+            app:layout_constraintTop_toBottomOf="@+id/image1_p" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/gia2_p"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:gravity="center"
             android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="@+id/textView11"
-            app:layout_constraintEnd_toEndOf="@+id/imageView7"
+            app:layout_constraintBottom_toBottomOf="@+id/gia1_p"
+            app:layout_constraintEnd_toEndOf="@+id/image2_p"
             app:layout_constraintHorizontal_bias="0.558"
-            app:layout_constraintStart_toStartOf="@+id/imageView7" />
+            app:layout_constraintStart_toStartOf="@+id/image2_p" />
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/gia3_p"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="@+id/textView12"
-            app:layout_constraintEnd_toEndOf="@+id/imageView8"
-            app:layout_constraintStart_toStartOf="@+id/imageView8" />
+            app:layout_constraintBottom_toBottomOf="@+id/gia2_p"
+            app:layout_constraintEnd_toEndOf="@+id/image3_p"
+            app:layout_constraintStart_toStartOf="@+id/image3_p" />
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/giagoc1_p"
             android:layout_width="54dp"
             android:layout_height="18dp"
             android:layout_marginTop="8dp"
             android:text="TextView"
-            app:layout_constraintStart_toStartOf="@+id/textView11"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+            app:layout_constraintStart_toStartOf="@+id/gia1_p"
+            app:layout_constraintTop_toBottomOf="@+id/gia1_p" />
 
 
         <ImageView
@@ -195,7 +198,7 @@
             android:layout_marginTop="24dp"
             android:background="#e2dede"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+            app:layout_constraintTop_toBottomOf="@+id/giagoc2_p" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/product_rec"
@@ -305,8 +308,7 @@
 
             </android.support.v7.widget.RecyclerView>
         </android.support.constraint.ConstraintLayout>
-
-
     </android.support.constraint.ConstraintLayout>
+
 
 </me.didik.component.StickyNestedScrollView>

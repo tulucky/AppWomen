@@ -21,6 +21,7 @@
         <activity android:name=".BrandActivity"></activity>
         <activity android:name=".Account"></activity>
         <activity android:name=".ProductDetail"></activity>
+        <activity android:name=".ProducBrandtActivity"></activity>
     </application>
 
 </manifest>

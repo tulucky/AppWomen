@@ -1,6 +1,7 @@
 package Model.Brand;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import Model.RetrofitO;
+import lucky.dev.tu.devandroid.ProducBrandtActivity;
 import lucky.dev.tu.devandroid.R;
 
 public class BrandAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -35,7 +37,7 @@ public class BrandAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
         MyHolderBrand holder = (MyHolderBrand)viewHolder;
         Glide.with(mcontext)
                 .load(RetrofitO.url + listBrand.get(i).getImage())
@@ -58,6 +60,14 @@ public class BrandAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 .into(holder.item3);
         holder.price3.setText(listBrand.get(i).getPrice3());
         holder.sale3.setText(listBrand.get(i).getSale3());
+        holder.imageBrand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mcontext, ProducBrandtActivity.class);
+                intent.putExtra("id", listBrand.get(i).getId());
+                mcontext.startActivity(intent);
+            }
+        });
 
     }
 
