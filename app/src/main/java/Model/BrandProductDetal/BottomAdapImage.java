@@ -18,10 +18,14 @@ import lucky.dev.tu.devandroid.R;
 public class BottomAdapImage extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context mcontext;
     List<String> listImageColor;
+    ImageView imagebotsheet;
+    OrderP orderP;
 
-    public BottomAdapImage(Context mcontext, List<String> listImageColor) {
+    public BottomAdapImage(Context mcontext, List<String> listImageColor, ImageView imagesheet, OrderP order) {
         this.mcontext = mcontext;
         this.listImageColor = listImageColor;
+        this.imagebotsheet = imagesheet;
+        this.orderP = order;
     }
 
     @NonNull
@@ -33,11 +37,20 @@ public class BottomAdapImage extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
         ImageHolder holder = (ImageHolder) viewHolder;
         Glide.with(mcontext)
                 .load(RetrofitO.url + listImageColor.get(i))
                 .into(holder.imageColor);
+        holder.imageColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Glide.with(mcontext).load(RetrofitO.url + listImageColor.get(i))
+                        .into(imagebotsheet);
+                orderP.setImagebag(listImageColor.get(i));
+
+            }
+        });
 
     }
 

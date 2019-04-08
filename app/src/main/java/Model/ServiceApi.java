@@ -3,8 +3,13 @@ package Model;
 import java.util.List;
 
 import Model.Brand.BrandModel;
+import Model.BrandProductDetal.OrderP;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -32,4 +37,9 @@ public interface ServiceApi {
 
     @GET("size.php")
     Call<List<String>> getaSize(@Query("asize") int id);
+
+    @FormUrlEncoded
+    @POST("orders.php")
+    Call<List<OrderP>> setOrder(@Field("idProduct") int id, @Field("image") String image, @Field("size") String size);
+    //the value of a Field is option as long as match with $_post[value]
 }

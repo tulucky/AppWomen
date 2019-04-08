@@ -50,6 +50,7 @@ import Model.BrandProductDetal.AdapterInfor;
 import Model.BrandProductDetal.BottomAdapImage;
 import Model.BrandProductDetal.BottomAdapSize;
 import Model.BrandProductDetal.DetailFrag;
+import Model.BrandProductDetal.OrderP;
 import Model.BrandProductDetal.ViewPagerProduct;
 import Model.Itemthree;
 import Model.MySingleton;
@@ -94,6 +95,8 @@ public class ProductDetail extends AppCompatActivity {
     RecyclerView sizeRec;
     Toolbar toolbar;
     TextView sizeDes;
+    String imageBag;
+    String sizeBag;
     CollapsingToolbarLayout collapsingToolbarLayout;
     private static final String urlData0 = "http://192.168.1.24/wmshop/tops.php";
     List<String> daTa;
@@ -141,9 +144,12 @@ public class ProductDetail extends AppCompatActivity {
         int id = intent.getIntExtra("id", 0);
         String image = intent.getStringExtra("image");
         Log.i("id", " " + id);
+        final OrderP orderP = new OrderP();
+        orderP.setIdProductb(id);
         getaProduct(id);
-        getImageProduct(id, image);
-        getImageSize(id);
+        getImageProduct(id, image, orderP);
+        getImageSize(id, orderP);
+        Log.i("k", " " + sizeBag);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
@@ -215,7 +221,8 @@ public class ProductDetail extends AppCompatActivity {
         sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ProductDetail.this,"jjjjj",Toast.LENGTH_LONG).show();
+                Toast.makeText(ProductDetail.this, " kkkk", Toast.LENGTH_LONG).show();
+
             }
         });
         backgroun.setOnClickListener(new View.OnClickListener() {
@@ -230,11 +237,33 @@ public class ProductDetail extends AppCompatActivity {
         bootom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ProductDetail.this, "add zozoz", Toast.LENGTH_SHORT).show();
-            }
+                ServiceApi getOrder = RetrofitO.getmRetrofit().create(ServiceApi.class);
 
+                Toast.makeText(ProductDetail.this, " " + orderP, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProductDetail.this, " " + orderP.getIdProductb() + " " + orderP.getImagebag() + " " + orderP.getSizebag(), Toast.LENGTH_SHORT).show();
+                ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
+                if (orderP.getImagebag() == null | orderP.getSizebag() == null) {
+                    Toast.makeText(ProductDetail.this, "vui long chon", Toast.LENGTH_LONG).show();
+                } else {
+                    Call<List<OrderP>> call = serviceApi.setOrder(orderP.getIdProductb(), orderP.getImagebag(), orderP.getSizebag());
+                    call.enqueue(new Callback<List<OrderP>>() {
+                        @Override
+                        public void onResponse(Call<List<OrderP>> call, retrofit2.Response<List<OrderP>> response) {
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<List<OrderP>> call, Throwable t) {
+
+                        }
+                    });
+
+
+                }
+            }
         });
- getDataRecyZezo();
+
+        getDataRecyZezo();
   setSupportActionBar(toolbar1);
   getSupportActionBar().setTitle("");
  toolbar1.setNavigationIcon(R.drawable.left_chevron);
@@ -244,14 +273,14 @@ toolbar1.setVisibility(GONE);
 
     }
 
-    private void getImageSize(int id) {
+    private void getImageSize(int id, final OrderP orderP) {
         ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
         Call<List<String>> call = serviceApi.getaSize(id);
         call.enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, retrofit2.Response<List<String>> response) {
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(ProductDetail.this, 10);
-                BottomAdapSize adapSize = new BottomAdapSize(ProductDetail.this, response.body());
+                BottomAdapSize adapSize = new BottomAdapSize(ProductDetail.this, response.body(), orderP);
                 sizeRec.setLayoutManager(gridLayoutManager);
                 sizeRec.setAdapter(adapSize);
 
@@ -293,7 +322,7 @@ toolbar1.setVisibility(GONE);
 
     }
 
-    private void getImageProduct(int id, final String image) {
+    private void getImageProduct(int id, final String image, final OrderP orderP) {
         ServiceApi service = RetrofitO.getmRetrofit().create(ServiceApi.class);
         Call<List<String>> call = service.getColor(id);
         call.enqueue(new Callback<List<String>>() {
@@ -305,16 +334,17 @@ toolbar1.setVisibility(GONE);
                     daTa.remove(daTa.indexOf(image));
                 }
                 daTa.add(0, image);
-                ViewPagerProduct adapter = new ViewPagerProduct(ProductDetail.this, daTa);
-                PagerAdapter wrappedAdapter = new InfinitePagerAdapter(adapter);
-                viewPager.setAdapter(wrappedAdapter);
-                BottomAdapImage adapImage = new BottomAdapImage(ProductDetail.this, daTa);
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(ProductDetail.this, 5);
-                recColor.setLayoutManager(gridLayoutManager);
-                recColor.setAdapter(adapImage);
                 Glide.with(ProductDetail.this)
                         .load(RetrofitO.url + image)
                         .into(imageBotSheet);
+                ViewPagerProduct adapter = new ViewPagerProduct(ProductDetail.this, daTa);
+                PagerAdapter wrappedAdapter = new InfinitePagerAdapter(adapter);
+                viewPager.setAdapter(wrappedAdapter);
+                BottomAdapImage adapImage = new BottomAdapImage(ProductDetail.this, daTa, imageBotSheet, orderP);
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(ProductDetail.this, 5);
+                recColor.setLayoutManager(gridLayoutManager);
+                recColor.setAdapter(adapImage);
+
             }
 
             @Override

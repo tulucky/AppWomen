@@ -8,7 +8,7 @@ public class RetrofitO {
     private static Retrofit mRetrofit = null;
     public static final String url = "http://192.168.1.24/wmshop/";
 
-    public RetrofitO() {
+    private RetrofitO() {
     }
     public static Retrofit getmRetrofit(){
         if(mRetrofit == null){

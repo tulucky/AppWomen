@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageListener imageListener = new ImageListener() {
         @Override
         public void setImageForPosition(int position, ImageView imageView) {
-         //   imageView.setImageResource(sampleImages[position]);
+            //imageView.setImageResource(sampleImages[position]);
         }
     };
 

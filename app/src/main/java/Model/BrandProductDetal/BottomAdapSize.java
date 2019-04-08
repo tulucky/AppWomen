@@ -15,10 +15,12 @@ import lucky.dev.tu.devandroid.R;
 public class BottomAdapSize extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context mcontext;
     List<String> listSize;
+    OrderP orderP;
 
-    public BottomAdapSize(Context mcontext, List<String> listSize) {
+    public BottomAdapSize(Context mcontext, List<String> listSize, OrderP order) {
         this.mcontext = mcontext;
         this.listSize = listSize;
+        this.orderP = order;
     }
 
     @NonNull
@@ -30,9 +32,16 @@ public class BottomAdapSize extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        SizeHolder holder = (SizeHolder) viewHolder;
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
+        final SizeHolder holder = (SizeHolder) viewHolder;
         holder.sizeB.setText(listSize.get(i));
+        holder.sizeB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                orderP.setSizebag(listSize.get(i));
+
+            }
+        });
 
     }
 
