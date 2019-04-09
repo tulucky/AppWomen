@@ -40,6 +40,14 @@ public interface ServiceApi {
 
     @FormUrlEncoded
     @POST("orders.php")
-    Call<List<OrderP>> setOrder(@Field("idProduct") int id, @Field("image") String image, @Field("size") String size);
+    Call<List<OrderP>> setOrder(@Field("idProduct") int id, @Field("image") String image, @Field("size") String size, @Field("number") int number);
     //the value of a Field is option as long as match with $_post[value]
+    @GET("listorders.php")
+    Call<List<OrderP>> getListOrder();
+
+    @FormUrlEncoded
+    @POST("upnumber.php")
+    Call<List<OrderP>> upNumber(@Field("id") int id, @Field("number") int number);
+
+    Call<List<OrderP>> updateProduct();
 }

@@ -3,6 +3,7 @@ package lucky.dev.tu.devandroid;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -81,6 +82,8 @@ public class ProductDetail extends AppCompatActivity {
     ConstraintLayout bottomsheet;
     ImageView backgroun;
    ImageView sub;
+    ImageView plus;
+    TextView amount;
     TextView bootom;
     TextView nameB;
     TextView aProductDes;
@@ -97,6 +100,10 @@ public class ProductDetail extends AppCompatActivity {
     TextView sizeDes;
     String imageBag;
     String sizeBag;
+    int addNumber;
+    int quantity = 1;
+    int test = 0;
+    List<OrderP> temp;
     CollapsingToolbarLayout collapsingToolbarLayout;
     private static final String urlData0 = "http://192.168.1.24/wmshop/tops.php";
     List<String> daTa;
@@ -133,6 +140,8 @@ public class ProductDetail extends AppCompatActivity {
         backgroun = findViewById(R.id.backgroun);
         collapsingToolbarLayout = findViewById(R.id.collapsing);
         sub = findViewById(R.id.sub);
+        plus = findViewById(R.id.plus);
+        amount = findViewById(R.id.amount);
         recColor = findViewById(R.id.rec_color);
         sizeRec = findViewById(R.id.size_rec);
         sizeDes = findViewById(R.id.size_des);
@@ -146,6 +155,7 @@ public class ProductDetail extends AppCompatActivity {
         Log.i("id", " " + id);
         final OrderP orderP = new OrderP();
         orderP.setIdProductb(id);
+        orderP.setNumber(quantity);
         getaProduct(id);
         getImageProduct(id, image, orderP);
         getImageSize(id, orderP);
@@ -208,7 +218,22 @@ public class ProductDetail extends AppCompatActivity {
                 collapsingToolbarLayout.setVisibility(GONE);
                 bottomsheet.startAnimation(animation);
                 bottomsheet.setVisibility(VISIBLE);
+                final ServiceApi getOrders = RetrofitO.getmRetrofit().create(ServiceApi.class);
+                Call<List<OrderP>> callOrder = getOrders.getListOrder();
+                callOrder.enqueue(new Callback<List<OrderP>>() {
+                    @Override
+                    public void onResponse(Call<List<OrderP>> call, retrofit2.Response<List<OrderP>> response) {
+                        Toast.makeText(ProductDetail.this, " hhh", Toast.LENGTH_LONG).show();
+                        Log.i("hh", " " + response.body());
+                        temp = response.body();
+                    }
 
+                    @Override
+                    public void onFailure(Call<List<OrderP>> call, Throwable t) {
+                        t.getMessage();
+
+                    }
+                });
             }
         });
         bottomsheet.setOnTouchListener(new View.OnTouchListener() {
@@ -221,8 +246,22 @@ public class ProductDetail extends AppCompatActivity {
         sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ProductDetail.this, " kkkk", Toast.LENGTH_LONG).show();
-
+                if (quantity == 1) {
+                    amount.setText(" " + quantity);
+                    orderP.setNumber(quantity);
+                } else {
+                    quantity--;
+                    amount.setText(" " + quantity);
+                    orderP.setNumber(quantity);
+                }
+            }
+        });
+        plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                quantity++;
+                amount.setText(" " + quantity);
+                orderP.setNumber(quantity);
             }
         });
         backgroun.setOnClickListener(new View.OnClickListener() {
@@ -237,29 +276,60 @@ public class ProductDetail extends AppCompatActivity {
         bootom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ServiceApi getOrder = RetrofitO.getmRetrofit().create(ServiceApi.class);
+                switch (test) {
+                    case 0:
+                        for (int i = 0; i < temp.size(); i++) {
+                            Toast.makeText(ProductDetail.this, "nna nanh", Toast.LENGTH_LONG).show();
+                            if (temp.get(i).getIdProductb() == orderP.getIdProductb() && temp.get(i).getImagebag()
+                                    .equals(orderP.getImagebag()) && temp.get(i).getSizebag().equals(orderP.getSizebag())) {
+                                Log.i("pl", " davao day" + temp.get(i).getId());
+                                Toast.makeText(ProductDetail.this, "tao ra", Toast.LENGTH_LONG).show();
+                                test = 2;
+                                addNumber = temp.get(i).getNumber() + orderP.getNumber();
+                                ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
+                                Call<List<OrderP>> callupnumber = serviceApi.upNumber(temp.get(i).getId(), addNumber);
+                                callupnumber.enqueue(new Callback<List<OrderP>>() {
+                                    @Override
+                                    public void onResponse(Call<List<OrderP>> call, retrofit2.Response<List<OrderP>> response) {
 
-                Toast.makeText(ProductDetail.this, " " + orderP, Toast.LENGTH_SHORT).show();
-                Toast.makeText(ProductDetail.this, " " + orderP.getIdProductb() + " " + orderP.getImagebag() + " " + orderP.getSizebag(), Toast.LENGTH_SHORT).show();
-                ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
-                if (orderP.getImagebag() == null | orderP.getSizebag() == null) {
-                    Toast.makeText(ProductDetail.this, "vui long chon", Toast.LENGTH_LONG).show();
-                } else {
-                    Call<List<OrderP>> call = serviceApi.setOrder(orderP.getIdProductb(), orderP.getImagebag(), orderP.getSizebag());
-                    call.enqueue(new Callback<List<OrderP>>() {
-                        @Override
-                        public void onResponse(Call<List<OrderP>> call, retrofit2.Response<List<OrderP>> response) {
+                                    }
 
+                                    @Override
+                                    public void onFailure(Call<List<OrderP>> call, Throwable t) {
+
+                                    }
+                                });
+                            }
+                        }
+                        if (test == 2) {
+                            test = 0;
+                            break;
                         }
 
-                        @Override
-                        public void onFailure(Call<List<OrderP>> call, Throwable t) {
+                    case 1:
+                        Log.i("an", "haha");
+                        final ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
+                        Toast.makeText(ProductDetail.this, "vao tao roi", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ProductDetail.this, " " + orderP.getIdProductb() + " " + orderP.getImagebag() + " " + orderP.getSizebag() + orderP.getNumber(), Toast.LENGTH_SHORT).show();
+                        if (orderP.getImagebag() == null | orderP.getSizebag() == null) {
+                            Toast.makeText(ProductDetail.this, "vui long chon", Toast.LENGTH_LONG).show();
+                        } else {
+                            Call<List<OrderP>> callInsert = serviceApi.setOrder(orderP.getIdProductb(), orderP.getImagebag(), orderP.getSizebag(), orderP.getNumber());
+                            callInsert.enqueue(new Callback<List<OrderP>>() {
+                                @Override
+                                public void onResponse(Call<List<OrderP>> call, retrofit2.Response<List<OrderP>> response) {
 
+                                }
+
+                                @Override
+                                public void onFailure(Call<List<OrderP>> call, Throwable t) {
+
+                                }
+                            });
                         }
-                    });
-
-
+                        test = 0;
                 }
+
             }
         });
 
@@ -279,8 +349,8 @@ toolbar1.setVisibility(GONE);
         call.enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, retrofit2.Response<List<String>> response) {
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(ProductDetail.this, 10);
-                BottomAdapSize adapSize = new BottomAdapSize(ProductDetail.this, response.body(), orderP);
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(ProductDetail.this, 5);
+                BottomAdapSize adapSize = new BottomAdapSize(ProductDetail.this, response.body(), orderP, sizeDes);
                 sizeRec.setLayoutManager(gridLayoutManager);
                 sizeRec.setAdapter(adapSize);
 

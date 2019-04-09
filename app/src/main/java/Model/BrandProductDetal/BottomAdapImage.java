@@ -2,6 +2,7 @@ package Model.BrandProductDetal;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ public class BottomAdapImage extends RecyclerView.Adapter<RecyclerView.ViewHolde
     List<String> listImageColor;
     ImageView imagebotsheet;
     OrderP orderP;
+    int selected = -1;
 
     public BottomAdapImage(Context mcontext, List<String> listImageColor, ImageView imagesheet, OrderP order) {
         this.mcontext = mcontext;
@@ -39,15 +41,26 @@ public class BottomAdapImage extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
         ImageHolder holder = (ImageHolder) viewHolder;
-        Glide.with(mcontext)
-                .load(RetrofitO.url + listImageColor.get(i))
-                .into(holder.imageColor);
+        if (selected == i) {
+            holder.aview.setBackgroundResource(R.drawable.background_color);
+            Glide.with(mcontext)
+                    .load(RetrofitO.url + listImageColor.get(i))
+                    .into(holder.imageColor);
+        } else {
+            holder.aview.setBackgroundResource(R.color.white);
+            Glide.with(mcontext)
+                    .load(RetrofitO.url + listImageColor.get(i))
+                    .into(holder.imageColor);
+        }
+
         holder.imageColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                selected = i;
                 Glide.with(mcontext).load(RetrofitO.url + listImageColor.get(i))
                         .into(imagebotsheet);
                 orderP.setImagebag(listImageColor.get(i));
+                notifyDataSetChanged();
 
             }
         });
@@ -61,10 +74,12 @@ public class BottomAdapImage extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private class ImageHolder extends RecyclerView.ViewHolder {
         ImageView imageColor;
+        ConstraintLayout aview;
 
         public ImageHolder(View view) {
             super(view);
             imageColor = view.findViewById(R.id.image_color);
+            aview = (ConstraintLayout) view;
         }
     }
 }

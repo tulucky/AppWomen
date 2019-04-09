@@ -6,4 +6,5 @@
     <color name="button_sign">#dc354e</color>
     <color name="toolbar">#ffffff</color>
     <color name="main_textcolor_bottom">#000000</color>
+    <color name="white">#ffffff</color>
 </resources>

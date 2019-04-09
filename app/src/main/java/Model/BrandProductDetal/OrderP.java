@@ -1,14 +1,33 @@
 package Model.BrandProductDetal;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class OrderP {
-
+    @SerializedName("id")
+    @Expose
+    int id;
+    @SerializedName("idproduct")
+    @Expose
     int idProductb;
-
+    @SerializedName("image")
+    @Expose
     String imagebag;
-
+    @SerializedName("size")
+    @Expose
     String sizebag;
-
+    @SerializedName("number")
+    @Expose
     int number;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+
+        return id;
+    }
 
     public OrderP() {
     }

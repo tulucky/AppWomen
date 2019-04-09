@@ -1,6 +1,7 @@
 package Model.BrandProductDetal;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,11 +17,14 @@ public class BottomAdapSize extends RecyclerView.Adapter<RecyclerView.ViewHolder
     Context mcontext;
     List<String> listSize;
     OrderP orderP;
+    TextView sizeDes;
+    int slected = -1;
 
-    public BottomAdapSize(Context mcontext, List<String> listSize, OrderP order) {
+    public BottomAdapSize(Context mcontext, List<String> listSize, OrderP order, TextView textView) {
         this.mcontext = mcontext;
         this.listSize = listSize;
         this.orderP = order;
+        sizeDes = textView;
     }
 
     @NonNull
@@ -34,12 +38,22 @@ public class BottomAdapSize extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
         final SizeHolder holder = (SizeHolder) viewHolder;
-        holder.sizeB.setText(listSize.get(i));
+        if (slected == i) {
+            holder.sizeB.setText(listSize.get(i));
+            holder.sizeB.setTextColor(Color.WHITE);
+            holder.sizeB.setBackgroundResource(R.drawable.background_color);
+        } else {
+            holder.sizeB.setText(listSize.get(i));
+            holder.sizeB.setTextColor(Color.BLACK);
+            holder.sizeB.setBackgroundResource(R.drawable.border);
+        }
         holder.sizeB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sizeDes.setVisibility(View.VISIBLE);
+                slected = i;
                 orderP.setSizebag(listSize.get(i));
-
+                notifyDataSetChanged();
             }
         });
 
