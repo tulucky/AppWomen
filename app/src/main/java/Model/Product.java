@@ -47,6 +47,18 @@ public class Product {
     private String updateAt;
     @SerializedName("nameb")
     private String nameB;
+    @SerializedName("price")
+    @Expose
+    private float price;
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public float getPrice() {
+
+        return price;
+    }
 
     public Product() {
     }
