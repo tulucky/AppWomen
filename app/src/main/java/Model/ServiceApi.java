@@ -49,5 +49,7 @@ public interface ServiceApi {
     @POST("upnumber.php")
     Call<List<OrderP>> upNumber(@Field("id") int id, @Field("number") int number);
 
-    Call<List<OrderP>> updateProduct();
+    @FormUrlEncoded
+    @POST("updateorder.php")
+    Call<List<OrderP>> updateOrderProduct(@Field("id") int id, @Field("image") String image, @Field("size") String size, @Field("number") int number);
 }

@@ -27,6 +27,14 @@ public class BottomAdapSize extends RecyclerView.Adapter<RecyclerView.ViewHolder
         sizeDes = textView;
     }
 
+    public BottomAdapSize(Context mcontext, List<String> listSize, OrderP order, TextView textView, int i) {
+        this.mcontext = mcontext;
+        this.listSize = listSize;
+        this.orderP = order;
+        sizeDes = textView;
+        this.slected = i;
+    }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -53,6 +61,7 @@ public class BottomAdapSize extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 sizeDes.setVisibility(View.VISIBLE);
                 slected = i;
                 orderP.setSizebag(listSize.get(i));
+                //set size for object to update;
                 notifyDataSetChanged();
             }
         });

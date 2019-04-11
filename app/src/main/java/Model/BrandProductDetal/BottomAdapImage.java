@@ -30,6 +30,14 @@ public class BottomAdapImage extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.orderP = order;
     }
 
+    public BottomAdapImage(Context mcontext, List<String> listImageColor, ImageView imagesheet, OrderP order, int slectted) {
+        this.mcontext = mcontext;
+        this.listImageColor = listImageColor;
+        this.imagebotsheet = imagesheet;
+        this.orderP = order;
+        this.selected = slectted;
+    }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -60,6 +68,7 @@ public class BottomAdapImage extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 Glide.with(mcontext).load(RetrofitO.url + listImageColor.get(i))
                         .into(imagebotsheet);
                 orderP.setImagebag(listImageColor.get(i));
+                //set size for object to update;
                 notifyDataSetChanged();
 
             }
