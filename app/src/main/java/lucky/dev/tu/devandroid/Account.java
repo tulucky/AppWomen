@@ -22,6 +22,7 @@ public class Account extends AppCompatActivity {
  ViewPager viewPager;
  StickyNestedScrollView a;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +33,8 @@ public class Account extends AppCompatActivity {
        Viewpager viewpager_adapter = new Viewpager(getSupportFragmentManager());
         //neu dat trung ten ta chon viewpager cua model account
         //nen dat khac ten
-        viewpager_adapter.addFragment(new Signin(),"Đăng nhập");
-        viewpager_adapter.addFragment(new Signup(),"Đăng ký");
+        viewpager_adapter.addFragment(new Signin(), "Đăng Nhập");
+        viewpager_adapter.addFragment(new Signup(), "Đăng Ký");
         viewPager.setAdapter(viewpager_adapter);
         tabLayout.setupWithViewPager(viewPager);
 

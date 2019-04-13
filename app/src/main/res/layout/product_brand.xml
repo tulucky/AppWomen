@@ -12,7 +12,7 @@
 
         <TextView
             android:id="@+id/giagoc3_p"
-            android:layout_width="54dp"
+            android:layout_width="wrap_content"
             android:layout_height="18dp"
             android:layout_marginTop="8dp"
             android:text="TextView"
@@ -21,7 +21,7 @@
 
         <TextView
             android:id="@+id/giagoc2_p"
-            android:layout_width="54dp"
+            android:layout_width="wrap_content"
             android:layout_height="18dp"
             android:layout_marginTop="8dp"
             android:text="TextView"
@@ -183,7 +183,7 @@
 
         <TextView
             android:id="@+id/giagoc1_p"
-            android:layout_width="54dp"
+            android:layout_width="wrap_content"
             android:layout_height="18dp"
             android:layout_marginTop="8dp"
             android:text="TextView"
@@ -218,7 +218,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
-            android:backgroundTint="@color/colorPrimary"
             android:background="@drawable/sticky_product_brand"
             android:tag="sticky"
             app:layout_constraintEnd_toEndOf="parent"
@@ -299,12 +298,22 @@
                     android:src="@drawable/ic_arrow_drop_down_black_24dp" />
             </FrameLayout>
 
+            <ImageView
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                app:layout_constraintTop_toBottomOf="@id/theloai"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/sticky_product_brand" />
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/menu_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/theloai">
+                app:layout_constraintTop_toBottomOf="@id/line">
 
             </android.support.v7.widget.RecyclerView>
         </android.support.constraint.ConstraintLayout>

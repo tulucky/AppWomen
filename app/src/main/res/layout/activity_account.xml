@@ -51,6 +51,8 @@
         android:layout_height="wrap_content"
         app:tabGravity="fill"
         app:tabMode="fixed"
+        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+        style="@style/tablayout"
         app:tabSelectedTextColor="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

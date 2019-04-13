@@ -6,92 +6,154 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".MainActivity">
-    <include layout="@layout/action_bar"/>
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
-        <com.synnapps.carouselview.CarouselView
-            android:id="@+id/carouselView"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@color/colorAccent"
-            app:fillColor="#fa2b2b"
-            app:pageColor="#00000000"
-            app:radius="3dp"
-            app:slideInterval="3000"
-            app:strokeColor="#FF777777"
-            app:strokeWidth="1dp" />
+    <include layout="@layout/action_bar" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nest_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="56dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.synnapps.carouselview.CarouselView
+                android:id="@+id/carouselView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@color/colorAccent"
+                app:fillColor="#fa2b2b"
+                app:pageColor="#00000000"
+                app:radius="3dp"
+                app:slideInterval="3000"
+                app:strokeColor="#FF777777"
+                app:strokeWidth="1dp" />
+
+            <include layout="@layout/menu_cirle" />
+
+            <ImageView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="#e2dede" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_height="350dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
 
-                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/profile_image1"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/image_3" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:src="@drawable/lolo" />
 
-                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/profile_image2"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="18dp"
-                    android:src="@drawable/image_1" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/profile_image3"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="18dp"
-                    android:src="@drawable/image_1" />
+                    <ImageView
+                        android:layout_width="180dp"
+                        android:layout_height="120dp"
+                        android:layout_marginRight="8dp"
+                        android:src="@drawable/ha" />
 
-                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/profile_image4"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="18dp"
-                    android:src="@drawable/image_1" />
+                    <ImageView
+                        android:layout_width="180dp"
+                        android:layout_height="120dp"
+                        android:src="@drawable/hi" />
 
-                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/profile_image5"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="18dp"
-                    android:src="@drawable/image_1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="180dp"
+                        android:layout_height="120dp"
+                        android:layout_marginRight="8dp"
+                        android:src="@drawable/ff" />
+
+                    <ImageView
+                        android:layout_width="180dp"
+                        android:layout_height="120dp"
+                        android:src="@drawable/hi" />
+
+                </LinearLayout>
+
             </LinearLayout>
-        </LinearLayout>
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:background="#e2dede" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="15dp"
-            android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/seperate"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:background="#e2dede" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/seperate"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/sans_prob"
+                    android:text="Giảm Giá Đặc Biệt "
+                    android:textColor="#0b0b0b"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/seperate"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="25dp"
+                    android:fontFamily="@font/utm_avor"
+                    android:text="Xem Nhiều >>"
+                    android:textColor="#0b0b0b" />
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/Recycle_one"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:scrollbars="horizontal">
+
+            </android.support.v7.widget.RecyclerView>
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:src="@drawable/lolo" />
+                android:layout_height="8dp"
+                android:layout_marginTop="15dp"
+                android:background="#e2dede" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/sans_prob"
+                android:text="Phổ Biến"
+                android:textColor="#0b0b0b"
+                android:textSize="20sp"
+
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -133,191 +195,105 @@
 
             </LinearLayout>
 
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp">
-
             <ImageView
-                android:id="@+id/seperate"
                 android:layout_width="match_parent"
                 android:layout_height="8dp"
+                android:layout_marginTop="20dp"
+                android:background="#e2dede" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/sale" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/das" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_marginTop="15dp"
                 android:background="#e2dede" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/seperate"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/sans_prob"
-                android:text="Giảm Giá Đặc Biệt "
+                android:text="What's Hot"
                 android:textColor="#0b0b0b"
                 android:textSize="20sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/colorAccent">
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativ"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/seperate"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="25dp"
-                android:fontFamily="@font/utm_avor"
+                android:layout_marginTop="20dp">
 
-                android:text="Xem Nhiều >"
-                android:textColor="#0b0b0b" />
-        </RelativeLayout>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/Recycle_Zezo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:scrollbars="horizontal"
-            >
-        </android.support.v7.widget.RecyclerView>
+                <TextView
+                    android:id="@+id/xem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/sans_prob"
+                    android:text="Bạn Có Thể Xem"
+                    android:textColor="#0b0b0b"
+                    android:textSize="20sp" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:layout_marginTop="15dp"
-            android:background="#e2dede" />
+                <ImageView
+                    android:id="@+id/list"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/list" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/sans_prob"
-            android:textColor="#0b0b0b"
-            android:text="Phổ Biến"
-            android:textSize="20sp"
+                <ImageView
+                    android:id="@+id/grid"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/squaresgridlayout" />
+            </RelativeLayout>
 
-            />
+            <RelativeLayout
+                android:id="@+id/recy_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"></RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="180dp"
-                android:layout_height="120dp"
-                android:layout_marginRight="8dp"
-                android:src="@drawable/ha" />
-
-            <ImageView
-                android:layout_width="180dp"
-                android:layout_height="120dp"
-                android:src="@drawable/hi" />
-
+            <include layout="@layout/progress" />
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="180dp"
-                android:layout_height="120dp"
-                android:layout_marginRight="8dp"
-                android:src="@drawable/ff" />
-
-            <ImageView
-                android:layout_width="180dp"
-                android:layout_height="120dp"
-                android:src="@drawable/hi" />
-
-        </LinearLayout>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:layout_marginTop="20dp"
-            android:background="#e2dede" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="110dp"
-            android:src="@drawable/sale"
-            android:layout_marginTop="15dp"/>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:src="@drawable/das"
-            android:layout_marginTop="15dp"/>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:layout_marginTop="15dp"
-            android:background="#e2dede" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/sans_prob"
-            android:text="What's Hot"
-            android:textColor="#0b0b0b"
-            android:textSize="20sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="15dp"
-            android:background="@color/colorAccent">
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/sans_prob"
-            android:text="Bạn Có Thể Xem"
-            android:textColor="#0b0b0b"
-            android:textSize="20sp" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/Recycle_Three"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:scrollbars="vertical">
-
-        </android.support.v7.widget.RecyclerView>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="56dp"
-            android:gravity="center_horizontal"
-            android:text="Xem Them"
-            android:textSize="20sp"/>
-
-    </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-    <android.support.design.widget.BottomNavigationView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <android.support.design.widget.BottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/navigation"
+        style="@style/main_Abottom"
         android:layout_width="match_parent"
         android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        android:background="#ffffff"
         app:itemIconTint="@drawable/bootom_navigation"
         app:labelVisibilityMode="labeled"
-        android:layout_gravity="bottom"
-        app:menu="@menu/my_navigation_items"
-        style="@style/main_Abottom"
-        android:background="#ffffff"/>
+        app:menu="@menu/my_navigation_items" />
 
 </FrameLayout>

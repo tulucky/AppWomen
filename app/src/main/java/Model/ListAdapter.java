@@ -20,11 +20,11 @@ import java.util.List;
 import lucky.dev.tu.devandroid.ProductDetail;
 import lucky.dev.tu.devandroid.R;
 
-public class AdapterProduct extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-   public List<Product> listProduct;
+public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    public List<Product> listProduct;
     public Context mcontext;
 
-    public AdapterProduct(Context context,List<Product> products) {
+    public ListAdapter(Context context, List<Product> products) {
         listProduct = new ArrayList<>();
         this.listProduct = products;
         this.mcontext = context;
@@ -33,7 +33,7 @@ public class AdapterProduct extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
         LayoutInflater myInflater = LayoutInflater.from(viewGroup.getContext());
-        View itemView = myInflater.inflate(R.layout.recy_main3, viewGroup, false);
+        View itemView = myInflater.inflate(R.layout.lea_item_product, viewGroup, false);
         return new MyHolder(itemView);
     }
 
@@ -44,6 +44,7 @@ public class AdapterProduct extends RecyclerView.Adapter<RecyclerView.ViewHolder
         Glide.with(mcontext)
                 .load(RetrofitO.url + listProduct.get(position).getImage())
                 .into(mholder.mImage);
+        mholder.titleName.setText(listProduct.get(position).getTitle());
         mholder.mPrice.setText(listProduct.get(position).getName());
         mholder.mGiaGoc.setText(listProduct.get(position).getOriginprice());
         mholder.phanTram.setText(listProduct.get(position).getSale());
@@ -62,7 +63,7 @@ public class AdapterProduct extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public int getItemCount() {
-        return listProduct.size();
+        return 20;
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {
@@ -70,6 +71,7 @@ public class AdapterProduct extends RecyclerView.Adapter<RecyclerView.ViewHolder
         TextView mPrice;
         TextView mGiaGoc;
         TextView phanTram;
+        TextView titleName;
 
         public MyHolder(View itemView) {
             super(itemView);
@@ -77,7 +79,9 @@ public class AdapterProduct extends RecyclerView.Adapter<RecyclerView.ViewHolder
             mPrice = itemView.findViewById(R.id.price);
             mGiaGoc = itemView.findViewById(R.id.price_1);
             phanTram = itemView.findViewById(R.id.phantram);
+            titleName = itemView.findViewById(R.id.title_name);
         }
 
     }
 }
+

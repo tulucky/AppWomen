@@ -1,13 +1,10 @@
 package lucky.dev.tu.devandroid;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
@@ -16,17 +13,12 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.Layout;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,24 +37,18 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.AdapterProduct;
-import Model.AdapterZezo;
+import Model.GridAdapter;
 import Model.BrandProductDetal.AdapterInfor;
 import Model.BrandProductDetal.BottomAdapImage;
 import Model.BrandProductDetal.BottomAdapSize;
-import Model.BrandProductDetal.DetailFrag;
 import Model.BrandProductDetal.OrderP;
 import Model.BrandProductDetal.ViewPagerProduct;
-import Model.Itemthree;
 import Model.MySingleton;
 import Model.Product;
 import Model.RetrofitO;
-import Model.Service;
 import Model.ServiceApi;
 import retrofit2.Call;
 import retrofit2.Callback;
-
-import android.view.MotionEvent;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -450,7 +436,7 @@ toolbar1.setVisibility(GONE);
                                         a.getString("sale"))
                                 );
                             }
-                            AdapterProduct madapter = new AdapterProduct(ProductDetail.this,list);
+                            GridAdapter madapter = new GridAdapter(ProductDetail.this, list);
                             recyclerView.setAdapter(madapter);
 
                             Log.i("ko", "" + list);

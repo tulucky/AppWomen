@@ -4,11 +4,9 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.ImageView;
 
 import java.util.List;
 
-import lucky.dev.tu.devandroid.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -56,7 +54,7 @@ public class Service {
         mrecycle.setHasFixedSize(true);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context,2);
        mrecycle.setLayoutManager(gridLayoutManager);
-        AdapterProduct adapter = new AdapterProduct(context,body);
+        GridAdapter adapter = new GridAdapter(context, body);
         mrecycle.setAdapter(adapter);
        // Log.i("m",""+mscroll.getHeight());
 

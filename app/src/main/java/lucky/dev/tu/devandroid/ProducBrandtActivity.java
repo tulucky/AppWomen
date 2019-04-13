@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.constraint.ConstraintLayout;
@@ -23,10 +22,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.AdapterProduct;
-import Model.Brand.BrandAdapter;
 import Model.Brand.BrandModel;
-import Model.Product;
 import Model.ProductBrand.AdapterMenu;
 
 import Model.ProductBrand.MenuList;
@@ -231,6 +227,7 @@ public class ProducBrandtActivity extends AppCompatActivity {
         if(recyclerView.getVisibility()==View.GONE){
             int s= menu.getTop();
             mscroll.smoothScrollTo(0,menu.getTop());
+            //scroll xuong 1 doan dung bang khoang cach voi vi tri con cua no
             Log.i("s",""+s+" "+mscroll.getHeight()+recyclerView.getTop());
             recyclerView.setVisibility(View.VISIBLE);
             iconTheLoai.setImageResource(R.drawable.ic_arrow_drop_up_black_24dp2);

@@ -3,20 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="150dp"
+    android:layout_marginEnd="10dp">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/image"
         android:layout_width="96dp"
         android:layout_height="120dp"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/vay1" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/title_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
@@ -24,38 +25,38 @@
         android:layout_marginTop="20dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/image"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
         android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintStart_toEndOf="@+id/image"
+        app:layout_constraintTop_toBottomOf="@+id/title_name" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/price_1"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="25dp"
         android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintStart_toEndOf="@+id/price"
+        app:layout_constraintTop_toBottomOf="@+id/title_name" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/phantram"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="25dp"
         android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintStart_toEndOf="@+id/price_1"
+        app:layout_constraintTop_toBottomOf="@+id/title_name" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -64,45 +65,45 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="12dp"
         android:orientation="horizontal"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView5">
+        app:layout_constraintStart_toEndOf="@+id/image"
+        app:layout_constraintTop_toBottomOf="@+id/price">
 
         <ImageView
             android:id="@+id/imageView26"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             app:srcCompat="@drawable/star"
             tools:layout_editor_absoluteX="309dp"
             tools:layout_editor_absoluteY="69dp" />
 
         <ImageView
             android:id="@+id/imageView25"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             app:srcCompat="@drawable/star"
             tools:layout_editor_absoluteX="261dp"
             tools:layout_editor_absoluteY="69dp" />
 
         <ImageView
             android:id="@+id/imageView24"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             app:srcCompat="@drawable/star"
             tools:layout_editor_absoluteX="333dp"
             tools:layout_editor_absoluteY="69dp" />
 
         <ImageView
             android:id="@+id/imageView23"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             app:srcCompat="@drawable/star"
             tools:layout_editor_absoluteX="285dp"
             tools:layout_editor_absoluteY="69dp" />
 
         <ImageView
             android:id="@+id/imageView22"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             app:srcCompat="@drawable/star"
             tools:layout_editor_absoluteX="237dp"
             tools:layout_editor_absoluteY="69dp" />
@@ -115,15 +116,15 @@
         android:layout_marginEnd="32dp"
         android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/phantram"
         app:srcCompat="@drawable/shopping_bag" />
 
     <ImageView
         android:layout_width="0dp"
-        android:layout_height="0.5dp"
-        android:layout_marginTop="21dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="19dp"
         android:background="@drawable/sticky_product_brand"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/image"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 </android.support.constraint.ConstraintLayout>
