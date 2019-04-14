@@ -2,6 +2,7 @@ package Model;
 
 import java.util.List;
 
+import Model.Account.Alter;
 import Model.Brand.BrandModel;
 import Model.BrandProductDetal.OrderP;
 import retrofit2.Call;
@@ -55,5 +56,9 @@ public interface ServiceApi {
 
     @FormUrlEncoded
     @POST("login.php")
-    Call<List<String>> logIn(@Field("name") String namne, @Field("pass") String pass);
+    Call<List<Alter>> logIn(@Field("name") String namne, @Field("pass") String pass);
+
+    @FormUrlEncoded
+    @POST("signup.php")
+    Call<List<Alter>> signUp(@Field("name") String namne, @Field("pass") String pass);
 }

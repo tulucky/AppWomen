@@ -6,13 +6,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
-import android.telecom.Call;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -22,6 +22,8 @@ import Model.ServiceApi;
 import lucky.dev.tu.devandroid.R;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Call;
+
 
 public class Signin extends Fragment {
     View view;
@@ -31,7 +33,7 @@ public class Signin extends Fragment {
     TextInputEditText passIn;
     EditText nameIn;
     String regex;
-
+    int checkedIn;
     String name;
     String pass;
     public Signin() {
@@ -42,6 +44,7 @@ public class Signin extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
        view = inflater.inflate(R.layout.fragment_signin,container,false);
         regex = "\\S+";
+        checkedIn = 0;
         nameIn = view.findViewById(R.id.name_signup);
         passIn = view.findViewById(R.id.pas_signup);
         alertname = view.findViewById(R.id.name_in);
@@ -57,36 +60,43 @@ public class Signin extends Fragment {
                 Log.i("kk", name);
                 Log.i("kk", pass);
                 if (!Pattern.matches(regex, name)) {
-                    Log.i("kk", "kska");
+                    Log.i("pk", "kska");
                     alertname.setText("Vui lòng nhập name");
                     alertname.setVisibility(View.VISIBLE);
-                }
-                if (!Pattern.matches(regex, pass)) {
+                } else if (!Pattern.matches(regex, pass)) {
                     alertpass.setText("Vui lòng nhập password");
                     alertpass.setVisibility(View.VISIBLE);
                 } else {
                     ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
-                    retrofit2.Call<List<String>> call = serviceApi.logIn(name, pass);
-                    call.enqueue(new Callback<List<String>>() {
+                    Log.i("hpa", "" + name + " " + pass);
+                    Call<List<Alter>> call = serviceApi.logIn(name, pass);
+                    call.enqueue(new Callback<List<Alter>>() {
                         @Override
-                        public void onResponse(retrofit2.Call<List<String>> call, Response<List<String>> response) {
-                            Log.i("kk", "lllska");
-                            if (response.body().get(0).equals(2)) {
+                        public void onResponse(Call<List<Alter>> call, Response<List<Alter>> response) {
+                            Log.i("haa", "" + response.body().get(0).getAlter());
+
+                            Toast.makeText(getActivity(), "kkll", Toast.LENGTH_LONG).show();
+                            if (response.body().get(0).getAlter().equals("2")) {
                                 alertname.setText("Nickname không đúng");
                                 alertpass.setText("Password không đúng");
                                 alertname.setVisibility(View.VISIBLE);
+                                passIn.getText().clear();
+                                nameIn.getText().clear();
                                 alertpass.setVisibility(View.VISIBLE);
-                            }
-                            if (response.body().get(0).equals(1)) {
+                            } else if (response.body().get(0).getAlter().equals("1")) {
                                 alertpass.setText("Password không đúng");
-                            }
-                            if (response.body().get(0).equals(0)) {
-
+                                alertpass.setVisibility(View.VISIBLE);
+                                passIn.getText().clear();
+                            } else if (response.body().get(0).getAlter().equals("0")) {
+                                Toast.makeText(getActivity(), "dang nhap ok", Toast.LENGTH_LONG).show();
+                                checkedIn = 1;
                             }
                         }
 
                         @Override
-                        public void onFailure(retrofit2.Call<List<String>> call, Throwable t) {
+                        public void onFailure(Call<List<Alter>> call, Throwable t) {
+                            t.getMessage();
+                            Log.i("ol", "pppp" + t.getMessage());
 
                         }
                     });
@@ -99,9 +109,11 @@ public class Signin extends Fragment {
                             alertpass.setVisibility(View.GONE);
                         }
                     }
-                }, 5000);
+                }, 3000);
             }
         });
+
        return view;
+
     }
 }

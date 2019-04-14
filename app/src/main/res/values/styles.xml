@@ -17,8 +17,8 @@
         <item name="android:textColor">@color/main_textcolor_bottom</item>
     </style>
 
-    <style name="tablayout" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:textSize">35sp</item>
+    <style name="tablayout" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">50sp</item>
     </style>
 
 </resources>

@@ -62,7 +62,7 @@
         android:background="@color/button_sign"
         android:fontFamily="@font/utm_avor"
         android:gravity="center"
-        android:text="Sign In"
+        android:text="SIgn In"
         android:textColor="#ffffff"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
