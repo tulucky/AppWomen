@@ -279,11 +279,10 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="15dp"></RelativeLayout>
 
-            <include layout="@layout/progress" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-
+    <include layout="@layout/progress" />
     <android.support.design.widget.BottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/navigation"
@@ -295,5 +294,20 @@
         app:itemIconTint="@drawable/bootom_navigation"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/my_navigation_items" />
+
+    <TextView
+        android:layout_width="18sp"
+        android:layout_height="18sp"
+        android:background="@drawable/backg_card"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="@color/white"
+        android:layout_gravity="bottom|right"
+        android:layout_marginEnd="125dp"
+        android:layout_marginBottom="50dp"
+
+        />
+
 
 </FrameLayout>

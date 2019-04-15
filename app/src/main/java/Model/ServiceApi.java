@@ -61,4 +61,7 @@ public interface ServiceApi {
     @FormUrlEncoded
     @POST("signup.php")
     Call<List<Alter>> signUp(@Field("name") String namne, @Field("pass") String pass);
+    @FormUrlEncoded
+    @POST("checkout.php")
+    Call<List<String>> checkOut(@Field("name") String namne, @Field("idorder") int id, @Field("status") String status);
 }

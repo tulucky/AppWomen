@@ -17,8 +17,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"></android.support.v7.widget.RecyclerView>
     </android.support.constraint.ConstraintLayout>
-
     <include
-        android:id="@+id/update_product"
         layout="@layout/order_update" />
+
+    <include layout="@layout/check_out" />
 </android.support.constraint.ConstraintLayout>

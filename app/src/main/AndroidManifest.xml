@@ -12,15 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
        <!-- <activity android:name=".Account"></activity>-->
-        <activity android:name=".Account">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" /></intent-filter>
         </activity>
         <activity android:name=".BrandActivity"></activity>
-        <activity android:name=".ProductDetail"></activity>
+        <activity android:name=".Account"></activity>
+        <activity android:name=".BagActivity"></activity>
         <activity android:name=".ProducBrandtActivity"></activity>
+        <activity android:name=".ProductDetail"></activity>
     </application>
 
 </manifest>

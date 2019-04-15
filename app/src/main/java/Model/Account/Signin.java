@@ -1,5 +1,6 @@
 package Model.Account;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -89,7 +90,11 @@ public class Signin extends Fragment {
                                 passIn.getText().clear();
                             } else if (response.body().get(0).getAlter().equals("0")) {
                                 Toast.makeText(getActivity(), "dang nhap ok", Toast.LENGTH_LONG).show();
-                                checkedIn = 1;
+                                SharedPreferences sharedPref = getActivity().getSharedPreferences(
+                                        "Accout", getActivity().MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPref.edit();
+                                editor.putString("idName", name);
+                                editor.apply();
                             }
                         }
 

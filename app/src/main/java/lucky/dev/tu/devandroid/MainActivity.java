@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         list = findViewById(R.id.list);
         grid = findViewById(R.id.grid);
         progress = findViewById(R.id.progress);
-        //progress.setVisibility(View.GONE);
+        progress.setVisibility(View.GONE);
         grid.setVisibility(View.GONE);
         getDataRecyZezo();
         //cu truy cap tai nguen la phai r
@@ -127,12 +127,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onScrollChange(NestedScrollView nestedScrollView, int i, int i1, int i2, int i3) {
                 if (!nestMain.canScrollVertically(1)) {
+                    progress.setVisibility(View.VISIBLE);
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            progress.setVisibility(View.VISIBLE);
+                            progress.setVisibility(View.GONE);
                         }
-                    }, 500);
+                    }, 300);
                 }
             }
         });
