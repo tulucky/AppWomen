@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Model.Brand.BrandModel;
+import Model.Product;
 import Model.ProductBrand.AdapterMenu;
 
 import Model.ProductBrand.MenuList;
@@ -63,6 +65,8 @@ public class ProducBrandtActivity extends AppCompatActivity {
     TextView gia3p;
     TextView giagoc3p;
     TextView sale3p;
+    ImageView backTo;
+    ImageView share;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -93,6 +97,8 @@ public class ProducBrandtActivity extends AppCompatActivity {
         gia3p = findViewById(R.id.gia3_p);
         giagoc3p = findViewById(R.id.giagoc3_p);
         sale3p = findViewById(R.id.sale3_p);
+        backTo = findViewById(R.id.backto);
+        share = findViewById(R.id.share);
 
        int a= theLoai.getTop();
         catlist= new ArrayList<>();
@@ -108,7 +114,11 @@ public class ProducBrandtActivity extends AppCompatActivity {
         recyclerView.setVisibility(View.GONE);
         Intent intent = getIntent();
         int id = intent.getIntExtra("id", 0);
-        getaBrand(id);
+        String brandImage = intent.getStringExtra("brandimage");
+        String logo = intent.getStringExtra("logo");
+        String nameb = intent.getStringExtra("nameb");
+        String desbrand = intent.getStringExtra("description");
+        getaBrand(id, brandImage, logo, nameb, desbrand);
        Log.i("mn",""+a);
        theLoai.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,6 +139,23 @@ public class ProducBrandtActivity extends AppCompatActivity {
                     },100);*/
                     }
                 });
+        backTo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProducBrandtActivity.this.finish();
+            }
+        });
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("kp", "jaja");
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+                sendIntent.setType("text/plain");
+                startActivity(Intent.createChooser(sendIntent, "share"));
+            }
+        });
 
        /*  final PopupMenu popup = new PopupMenu(this,theLoai);
         popup.getMenuInflater().inflate(R.menu.theloai_product, popup.getMenu());
@@ -143,44 +170,74 @@ public class ProducBrandtActivity extends AppCompatActivity {
 
     }
 
-    private void getaBrand(int id) {
+    private void getaBrand(int id, final String brandImage, final String logo, final String nameb, final String desbrand) {
         ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
-        Call<List<BrandModel>> call = serviceApi.getaBrand(id);
-        call.enqueue(new Callback<List<BrandModel>>() {
+        Call<List<Product>> call = serviceApi.brandImages(id);
+        call.enqueue(new Callback<List<Product>>() {
             @Override
-            public void onResponse(Call<List<BrandModel>> call, Response<List<BrandModel>> response) {
-                Log.i("sa", "" + response.body());
+            public void onResponse(Call<List<Product>> call, final Response<List<Product>> response) {
+                Log.i("ko", " " + response.body());
                 Glide.with(ProducBrandtActivity.this)
-                        .load(RetrofitO.url + response.body().get(0).getImage())
+                        .load(RetrofitO.url + brandImage)
                         .into(imageBrandp);
                 Glide.with(ProducBrandtActivity.this)
-                        .load(RetrofitO.url + response.body().get(0).getLogo())
+                        .load(RetrofitO.url + logo)
                         .into(logoBrandp);
-                nameBrandp.setText(response.body().get(0).getName());
-                desBrandp.setText(response.body().get(0).getDesbrand());
-
+                nameBrandp.setText(nameb);
+                desBrandp.setText(desbrand);
                 Glide.with(ProducBrandtActivity.this)
-                        .load(RetrofitO.url + response.body().get(0).getImage1())
+                        .load(RetrofitO.url + response.body().get(0).getImage())
                         .into(image1p);
-                gia1p.setText(response.body().get(0).getPrice1());
-                giagoc1p.setText(response.body().get(0).getOriginprice1());
-                sale1p.setText(response.body().get(0).getSale1());
+                gia1p.setText(response.body().get(0).getName());
+                sale1p.setText(response.body().get(0).getSale());
+                giagoc1p.setText(response.body().get(0).getOriginprice());
+                Log.i("ko", " " + response.body().get(0).getSale());
+                Log.i("ko", " " + response.body().get(0).getOriginprice());
+                //null do ko chon cot originprice trong file php
                 Glide.with(ProducBrandtActivity.this)
-                        .load(RetrofitO.url + response.body().get(0).getImage2())
+                        .load(RetrofitO.url + response.body().get(1).getImage())
                         .into(image2p);
-                gia2p.setText(response.body().get(0).getPrice2());
-                giagoc2p.setText(response.body().get(0).getOriginprice2());
-                sale2p.setText(response.body().get(0).getSale2());
+                gia2p.setText(response.body().get(1).getName());
+                sale2p.setText(response.body().get(1).getSale());
+                giagoc2p.setText(response.body().get(1).getOriginprice());
                 Glide.with(ProducBrandtActivity.this)
-                        .load(RetrofitO.url + response.body().get(0).getImage3())
+                        .load(RetrofitO.url + response.body().get(2).getImage())
                         .into(image3p);
-                gia3p.setText(response.body().get(0).getPrice3());
-                giagoc3p.setText(response.body().get(0).getOriginprice3());
-                sale3p.setText(response.body().get(0).getSale3());
+                gia3p.setText(response.body().get(2).getName());
+                sale3p.setText(response.body().get(2).getSale());
+                giagoc3p.setText(response.body().get(2).getOriginprice());
+
+                image1p.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ProducBrandtActivity.this, ProductDetail.class);
+                        intent.putExtra("id", response.body().get(0).getId());
+                        intent.putExtra("image", response.body().get(0).getImage());
+                        ProducBrandtActivity.this.startActivity(intent);
+                    }
+                });
+                image2p.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ProducBrandtActivity.this, ProductDetail.class);
+                        intent.putExtra("id", response.body().get(1).getId());
+                        intent.putExtra("image", response.body().get(1).getImage());
+                        ProducBrandtActivity.this.startActivity(intent);
+                    }
+                });
+                image3p.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ProducBrandtActivity.this, ProductDetail.class);
+                        intent.putExtra("id", response.body().get(2).getId());
+                        intent.putExtra("image", response.body().get(2).getImage());
+                        ProducBrandtActivity.this.startActivity(intent);
+                    }
+                });
             }
 
             @Override
-            public void onFailure(Call<List<BrandModel>> call, Throwable t) {
+            public void onFailure(Call<List<Product>> call, Throwable t) {
 
             }
         });

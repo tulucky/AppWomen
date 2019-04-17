@@ -24,8 +24,10 @@ public interface ServiceApi {
     @GET("bottoms")
     Call<List<Product>> getBottoms();
 
+    @GET("a.php")
+    Call<List<Product>> brandImages(@Query("brand") int brand);
     @GET("brand.php")
-    Call<List<BrandModel>> getListBrand();
+    Call<List<BrandModel>> brandList();
 
     @GET("getabrand.php")
     Call<List<BrandModel>> getaBrand(@Query("brand") int id);

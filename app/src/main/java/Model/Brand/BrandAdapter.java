@@ -3,7 +3,9 @@ package Model.Brand;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +16,16 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+import Model.Product;
 import Model.RetrofitO;
+import Model.ServiceApi;
+import lucky.dev.tu.devandroid.BrandActivity;
 import lucky.dev.tu.devandroid.ProducBrandtActivity;
+import lucky.dev.tu.devandroid.ProductDetail;
 import lucky.dev.tu.devandroid.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BrandAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context mcontext;
@@ -38,33 +47,79 @@ public class BrandAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
-        MyHolderBrand holder = (MyHolderBrand)viewHolder;
+        final MyHolderBrand holder = (MyHolderBrand) viewHolder;
         Glide.with(mcontext)
                 .load(RetrofitO.url + listBrand.get(i).getImage())
                 .into(holder.imageBrand);
         Glide.with(mcontext)
                 .load(RetrofitO.url + listBrand.get(i).getLogo())
                 .into(holder.logoBrand);
-        Glide.with(mcontext)
-                .load(RetrofitO.url + listBrand.get(i).getImage1())
-                .into(holder.item1);
-        holder.price1.setText(listBrand.get(i).getPrice1());
-        holder.sale1.setText(listBrand.get(i).getSale1());
-        Glide.with(mcontext)
-                .load(RetrofitO.url + listBrand.get(i).getImage2())
-                .into(holder.item2);
-        holder.price2.setText(listBrand.get(i).getPrice2());
-        holder.sale2.setText(listBrand.get(i).getSale2());
-        Glide.with(mcontext)
-                .load(RetrofitO.url + listBrand.get(i).getImage3())
-                .into(holder.item3);
-        holder.price3.setText(listBrand.get(i).getPrice3());
-        holder.sale3.setText(listBrand.get(i).getSale3());
+
+        ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
+        Call<List<Product>> call = serviceApi.brandImages(listBrand.get(i).getId());
+        call.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, final Response<List<Product>> response) {
+                Log.i("ko", " " + response.body());
+                Glide.with(mcontext)
+                        .load(RetrofitO.url + response.body().get(0).getImage())
+                        .into(holder.item1);
+                holder.price1.setText(response.body().get(0).getName());
+                holder.sale1.setText(response.body().get(0).getSale());
+                Glide.with(mcontext)
+                        .load(RetrofitO.url + response.body().get(1).getImage())
+                        .into(holder.item2);
+                holder.price2.setText(response.body().get(1).getName());
+                holder.sale2.setText(response.body().get(1).getSale());
+                Glide.with(mcontext)
+                        .load(RetrofitO.url + response.body().get(2).getImage())
+                        .into(holder.item3);
+                holder.price3.setText(response.body().get(2).getName());
+                holder.sale3.setText(response.body().get(2).getSale());
+
+                holder.item1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(mcontext, ProductDetail.class);
+                        intent.putExtra("id", response.body().get(0).getId());
+                        intent.putExtra("image", response.body().get(0).getImage());
+                        mcontext.startActivity(intent);
+                    }
+                });
+                holder.item2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(mcontext, ProductDetail.class);
+                        intent.putExtra("id", response.body().get(1).getId());
+                        intent.putExtra("image", response.body().get(1).getImage());
+                        mcontext.startActivity(intent);
+                    }
+                });
+                holder.item3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(mcontext, ProductDetail.class);
+                        intent.putExtra("id", response.body().get(2).getId());
+                        intent.putExtra("image", response.body().get(2).getImage());
+                        mcontext.startActivity(intent);
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+
+            }
+        });
         holder.imageBrand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mcontext, ProducBrandtActivity.class);
                 intent.putExtra("id", listBrand.get(i).getId());
+                intent.putExtra("brandimage", listBrand.get(i).getImage());
+                intent.putExtra("logo", listBrand.get(i).getLogo());
+                intent.putExtra("nameb", listBrand.get(i).getNameb());
+                intent.putExtra("description", listBrand.get(i).getDesbrand());
                 mcontext.startActivity(intent);
             }
         });

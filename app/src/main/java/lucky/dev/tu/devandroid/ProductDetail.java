@@ -100,6 +100,7 @@ public class ProductDetail extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,7 +116,6 @@ public class ProductDetail extends AppCompatActivity {
         aProductName = findViewById(R.id.aproduct_name);
         originPrice = findViewById(R.id.origin_price);
         sale = findViewById(R.id.sale);
-        toolbar = findViewById(R.id.toolbar);
         priceB = findViewById(R.id.price_b);
         originPriceB = findViewById(R.id.origin_price_b);
         desscriptionB = findViewById(R.id.description_b);
@@ -135,6 +135,15 @@ public class ProductDetail extends AppCompatActivity {
         bottomsheet.setVisibility(GONE);
         aProduct = new ArrayList<>();
         daTa = new ArrayList<>();
+       /* findViewById(R.id.share1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+                intent.setType("text/plain");
+                startActivity(Intent.createChooser(intent, "share"));
+            }
+        });*/
         Intent intent = getIntent();
         int id = intent.getIntExtra("id", 0);
         String image = intent.getStringExtra("image");
@@ -323,6 +332,12 @@ public class ProductDetail extends AppCompatActivity {
   setSupportActionBar(toolbar1);
   getSupportActionBar().setTitle("");
  toolbar1.setNavigationIcon(R.drawable.left_chevron);
+        toolbar1.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProductDetail.this.finish();
+            }
+        });
 toolbar1.setVisibility(GONE);
 
 

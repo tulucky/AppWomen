@@ -17,6 +17,7 @@ import java.util.List;
 
 import Model.Brand.BrandAdapter;
 import Model.Brand.BrandModel;
+import Model.Product;
 import Model.RetrofitO;
 import Model.ServiceApi;
 import retrofit2.Call;
@@ -41,7 +42,7 @@ public class BrandActivity extends AppCompatActivity {
         carouselView.setPageCount(sampleImages.length);
         carouselView.setImageListener(imageListener);
         ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
-        Call<List<BrandModel>> call = serviceApi.getListBrand();
+        Call<List<BrandModel>> call = serviceApi.brandList();
         call.enqueue(new Callback<List<BrandModel>>() {
             @Override
             public void onResponse(Call<List<BrandModel>> call, Response<List<BrandModel>> response) {

@@ -76,11 +76,11 @@ public class BrandModel {
         this.id = id;
     }
 
-    public String getName() {
+    public String getNameb() {
         return nameb;
     }
 
-    public void setName(String name) {
+    public void setNameb(String name) {
         this.nameb = name;
     }
 

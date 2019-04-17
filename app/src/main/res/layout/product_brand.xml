@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<me.didik.component.StickyNestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/stickyone"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:scrollbars="vertical">
+    android:layout_height="wrap_content">
+
+    <me.didik.component.StickyNestedScrollView
+        android:id="@+id/stickyone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp">
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -318,6 +322,7 @@
             </android.support.v7.widget.RecyclerView>
         </android.support.constraint.ConstraintLayout>
     </android.support.constraint.ConstraintLayout>
+    </me.didik.component.StickyNestedScrollView>
 
-
-</me.didik.component.StickyNestedScrollView>
+    <include layout="@layout/actionbar_detail" />
+</FrameLayout>
