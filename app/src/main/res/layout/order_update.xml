@@ -5,6 +5,8 @@
     android:id="@+id/update_product"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
     android:background="#ffffff">
 
     <ImageView
@@ -195,14 +197,15 @@
     <ImageView
         android:id="@+id/image_botsheet"
         android:layout_width="120dp"
-        android:layout_height="150dp"
-        android:layout_marginBottom="420dp"
+        android:layout_height="132dp"
+        android:layout_marginBottom="410dp"
         android:layout_marginStart="16dp"
-        android:scaleType="centerCrop"
         android:background="@color/colorAccent"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="@id/constraintLayout0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/constraintLayout0" />
+        app:layout_constraintTop_toTopOf="@id/constraintLayout0"
+        app:layout_constraintVertical_bias="0.328" />
 
     <TextView
         android:id="@+id/bottom_update"
@@ -210,8 +213,9 @@
         android:layout_height="42dp"
         android:background="@color/colorAccent"
         android:gravity="center"
-        android:text="update"
-        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:text="CẬP NHẬT"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>

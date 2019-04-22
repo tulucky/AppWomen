@@ -25,7 +25,6 @@ public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public Context mcontext;
     View itemView;
 
-
     public GridAdapter(Context context, List<Product> products) {
         listProduct = new ArrayList<>();
         this.listProduct = products;
@@ -42,9 +41,9 @@ public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
-
+        Log.i("oo", " " + State.ids);
         Log.i("a", "" + listProduct.get(position).getImage());
-        MyHolder mholder = (MyHolder) holder;
+        final MyHolder mholder = (MyHolder) holder;
         Glide.with(mcontext)
                 .load(RetrofitO.url + listProduct.get(position).getImage())
                 .into(mholder.mImage);
@@ -52,6 +51,35 @@ public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         mholder.mGiaGoc.setText(listProduct.get(position).getOriginprice());
         mholder.phanTram.setText(listProduct.get(position).getSale());
         mholder.mGiaGoc.setPaintFlags(mholder.mGiaGoc.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        final State state = new State();
+        state.on = 1;
+        mholder.love.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (state.on == 1) {
+                    mholder.love.setImageResource(R.drawable.ic_favorite_pink_24dp);
+                    state.on = 0;
+                    State.addP(listProduct.get(position));
+                } else if (state.on == 0) {
+                    mholder.love.setImageResource(R.drawable.ic_favorite_border_gray_24dp);
+                    state.on = 1;
+                    State.removeP(listProduct.get(position));
+                }
+            }
+        });
+        if (State.ids != null) {
+            Log.i("ou", "lololo ");
+            if (State.ids.contains(listProduct.get(position))) {
+                mholder.love.setImageResource(R.drawable.ic_favorite_pink_24dp);
+                state.on = 0;
+            } else {
+                mholder.love.setImageResource(R.drawable.ic_favorite_border_gray_24dp);
+
+            }
+
+        }
+
+        Log.i("iu", "lol");
         mholder.mImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,7 +96,7 @@ public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return 20;
+        return 26;
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {
@@ -76,11 +104,13 @@ public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         TextView mPrice;
         TextView mGiaGoc;
         TextView phanTram;
+        ImageView love;
 
         public MyHolder(View itemView) {
             super(itemView);
             mImage = itemView.findViewById(R.id.image);
             mPrice = itemView.findViewById(R.id.price);
+            love = itemView.findViewById(R.id.love);
             mGiaGoc = itemView.findViewById(R.id.price_1);
             phanTram = itemView.findViewById(R.id.phantram);
         }

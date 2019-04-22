@@ -12,12 +12,10 @@ import android.widget.TextView;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import Model.Brand.BrandAdapter;
 import Model.Brand.BrandModel;
-import Model.Product;
 import Model.RetrofitO;
 import Model.ServiceApi;
 import retrofit2.Call;
@@ -25,7 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class BrandActivity extends AppCompatActivity {
+public class bnew extends AppCompatActivity {
     TextView text;
     TabLayout tabLayout;
     int pagePosition;
@@ -48,8 +46,8 @@ public class BrandActivity extends AppCompatActivity {
             public void onResponse(Call<List<BrandModel>> call, Response<List<BrandModel>> response) {
                 recycleBrand.setNestedScrollingEnabled(false);
                 recycleBrand.setHasFixedSize(true);
-                BrandAdapter brandList = new BrandAdapter(BrandActivity.this, response.body());
-                LinearLayoutManager layoutManager = new LinearLayoutManager(BrandActivity.this);
+                BrandAdapter brandList = new BrandAdapter(bnew.this, response.body());
+                LinearLayoutManager layoutManager = new LinearLayoutManager(bnew.this);
                 recycleBrand.setLayoutManager(layoutManager);
                 recycleBrand.setAdapter(brandList);
             }

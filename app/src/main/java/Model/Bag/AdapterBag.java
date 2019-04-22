@@ -54,12 +54,14 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     ImageView subUp;
     ImageView plusUp;
     TextView update;
+    ConstraintLayout checkOut;
 
 
-    public AdapterBag(Context mcontext, List<OrderP> data, ConstraintLayout updateProduct) {
+    public AdapterBag(Context mcontext, List<OrderP> data, ConstraintLayout updateProduct, ConstraintLayout check) {
         this.mcontext = mcontext;
         this.data = data;
         this.updateProduct = updateProduct;
+        this.checkOut = check;
     }
 
     @NonNull
@@ -163,6 +165,7 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 call.enqueue(new Callback<List<Product>>() {
                     @Override
                     public void onResponse(final Call<List<Product>> call, Response<List<Product>> response) {
+                        checkOut.setVisibility(View.GONE);
                         price = updateProduct.findViewById(R.id.price_b);
                         originPrice = updateProduct.findViewById(R.id.origin_price_b);
                         name = updateProduct.findViewById(R.id.description_b);

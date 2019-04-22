@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toptop"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".MainActivity">
 
     <include layout="@layout/action_bar" />
@@ -17,7 +17,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <com.synnapps.carouselview.CarouselView
@@ -283,7 +283,5 @@
     </android.support.v4.widget.NestedScrollView>
 
     <include layout="@layout/progress" />
-
-    <include layout="@layout/bottom" />
 
 </FrameLayout>

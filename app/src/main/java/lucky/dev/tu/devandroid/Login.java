@@ -16,7 +16,7 @@ import Model.Account.Signup;
 import Model.Account.Viewpager;
 import me.didik.component.StickyNestedScrollView;
 
-public class Account extends AppCompatActivity {
+public class Login extends AppCompatActivity {
  TextView textView;
  TabLayout tabLayout;
  ViewPager viewPager;
@@ -26,7 +26,7 @@ public class Account extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account);
+        setContentView(R.layout.login);
         tabLayout = findViewById(R.id.tab_Layout);
         tabLayout.setTabTextColors(Color.BLACK,Color.RED);
         viewPager = findViewById(R.id.view_pager);

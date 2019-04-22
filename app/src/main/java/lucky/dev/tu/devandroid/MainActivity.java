@@ -1,216 +1,125 @@
 package lucky.dev.tu.devandroid;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.synnapps.carouselview.CarouselView;
-import com.synnapps.carouselview.ImageListener;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import Model.AdapterZezo;
-import Model.GridAdapter;
-import Model.GridProduct;
-import Model.ItemRecy0;
-import Model.ListProduct;
-import Model.MySingleton;
-import Model.Product;
-
+import Model.Account.Account;
+import Model.Bag.Bag;
+import Model.Brand.Brand;
+import Model.Home.Home;
+import Model.State;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    List<ItemRecy0> containerZezo;
-    CarouselView carouselView;
-    RecyclerView mRecycleZezo;
-    RecyclerView listProduct;
-    FrameLayout frameLayout;
-    BottomNavigationView bottomNavigationView;
-    ImageView list;
-    ImageView grid;
-    RelativeLayout recyMain;
-    RelativeLayout relativ;
-    ConstraintLayout progress;
-    public NestedScrollView nestMain;
-    private static final String urlData0 = "http://192.168.1.24/wmshop/tops.php";
-    private static final String urlData3 = "http://192.168.1.24/wmshop/tops.php";
+    ImageView home;
+    ImageView brand;
+    ImageView bag;
+    ImageView account;
+    TextView tHome;
+    TextView tBrand;
+    TextView tBag;
+    TextView tAccount;
 
-   int[] sampleImages = {R.drawable.image_3, R.drawable.lko, R.drawable.image_4, R.drawable.image_2, R.drawable.image_3};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        frameLayout = findViewById(R.id.toptop);
-        recyMain = findViewById(R.id.recy_main);
-        bottomNavigationView = findViewById(R.id.navigation);
-        nestMain = findViewById(R.id.nest_main);
-        relativ = findViewById(R.id.relativ);
-        list = findViewById(R.id.list);
-        grid = findViewById(R.id.grid);
-        progress = findViewById(R.id.progress);
-        progress.setVisibility(View.GONE);
-        grid.setVisibility(View.GONE);
-        getDataRecyZezo();
-        //cu truy cap tai nguen la phai r
-        carouselView = (CarouselView) findViewById(R.id.carouselView);
-        carouselView.setPageCount(sampleImages.length);
-        carouselView.setImageListener(imageListener);
-        findViewById(R.id.home).setOnClickListener(this);
-        findViewById(R.id.brand).setOnClickListener(this);
-        findViewById(R.id.cart).setOnClickListener(this);
-        findViewById(R.id.account).setOnClickListener(this);
-        final FragmentManager fragmentManager = getSupportFragmentManager();
+        setContentView(R.layout.main_activity);
+        home = findViewById(R.id.home);
+        brand = findViewById(R.id.brand);
+        bag = findViewById(R.id.bag);
+        account = findViewById(R.id.avatar);
+        tHome = findViewById(R.id.text_home);
+        tBrand = findViewById(R.id.text_crown);
+        tBag = findViewById(R.id.text_bag);
+        tAccount = findViewById(R.id.text_avatar);
+        home.setOnClickListener(this);
+        brand.setOnClickListener(this);
+        bag.setOnClickListener(this);
+        account.setOnClickListener(this);
+        home.setImageResource(R.drawable.home1);
+        tHome.setTextColor(getResources().getColor(R.color.colorAccent));
+        FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        GridProduct gridProduct = new GridProduct();
-        transaction.add(R.id.recy_main, gridProduct);
+        Home home = new Home();
+        transaction.add(R.id.container, home);
         transaction.commit();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                list.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        grid.setVisibility(View.VISIBLE);
-                        list.setVisibility(View.GONE);
-                        FragmentTransaction transaction = fragmentManager.beginTransaction();
-                        ListProduct listProduct = new ListProduct();
-                        transaction.replace(R.id.recy_main, listProduct);
-                        transaction.commit();
-
-                    }
-
-                });
-            }
-        }, 100);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                grid.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        list.setVisibility(View.VISIBLE);
-                        grid.setVisibility(View.GONE);
-                        final FragmentTransaction transaction = fragmentManager.beginTransaction();
-                        GridProduct gridProduct = new GridProduct();
-                        transaction.replace(R.id.recy_main, gridProduct);
-                        transaction.commit();
-                    }
-                });
-            }
-        }, 100);
-        nestMain.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(NestedScrollView nestedScrollView, int i, int i1, int i2, int i3) {
-                if (!nestMain.canScrollVertically(1)) {
-                    progress.setVisibility(View.VISIBLE);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            progress.setVisibility(View.GONE);
-                        }
-                    }, 300);
-                }
-            }
-        });
-
     }
 
     @Override
     public void onClick(View v) {
-        Class clas = null;
+        FragmentManager fragmentManager = getSupportFragmentManager();
         switch (v.getId()) {
             case R.id.brand:
-                clas = BrandActivity.class;
+                brand.setImageResource(R.drawable.crow1);
+                tBrand.setTextColor(getResources().getColor(R.color.colorAccent));
+                home.setImageResource(R.drawable.home);
+                tHome.setTextColor(getResources().getColor(R.color.black));
+                bag.setImageResource(R.drawable.bag);
+                tBag.setTextColor(getResources().getColor(R.color.black));
+                account.setImageResource(R.drawable.avatar);
+                tAccount.setTextColor(getResources().getColor(R.color.black));
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                Brand brandM = new Brand();
+                transaction.replace(R.id.container, brandM);
+                transaction.commit();
                 break;
-            case R.id.cart:
-                clas = BagActivity.class;
+            case R.id.bag:
+                bag.setImageResource(R.drawable.bag1);
+                tBag.setTextColor(getResources().getColor(R.color.colorAccent));
+                home.setImageResource(R.drawable.home);
+                tHome.setTextColor(getResources().getColor(R.color.black));
+                brand.setImageResource(R.drawable.crow);
+                tBrand.setTextColor(getResources().getColor(R.color.black));
+                account.setImageResource(R.drawable.avatar);
+                tAccount.setTextColor(getResources().getColor(R.color.black));
+                FragmentTransaction transaction1 = fragmentManager.beginTransaction();
+                Bag bagM = new Bag();
+                transaction1.replace(R.id.container, bagM);
+                transaction1.commit();
                 break;
-            case R.id.account:
-                clas = Account.class;
+            case R.id.avatar:
+                bag.setImageResource(R.drawable.bag);
+                tBag.setTextColor(getResources().getColor(R.color.black));
+                home.setImageResource(R.drawable.home);
+                tHome.setTextColor(getResources().getColor(R.color.black));
+                brand.setImageResource(R.drawable.crow);
+                tBrand.setTextColor(getResources().getColor(R.color.black));
+                account.setImageResource(R.drawable.avatar1);
+                tAccount.setTextColor(getResources().getColor(R.color.colorAccent));
+                FragmentTransaction transaction2 = fragmentManager.beginTransaction();
+                Account accountM = new Account();
+                transaction2.replace(R.id.container, accountM);
+                transaction2.commit();
                 break;
             case R.id.home:
-                clas = MainActivity.class;
+                bag.setImageResource(R.drawable.bag);
+                tBag.setTextColor(getResources().getColor(R.color.black));
+                home.setImageResource(R.drawable.home1);
+                tHome.setTextColor(getResources().getColor(R.color.colorAccent));
+                brand.setImageResource(R.drawable.crow);
+                tBrand.setTextColor(getResources().getColor(R.color.black));
+                account.setImageResource(R.drawable.avatar);
+                tAccount.setTextColor(getResources().getColor(R.color.black));
+                FragmentTransaction transaction3 = fragmentManager.beginTransaction();
+                Home home = new Home();
+                transaction3.replace(R.id.container, home);
+                transaction3.commit();
                 break;
         }
-        startActivity(new Intent(MainActivity.this, clas));
 
     }
 
-
-
-
-    private void getDataRecyZezo() {
-        mRecycleZezo = findViewById(R.id.Recycle_one);
-        mRecycleZezo.setHasFixedSize(true);
-        mRecycleZezo.setNestedScrollingEnabled(false);
-        containerZezo = new ArrayList<>();
-        mRecycleZezo.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        StringRequest obj = new StringRequest(Request.Method.GET,urlData0,
-                new Response.Listener<String>() {
-
-                    @Override
-                    public void onResponse(String response) {
-                        Log.i("p", "" + response);
-                        JSONArray aray = null;
-                        try {
-                            aray = new JSONArray(response);
-
-                            for (int i = 0; i < aray.length(); i++) {
-                                // chu y du lieu tra ve tu url len de la acsoc thi ta moi getdc jsonobject
-                                JSONObject a = aray.getJSONObject(i);
-                                containerZezo.add(new ItemRecy0(a.getInt("id"), a.getString("image"),
-                                        a.getString("name"),
-                                        a.getString("sale"))
-                                );
-                            }
-                            AdapterZezo madapter = new AdapterZezo(containerZezo,MainActivity.this);
-                            mRecycleZezo.setAdapter(madapter);
-
-                            Log.i("ko", "" + containerZezo);
-                        }
-                        catch (JSONException e1) {
-                            Log.i("j", "khong");
-                        }}}
-                , new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error){
-
-            }
-        });
-        MySingleton.getInstance(MainActivity.this).addToRequestQueue(obj);
-
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.recy_main);
+        getSupportFragmentManager().beginTransaction().detach(fragment).attach(fragment).commit();
     }
-
-    ImageListener imageListener = new ImageListener() {
-        @Override
-        public void setImageForPosition(int position, ImageView imageView) {
-            //  imageView.setImageResource(sampleImages[position]);
-        }
-    };
-
 }

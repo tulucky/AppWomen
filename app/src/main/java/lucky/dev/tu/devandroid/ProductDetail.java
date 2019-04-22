@@ -15,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -84,20 +85,33 @@ public class ProductDetail extends AppCompatActivity {
     RecyclerView sizeRec;
     Toolbar toolbar;
     TextView sizeDes;
-    String imageBag;
     String sizeBag;
     int addNumber;
     int quantity = 1;
     int test = 0;
     List<OrderP> temp;
     CollapsingToolbarLayout collapsingToolbarLayout;
-    private static final String urlData0 = "http://192.168.1.24/wmshop/tops.php";
+    private static final String urlData0 = "http://192.168.1.108/wmshop/tops.php";
     List<String> daTa;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar,menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.share1:
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT, " http://www.google.com");
+                intent.setType("image/jpeg");
+                startActivity(Intent.createChooser(intent, "share"));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 

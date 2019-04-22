@@ -28,11 +28,13 @@ import java.util.List;
 
 import lucky.dev.tu.devandroid.MainActivity;
 import lucky.dev.tu.devandroid.R;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class GridProduct extends Fragment {
     RecyclerView listProduct;
     List<Product> listData;
-    private static final String urlData3 = "http://192.168.1.24/wmshop/tops.php";
+    private static final String urlData3 = "http://192.168.1.108/wmshop/tops.php";
 
     public GridProduct() {
     }
@@ -52,46 +54,21 @@ public class GridProduct extends Fragment {
     }
 
     private void getGrid() {
-        listData = new ArrayList<>();
         listProduct.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        StringRequest obj = new StringRequest(Request.Method.GET, urlData3,
-                new Response.Listener<String>() {
-
-                    @Override
-                    public void onResponse(String response) {
-                        Log.i("l", "" + response);
-                        JSONArray aray = null;
-                        try {
-                            aray = new JSONArray(response);
-
-                            for (int i = 0; i < aray.length(); i++) {
-                                // chu y du lieu tra ve tu url len de la acsoc thi ta moi getdc jsonobject
-                                JSONObject a = aray.getJSONObject(i);
-                                listData.add(new Product(a.getInt("id"),
-                                        a.getString("image"),
-                                        a.getString("name"),
-                                        a.getString("originprice"),
-                                        a.getString("sale"))
-                                );
-                            }
-
-                            GridAdapter madapter = new GridAdapter(getActivity(), listData);
-                            listProduct.setAdapter(madapter);
-                            Log.i("yy", "" + listData.size());
-                        } catch (JSONException e1) {
-                            Log.i("j", "khong");
-                        }
-                    }
-                }
-                , new Response.ErrorListener() {
+        ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
+        Call<List<Product>> call = serviceApi.getProduct();
+        call.enqueue(new Callback<List<Product>>() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onResponse(Call<List<Product>> call, retrofit2.Response<List<Product>> response) {
+                GridAdapter madapter = new GridAdapter(getActivity(), response.body());
+                listProduct.setAdapter(madapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
 
             }
         });
-        MySingleton.getInstance(getActivity()).addToRequestQueue(obj);
-
     }
-
 
 }

@@ -6,13 +6,13 @@
     <item
         android:id="@+id/brand"
         android:title="Thương Hiệu"
-        android:icon="@drawable/crown" />
+        android:icon="@drawable/brand" />
     <item
         android:id="@+id/cart"
         android:title="Giỏ Hàng"
-        android:icon="@drawable/shopping_bag" />
+        android:icon="@drawable/bag" />
     <item
         android:id="@+id/account"
         android:title="Tài Khoản"
-        android:icon="@drawable/user" />
+        android:icon="@drawable/avatar" />
 </menu>

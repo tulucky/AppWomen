@@ -190,4 +190,13 @@ public class Product {
         this.updateAt = updateAt;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Product) {
+            if (((Product) obj).getId() == this.getId()) {
+                return true;
+            } else return false;
+        } else
+            return false;
+    }
 }

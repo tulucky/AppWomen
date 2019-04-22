@@ -14,7 +14,7 @@
     <style name="main_Abottom" parent="Theme.AppCompat.Light.NoActionBar">
 
         <item name="android:fontFamily">@font/sans_prob</item>
-        <item name="android:textColor">@color/main_textcolor_bottom</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="tablayout" parent="TextAppearance.Design.Tab">

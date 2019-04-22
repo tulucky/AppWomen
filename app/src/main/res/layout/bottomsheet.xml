@@ -211,8 +211,9 @@
         android:layout_height="42dp"
         android:background="@color/colorAccent"
         android:gravity="center"
-        android:text="add to bag"
-        android:textSize="25sp"
+        android:text="ADD TO BAG"
+        android:textColor="@color/white"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
