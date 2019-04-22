@@ -40,7 +40,7 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         Log.i("a",""+listProduct.get(position).getImage());
-        MyHolder mholder = (MyHolder) holder;
+        final MyHolder mholder = (MyHolder) holder;
         Glide.with(mcontext)
                 .load(RetrofitO.url + listProduct.get(position).getImage())
                 .into(mholder.mImage);
@@ -59,6 +59,33 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 mcontext.startActivity(intent);
             }
         });
+        final State state = new State();
+        state.on = 1;
+        mholder.loved.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (state.on == 1) {
+                    mholder.loved.setImageResource(R.drawable.ic_favorite_pink_24dp);
+                    state.on = 0;
+                    State.addP(listProduct.get(position));
+                } else if (state.on == 0) {
+                    mholder.loved.setImageResource(R.drawable.ic_favorite_border_gray_24dp);
+                    state.on = 1;
+                    State.removeP(listProduct.get(position));
+                }
+            }
+        });
+        if (State.ids != null) {
+            Log.i("ou", "lololo ");
+            if (State.ids.contains(listProduct.get(position))) {
+                mholder.loved.setImageResource(R.drawable.ic_favorite_pink_24dp);
+                state.on = 0;
+            } else {
+                mholder.loved.setImageResource(R.drawable.ic_favorite_border_gray_24dp);
+
+            }
+
+        }
     }
 
     @Override
@@ -72,6 +99,7 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         TextView mGiaGoc;
         TextView phanTram;
         TextView titleName;
+        ImageView loved;
 
         public MyHolder(View itemView) {
             super(itemView);
@@ -80,6 +108,7 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             mGiaGoc = itemView.findViewById(R.id.price_1);
             phanTram = itemView.findViewById(R.id.phantram);
             titleName = itemView.findViewById(R.id.title_name);
+            loved = itemView.findViewById(R.id.loved);
         }
 
     }

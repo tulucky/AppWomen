@@ -110,7 +110,7 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/loved"
         android:layout_width="28dp"
         android:layout_height="28dp"
         android:layout_marginEnd="32dp"
