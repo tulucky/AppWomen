@@ -1,6 +1,7 @@
 package lucky.dev.tu.devandroid;
 
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -9,7 +10,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import Model.Account.Account;
 import Model.Bag.Bag;
@@ -26,6 +29,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView tBrand;
     TextView tBag;
     TextView tAccount;
+    ImageView love;
+    ImageView search;
+    ConstraintLayout actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +50,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bag.setOnClickListener(this);
         account.setOnClickListener(this);
         home.setImageResource(R.drawable.home1);
+        actionBar = findViewById(R.id.action_bar);
+        search = findViewById(R.id.search_a);
         tHome.setTextColor(getResources().getColor(R.color.colorAccent));
+        love = findViewById(R.id.loved);
+        love.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Wishlish.class);
+                MainActivity.this.startActivity(intent);
+            }
+        });
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Search.class);
+                MainActivity.this.startActivity(intent);
+            }
+        });
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         Home home = new Home();
@@ -57,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FragmentManager fragmentManager = getSupportFragmentManager();
         switch (v.getId()) {
             case R.id.brand:
+                actionBar.setVisibility(View.VISIBLE);
                 brand.setImageResource(R.drawable.crow1);
                 tBrand.setTextColor(getResources().getColor(R.color.colorAccent));
                 home.setImageResource(R.drawable.home);
@@ -71,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 transaction.commit();
                 break;
             case R.id.bag:
+                actionBar.setVisibility(View.GONE);
                 bag.setImageResource(R.drawable.bag1);
                 tBag.setTextColor(getResources().getColor(R.color.colorAccent));
                 home.setImageResource(R.drawable.home);
@@ -85,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 transaction1.commit();
                 break;
             case R.id.avatar:
+                actionBar.setVisibility(View.GONE);
                 bag.setImageResource(R.drawable.bag);
                 tBag.setTextColor(getResources().getColor(R.color.black));
                 home.setImageResource(R.drawable.home);
@@ -99,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 transaction2.commit();
                 break;
             case R.id.home:
+                actionBar.setVisibility(View.VISIBLE);
                 bag.setImageResource(R.drawable.bag);
                 tBag.setTextColor(getResources().getColor(R.color.black));
                 home.setImageResource(R.drawable.home1);
@@ -119,7 +146,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onRestart() {
         super.onRestart();
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.recy_main);
-        getSupportFragmentManager().beginTransaction().detach(fragment).attach(fragment).commit();
+        if (findViewById(R.id.recy_main) != null) {
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.recy_main);
+            getSupportFragmentManager().beginTransaction().detach(fragment).attach(fragment).commit();
+        }
     }
 }

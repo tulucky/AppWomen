@@ -58,7 +58,7 @@ public class ProductDetail extends AppCompatActivity {
     TextView text;
     int pagePosition;
     ViewPager viewPager;
-    RecyclerView recyclerView;
+    RecyclerView content;
     RecyclerView recInfo;
     List<Product> list;
     List<String> inFor;
@@ -85,13 +85,15 @@ public class ProductDetail extends AppCompatActivity {
     RecyclerView sizeRec;
     Toolbar toolbar;
     TextView sizeDes;
+    ImageView homed;
+    ImageView loved;
     String sizeBag;
     int addNumber;
     int quantity = 1;
     int test = 0;
     List<OrderP> temp;
     CollapsingToolbarLayout collapsingToolbarLayout;
-    private static final String urlData0 = "http://192.168.1.108/wmshop/tops.php";
+    private static final String urlData0 = "http://192.168.1.109/wmshop/tops.php";
     List<String> daTa;
 
     @Override
@@ -145,6 +147,9 @@ public class ProductDetail extends AppCompatActivity {
         recColor = findViewById(R.id.rec_color);
         sizeRec = findViewById(R.id.size_rec);
         sizeDes = findViewById(R.id.size_des);
+        content = findViewById(R.id.content);
+        homed = findViewById(R.id.homed);
+        loved = findViewById(R.id.loved);
         sizeDes.setVisibility(GONE);
         bottomsheet.setVisibility(GONE);
         aProduct = new ArrayList<>();
@@ -196,7 +201,11 @@ public class ProductDetail extends AppCompatActivity {
         scrollDetail.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView nestedScrollView, int i, int i1, int i2, int i3) {
-                Log.i("ss"," "+i1);
+
+                if (!scrollDetail.canScrollVertically(1)) {
+                    Log.i("ss", "llol ");
+                    content.setPadding(0, 0, 0, 112);
+                }
 
                 if(i1>112){
                     toolbar1.setVisibility(VISIBLE);
@@ -353,7 +362,13 @@ public class ProductDetail extends AppCompatActivity {
             }
         });
 toolbar1.setVisibility(GONE);
-
+        loved.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(ProductDetail.this, Wishlish.class);
+                ProductDetail.this.startActivity(intent1);
+            }
+        });
 
 
     }
@@ -441,11 +456,10 @@ toolbar1.setVisibility(GONE);
     }
 
     private void getDataRecyZezo() {
-        recyclerView = findViewById(R.id.content);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setNestedScrollingEnabled(false);
+        content.setHasFixedSize(true);
+        content.setNestedScrollingEnabled(false);
         list = new ArrayList<>();
-        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+        content.setLayoutManager(new GridLayoutManager(this, 2));
         StringRequest obj = new StringRequest(Request.Method.GET,urlData0,
                 new Response.Listener<String>() {
 
@@ -466,7 +480,7 @@ toolbar1.setVisibility(GONE);
                                 );
                             }
                             GridAdapter madapter = new GridAdapter(ProductDetail.this, list);
-                            recyclerView.setAdapter(madapter);
+                            content.setAdapter(madapter);
 
                             Log.i("ko", "" + list);
                         }

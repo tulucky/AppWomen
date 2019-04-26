@@ -24,6 +24,7 @@
         <activity android:name=".Wishlish"></activity>
         <activity android:name=".ProducBrandtActivity"></activity>
         <activity android:name=".ProductDetail"></activity>
+        <activity android:name=".Search"></activity>
     </application>
 
 </manifest>

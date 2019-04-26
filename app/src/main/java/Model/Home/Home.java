@@ -56,10 +56,9 @@ public class Home extends Fragment {
     RelativeLayout recyMain;
     RelativeLayout relativ;
     ConstraintLayout progress;
-    ImageView love;
     public NestedScrollView nestMain;
-    private static final String urlData0 = "http://192.168.1.108/wmshop/tops.php";
-    private static final String urlData3 = "http://192.168.1.108/wmshop/tops.php";
+    private static final String urlData0 = "http://192.168.1.109/wmshop/tops.php";
+    private static final String urlData3 = "http://192.168.1.109/wmshop/tops.php";
     int[] sampleImages = {R.drawable.image_3, R.drawable.lko, R.drawable.image_4, R.drawable.image_2, R.drawable.image_3};
 
     public Home() {
@@ -137,14 +136,6 @@ public class Home extends Fragment {
                         }
                     }, 300);
                 }
-            }
-        });
-        love = view.findViewById(R.id.loved);
-        love.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Wishlish.class);
-                getActivity().startActivity(intent);
             }
         });
         return view;
