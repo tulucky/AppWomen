@@ -19,8 +19,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Vai468đ"
-        android:fontFamily="@font/sans_prol"
-        android:textSize="16sp"
+        android:fontFamily="@font/helvetica"
+        android:textSize="18sp"
         android:textColor="#e61414"
         android:layout_below="@id/image"
         android:layout_marginTop="5dp" />
@@ -30,7 +30,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/price"
-        android:fontFamily="@font/utm_avor"
+        android:fontFamily="@font/helvetica"
+        android:textSize="16sp"
         android:textColor="#000000"
         android:text="@string/StrikePrice"
         android:layout_marginTop="5dp" />

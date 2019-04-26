@@ -109,7 +109,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/seperate"
                     android:layout_marginTop="15dp"
-                    android:fontFamily="@font/sans_prob"
+                    android:fontFamily="@font/helvetica"
                     android:text="Giảm Giá Đặc Biệt "
                     android:textColor="#0b0b0b"
                     android:textSize="20sp" />
