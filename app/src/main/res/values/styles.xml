@@ -17,8 +17,10 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
-    <style name="tablayout" parent="TextAppearance.Design.Tab">
-        <item name="android:textSize">50sp</item>
+    <style name="tablayout" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:fontFamily">@font/helvetica</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
 </resources>

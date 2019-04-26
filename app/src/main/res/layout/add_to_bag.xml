@@ -47,6 +47,7 @@
         android:background="@color/colorAccent"
         android:gravity="center"
         android:text="THÊM VÀO TÚI"
+        android:fontFamily="@font/helvetica"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"

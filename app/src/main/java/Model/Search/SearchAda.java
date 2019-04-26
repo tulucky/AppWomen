@@ -53,15 +53,6 @@ public class SearchAda extends RecyclerView.Adapter<RecyclerView.ViewHolder> imp
         holder.name.setText(products.get(i).getTitle());
         holder.sale.setText(products.get(i).getSale());
         holder.price.setText(products.get(i).getName());
-        holder.nav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, ProductDetail.class);
-                intent.putExtra("id", products.get(i).getId());
-                intent.putExtra("image", products.get(i).getImage());
-                context.startActivity(intent);
-            }
-        });
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,7 +129,7 @@ public class SearchAda extends RecyclerView.Adapter<RecyclerView.ViewHolder> imp
         TextView price;
         TextView name;
         TextView sale;
-        ImageView nav;
+
 
         public HolderView(@NonNull View itemView) {
             super(itemView);
@@ -146,7 +137,7 @@ public class SearchAda extends RecyclerView.Adapter<RecyclerView.ViewHolder> imp
             name = itemView.findViewById(R.id.name_search);
             sale = itemView.findViewById(R.id.sale_search);
             price = itemView.findViewById(R.id.price_search);
-            nav = itemView.findViewById(R.id.nav);
+
         }
     }
 }

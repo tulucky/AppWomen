@@ -87,6 +87,7 @@ public class ProductDetail extends AppCompatActivity {
     TextView sizeDes;
     ImageView homed;
     ImageView loved;
+    ImageView bagd;
     String sizeBag;
     int addNumber;
     int quantity = 1;
@@ -150,6 +151,7 @@ public class ProductDetail extends AppCompatActivity {
         content = findViewById(R.id.content);
         homed = findViewById(R.id.homed);
         loved = findViewById(R.id.loved);
+        bagd = findViewById(R.id.bagd);
         sizeDes.setVisibility(GONE);
         bottomsheet.setVisibility(GONE);
         aProduct = new ArrayList<>();
@@ -369,7 +371,22 @@ toolbar1.setVisibility(GONE);
                 ProductDetail.this.startActivity(intent1);
             }
         });
-
+        bagd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(ProductDetail.this, MainActivity.class);
+                intent1.putExtra("bag", 2);
+                ProductDetail.this.startActivity(intent1);
+            }
+        });
+        homed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(ProductDetail.this, MainActivity.class);
+                intent1.putExtra("bag", 1);
+                ProductDetail.this.startActivity(intent1);
+            }
+        });
 
     }
 

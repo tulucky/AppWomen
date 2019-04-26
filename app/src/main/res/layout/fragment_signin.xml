@@ -16,8 +16,10 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="30dp"
+        android:textColor="@color/black"
         android:ems="10"
         android:hint="Nickname"
+        android:fontFamily="@font/helvetica"
         android:inputType="textEmailAddress"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +48,9 @@
             android:layout_height="50dp"
             android:ems="10"
             android:hint="Password"
+            android:fontFamily="@font/helvetica"
             android:inputType="textPassword"
+            android:textColor="@color/black"
             android:paddingBottom="15dp"
             android:textSize="20sp" />
 
@@ -80,6 +84,8 @@
         android:gravity="center"
         android:text="Hoặc đăng nhập với"
         android:textSize="20sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/utm_avor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,6 +98,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="12dp"
         android:text="Bạn quên mật khẩu?"
+        android:fontFamily="@font/utm_avor"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputlayout" />
@@ -126,6 +134,8 @@
         android:textSize="15sp"
         android:layout_marginStart="5dp"
         android:text="TextView"
+        android:textColor="@color/colorAccent"
+        android:fontFamily="@font/helvetica"
         app:layout_constraintBottom_toTopOf="@+id/name_signup"
         app:layout_constraintStart_toStartOf="@+id/name_signup" />
 
@@ -136,6 +146,8 @@
         android:layout_marginStart="5dp"
         android:textSize="15sp"
         android:text="TextView"
+        android:textColor="@color/colorAccent"
+        android:fontFamily="@font/helvetica"
         app:layout_constraintBottom_toTopOf="@+id/inputlayout"
         app:layout_constraintStart_toStartOf="@+id/inputlayout" />
 

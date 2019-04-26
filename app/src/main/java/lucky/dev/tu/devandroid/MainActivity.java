@@ -68,11 +68,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 MainActivity.this.startActivity(intent);
             }
         });
+        Intent intent = getIntent();
+        int k = intent.getIntExtra("bag", 0);
         FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        Home home = new Home();
-        transaction.add(R.id.container, home);
-        transaction.commit();
+        switch (k) {
+            case 1:
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                Home home1 = new Home();
+                transaction.add(R.id.container, home1);
+                transaction.commit();
+                break;
+            case 2:
+                actionBar.setVisibility(View.GONE);
+                bag.setImageResource(R.drawable.bag1);
+                tBag.setTextColor(getResources().getColor(R.color.colorAccent));
+                home.setImageResource(R.drawable.home);
+                tHome.setTextColor(getResources().getColor(R.color.black));
+                brand.setImageResource(R.drawable.crow);
+                tBrand.setTextColor(getResources().getColor(R.color.black));
+                account.setImageResource(R.drawable.avatar);
+                tAccount.setTextColor(getResources().getColor(R.color.black));
+                FragmentTransaction transaction1 = fragmentManager.beginTransaction();
+                Bag bagM = new Bag();
+                transaction1.replace(R.id.container, bagM);
+                transaction1.commit();
+                break;
+            default:
+                FragmentTransaction transaction2 = fragmentManager.beginTransaction();
+                Home home = new Home();
+                transaction2.add(R.id.container, home);
+                transaction2.commit();
+        }
+
+
     }
 
     @Override

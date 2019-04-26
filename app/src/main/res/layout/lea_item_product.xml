@@ -24,6 +24,9 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         android:text="TextView"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/utm_avor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/image"
         app:layout_constraintTop_toTopOf="parent" />

@@ -33,7 +33,7 @@ public class Search extends AppCompatActivity {
         setContentView(R.layout.search);
         search = findViewById(R.id.search);
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Tìm kiếm sản phẩm");
+        toolbar.setTitle("");
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,10 +75,11 @@ public class Search extends AppCompatActivity {
         inflater.inflate(R.menu.search, menu);
         MenuItem searchItem = menu.findItem(R.id.search);
         SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setIconifiedByDefault(false);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                return false;
+                return true;
             }
 
             @Override
