@@ -232,17 +232,19 @@
             <FrameLayout
                 android:id="@+id/theloai"
                 android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="15dp"
                 app:layout_constraintEnd_toStartOf="@+id/sort"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_marginRight="30dp"
                     android:text="Thể Loại"
+                    android:fontFamily="@font/helvetica"
+                    android:textColor="@color/black"
                     android:textSize="18sp" />
 
                 <ImageView
@@ -256,8 +258,8 @@
             <FrameLayout
                 android:id="@+id/sort"
                 android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="15dp"
                 app:layout_constraintEnd_toStartOf="@+id/loc"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/theloai"
@@ -268,6 +270,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="30dp"
                     android:text="Sắp xếp"
+                    android:fontFamily="@font/helvetica"
+                    android:textColor="@color/black"
                     android:textSize="18sp" />
 
                 <ImageView
@@ -281,8 +285,8 @@
             <FrameLayout
                 android:id="@+id/loc"
                 android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/sort"
@@ -293,7 +297,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="30dp"
                     android:text="Lọc"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:fontFamily="@font/helvetica"
+                    android:textColor="@color/black" />
 
                 <ImageView
                     android:layout_width="wrap_content"

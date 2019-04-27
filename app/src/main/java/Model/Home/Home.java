@@ -186,7 +186,7 @@ public class Home extends Fragment {
     ImageListener imageListener = new ImageListener() {
         @Override
         public void setImageForPosition(int position, ImageView imageView) {
-            //  imageView.setImageResource(sampleImages[position]);
+            //  b_logo.setImageResource(sampleImages[position]);
         }
     };
 

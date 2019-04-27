@@ -5,6 +5,7 @@ import java.util.List;
 import Model.Account.Alter;
 import Model.Brand.BrandModel;
 import Model.BrandProductDetal.OrderP;
+import Model.Resum.OrderedP;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -66,4 +67,8 @@ public interface ServiceApi {
     @FormUrlEncoded
     @POST("checkout.php")
     Call<List<String>> checkOut(@Field("name") String namne, @Field("idorder") int id, @Field("status") String status);
+
+    @FormUrlEncoded
+    @POST("orderedproducts.php")
+    Call<List<OrderedP>> orderedProducts(@Field("name") String name);
 }

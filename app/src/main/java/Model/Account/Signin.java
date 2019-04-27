@@ -1,5 +1,6 @@
 package Model.Account;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +22,7 @@ import java.util.regex.Pattern;
 import Model.RetrofitO;
 import Model.ServiceApi;
 import lucky.dev.tu.devandroid.R;
+import lucky.dev.tu.devandroid.Resum;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Call;
@@ -95,6 +97,8 @@ public class Signin extends Fragment {
                                 SharedPreferences.Editor editor = sharedPref.edit();
                                 editor.putString("idName", name);
                                 editor.apply();
+                                Intent intent = new Intent(getActivity(), Resum.class);
+                                getActivity().startActivity(intent);
                             }
                         }
 

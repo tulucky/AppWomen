@@ -71,7 +71,7 @@ public class AdapterZezo extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public MyHolder(View itemView) {
             super(itemView);
             mImage = itemView.findViewById(R.id.image);
-            mPrice = itemView.findViewById(R.id.price);
+            mPrice = itemView.findViewById(R.id.size);
             phanTram = itemView.findViewById(R.id.phantram);
         }
 

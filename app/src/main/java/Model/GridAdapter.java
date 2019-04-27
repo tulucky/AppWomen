@@ -42,7 +42,7 @@ public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         Log.i("oo", " " + State.ids);
-        Log.i("a", "" + listProduct.get(position).getImage());
+        //  Log.i("a", "" + listProduct.get(position).getImage());
         final MyHolder mholder = (MyHolder) holder;
         Glide.with(mcontext)
                 .load(RetrofitO.url + listProduct.get(position).getImage())
@@ -109,7 +109,7 @@ public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public MyHolder(View itemView) {
             super(itemView);
             mImage = itemView.findViewById(R.id.image);
-            mPrice = itemView.findViewById(R.id.price);
+            mPrice = itemView.findViewById(R.id.size);
             love = itemView.findViewById(R.id.love);
             mGiaGoc = itemView.findViewById(R.id.price_1);
             phanTram = itemView.findViewById(R.id.phantram);

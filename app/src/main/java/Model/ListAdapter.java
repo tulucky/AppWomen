@@ -104,7 +104,7 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public MyHolder(View itemView) {
             super(itemView);
             mImage = itemView.findViewById(R.id.image);
-            mPrice = itemView.findViewById(R.id.price);
+            mPrice = itemView.findViewById(R.id.size);
             mGiaGoc = itemView.findViewById(R.id.price_1);
             phanTram = itemView.findViewById(R.id.phantram);
             titleName = itemView.findViewById(R.id.title_name);
