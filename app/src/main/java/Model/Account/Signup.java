@@ -100,6 +100,7 @@ public class Signup extends Fragment {
                                     new Handler().postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
+                                            getActivity().finish();
                                             Intent intent = new Intent(getActivity(), Login.class);
                                             getActivity().startActivity(intent);
                                         }
