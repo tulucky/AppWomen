@@ -19,10 +19,11 @@ import android.widget.Toast;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import Model.Resum.Resum;
 import Model.RetrofitO;
 import Model.ServiceApi;
+import lucky.dev.tu.devandroid.MainActivity;
 import lucky.dev.tu.devandroid.R;
-import lucky.dev.tu.devandroid.Resum;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Call;
@@ -58,8 +59,8 @@ public class Signin extends Fragment {
         buttonIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                name = nameIn.getText().toString();
-                pass = passIn.getText().toString();
+                name = nameIn.getText().toString().trim();
+                pass = passIn.getText().toString().trim();
                 Log.i("kk", name);
                 Log.i("kk", pass);
                 if (!Pattern.matches(regex, name)) {
@@ -97,7 +98,8 @@ public class Signin extends Fragment {
                                 SharedPreferences.Editor editor = sharedPref.edit();
                                 editor.putString("idName", name);
                                 editor.apply();
-                                Intent intent = new Intent(getActivity(), Resum.class);
+                                Intent intent = new Intent(getActivity(), MainActivity.class);
+                                intent.putExtra("ide", 3);
                                 getActivity().startActivity(intent);
                             }
                         }

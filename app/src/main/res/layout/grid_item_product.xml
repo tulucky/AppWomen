@@ -6,7 +6,7 @@
     android:layout_marginBottom="15dp"
     android:paddingLeft="10dp"
     android:paddingRight="10dp">
-    //chu y de height cua root la content do no match parent
+    //chu y de height cua root la content dont match parent
 
     <ImageView
         android:id="@+id/image"

@@ -1,24 +1,22 @@
 package lucky.dev.tu.devandroid;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import Model.Account.Account;
+import Model.Resum.Resum;
 import Model.Bag.Bag;
 import Model.Brand.Brand;
 import Model.Home.Home;
-import Model.State;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     ImageView home;
@@ -52,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         home.setImageResource(R.drawable.home1);
         actionBar = findViewById(R.id.action_bar);
         search = findViewById(R.id.search_a);
-        tHome.setTextColor(getResources().getColor(R.color.colorAccent));
+        tHome.setTextColor(getResources().getColor(R.color.pink));
         love = findViewById(R.id.loved);
         love.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         Intent intent = getIntent();
-        int k = intent.getIntExtra("bag", 0);
+        int k = intent.getIntExtra("ide", 0);
         FragmentManager fragmentManager = getSupportFragmentManager();
         switch (k) {
             case 1:
@@ -81,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case 2:
                 actionBar.setVisibility(View.GONE);
                 bag.setImageResource(R.drawable.bag1);
-                tBag.setTextColor(getResources().getColor(R.color.colorAccent));
+                tBag.setTextColor(getResources().getColor(R.color.pink));
                 home.setImageResource(R.drawable.home);
                 tHome.setTextColor(getResources().getColor(R.color.black));
                 brand.setImageResource(R.drawable.crow);
@@ -93,11 +91,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 transaction1.replace(R.id.container, bagM);
                 transaction1.commit();
                 break;
-            default:
+            case 3:
+                actionBar.setVisibility(View.GONE);
+                bag.setImageResource(R.drawable.bag);
+                tBag.setTextColor(getResources().getColor(R.color.black));
+                home.setImageResource(R.drawable.home);
+                tHome.setTextColor(getResources().getColor(R.color.black));
+                brand.setImageResource(R.drawable.crow);
+                tBrand.setTextColor(getResources().getColor(R.color.black));
+                account.setImageResource(R.drawable.avatar1);
+                tAccount.setTextColor(getResources().getColor(R.color.pink));
                 FragmentTransaction transaction2 = fragmentManager.beginTransaction();
-                Home home = new Home();
-                transaction2.add(R.id.container, home);
+                Resum resum = new Resum();
+                transaction2.replace(R.id.container, resum);
                 transaction2.commit();
+                break;
+            case 5:
+                actionBar.setVisibility(View.GONE);
+                bag.setImageResource(R.drawable.bag);
+                tBag.setTextColor(getResources().getColor(R.color.black));
+                home.setImageResource(R.drawable.home);
+                tHome.setTextColor(getResources().getColor(R.color.black));
+                brand.setImageResource(R.drawable.crow);
+                tBrand.setTextColor(getResources().getColor(R.color.black));
+                account.setImageResource(R.drawable.avatar1);
+                tAccount.setTextColor(getResources().getColor(R.color.pink));
+                FragmentTransaction transaction5 = fragmentManager.beginTransaction();
+                Account accountM = new Account();
+                transaction5.replace(R.id.container, accountM);
+                transaction5.commit();
+                break;
+            default:
+                FragmentTransaction transaction3 = fragmentManager.beginTransaction();
+                Home home = new Home();
+                transaction3.add(R.id.container, home);
+                transaction3.commit();
         }
 
 
@@ -110,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.brand:
                 actionBar.setVisibility(View.VISIBLE);
                 brand.setImageResource(R.drawable.crow1);
-                tBrand.setTextColor(getResources().getColor(R.color.colorAccent));
+                tBrand.setTextColor(getResources().getColor(R.color.pink));
                 home.setImageResource(R.drawable.home);
                 tHome.setTextColor(getResources().getColor(R.color.black));
                 bag.setImageResource(R.drawable.bag);
@@ -125,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bag:
                 actionBar.setVisibility(View.GONE);
                 bag.setImageResource(R.drawable.bag1);
-                tBag.setTextColor(getResources().getColor(R.color.colorAccent));
+                tBag.setTextColor(getResources().getColor(R.color.pink));
                 home.setImageResource(R.drawable.home);
                 tHome.setTextColor(getResources().getColor(R.color.black));
                 brand.setImageResource(R.drawable.crow);
@@ -138,26 +166,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 transaction1.commit();
                 break;
             case R.id.avatar:
-                actionBar.setVisibility(View.GONE);
-                bag.setImageResource(R.drawable.bag);
-                tBag.setTextColor(getResources().getColor(R.color.black));
-                home.setImageResource(R.drawable.home);
-                tHome.setTextColor(getResources().getColor(R.color.black));
-                brand.setImageResource(R.drawable.crow);
-                tBrand.setTextColor(getResources().getColor(R.color.black));
-                account.setImageResource(R.drawable.avatar1);
-                tAccount.setTextColor(getResources().getColor(R.color.colorAccent));
-                FragmentTransaction transaction2 = fragmentManager.beginTransaction();
-                Account accountM = new Account();
-                transaction2.replace(R.id.container, accountM);
-                transaction2.commit();
-                break;
+                SharedPreferences preferences = this.getSharedPreferences("Accout", this.MODE_PRIVATE);
+                String name = preferences.getString("idName", "khong");
+                if (name.equals("khong")) {
+                    actionBar.setVisibility(View.GONE);
+                    bag.setImageResource(R.drawable.bag);
+                    tBag.setTextColor(getResources().getColor(R.color.black));
+                    home.setImageResource(R.drawable.home);
+                    tHome.setTextColor(getResources().getColor(R.color.black));
+                    brand.setImageResource(R.drawable.crow);
+                    tBrand.setTextColor(getResources().getColor(R.color.black));
+                    account.setImageResource(R.drawable.avatar1);
+                    tAccount.setTextColor(getResources().getColor(R.color.pink));
+                    FragmentTransaction transaction2 = fragmentManager.beginTransaction();
+                    Account accountM = new Account();
+                    transaction2.replace(R.id.container, accountM);
+                    transaction2.commit();
+                    break;
+                } else {
+                    actionBar.setVisibility(View.GONE);
+                    bag.setImageResource(R.drawable.bag);
+                    tBag.setTextColor(getResources().getColor(R.color.black));
+                    home.setImageResource(R.drawable.home);
+                    tHome.setTextColor(getResources().getColor(R.color.black));
+                    brand.setImageResource(R.drawable.crow);
+                    tBrand.setTextColor(getResources().getColor(R.color.black));
+                    account.setImageResource(R.drawable.avatar1);
+                    tAccount.setTextColor(getResources().getColor(R.color.pink));
+                    FragmentTransaction transaction2 = fragmentManager.beginTransaction();
+                    Resum resum = new Resum();
+                    transaction2.replace(R.id.container, resum);
+                    transaction2.commit();
+                    break;
+                }
+
             case R.id.home:
                 actionBar.setVisibility(View.VISIBLE);
                 bag.setImageResource(R.drawable.bag);
                 tBag.setTextColor(getResources().getColor(R.color.black));
                 home.setImageResource(R.drawable.home1);
-                tHome.setTextColor(getResources().getColor(R.color.colorAccent));
+                tHome.setTextColor(getResources().getColor(R.color.pink));
                 brand.setImageResource(R.drawable.crow);
                 tBrand.setTextColor(getResources().getColor(R.color.black));
                 account.setImageResource(R.drawable.avatar);

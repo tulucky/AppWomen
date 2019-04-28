@@ -63,7 +63,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="72dp"
-        android:background="@color/button_sign"
+        android:background="@color/red"
         android:fontFamily="@font/utm_avor"
         android:gravity="center"
         android:text="SIgn In"
@@ -134,7 +134,7 @@
         android:textSize="15sp"
         android:layout_marginStart="5dp"
         android:text="TextView"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/pink"
         android:fontFamily="@font/helvetica"
         app:layout_constraintBottom_toTopOf="@+id/name_signup"
         app:layout_constraintStart_toStartOf="@+id/name_signup" />
@@ -146,7 +146,7 @@
         android:layout_marginStart="5dp"
         android:textSize="15sp"
         android:text="TextView"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/pink"
         android:fontFamily="@font/helvetica"
         app:layout_constraintBottom_toTopOf="@+id/inputlayout"
         app:layout_constraintStart_toStartOf="@+id/inputlayout" />

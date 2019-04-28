@@ -28,7 +28,7 @@
                 android:id="@+id/carouselView"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:background="@color/colorAccent"
+                android:background="@color/pink"
                 app:fillColor="#fa2b2b"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

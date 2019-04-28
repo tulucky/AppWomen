@@ -2,10 +2,11 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="button_sign">#dc354e</color>
+    <color name="pink">#FF4081</color>
+    <color name="red">#dc354e</color>
     <color name="toolbar">#ffffff</color>
-    <color name="black">#000000</color>
+    <color name="black">#353434</color>
     <color name="white">#ffffff</color>
     <color name="gray">#434242</color>
+    <color name="yallow">#e1d992</color>
 </resources>

@@ -22,6 +22,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:textColor="@color/black"
+            android:fontFamily="@font/utm_avob"
             android:textSize="20sp"
             android:text="Giỏ Hàng" />
     </android.support.constraint.ConstraintLayout>

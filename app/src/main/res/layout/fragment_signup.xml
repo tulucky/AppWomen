@@ -86,7 +86,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="68dp"
-        android:background="@color/button_sign"
+        android:background="@color/red"
         android:fontFamily="@font/utm_avor"
         android:gravity="center"
         android:text="Sign Up"
@@ -174,7 +174,7 @@
         android:layout_marginStart="5dp"
         android:textSize="15sp"
         android:text="aa"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/pink"
         android:fontFamily="@font/helvetica"
         app:layout_constraintBottom_toTopOf="@+id/email_signup"
         app:layout_constraintStart_toStartOf="@+id/email_signup" />
@@ -186,7 +186,7 @@
         android:layout_marginStart="5dp"
         android:text="Mật khấu không khớp"
         android:textSize="15sp"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/pink"
         android:fontFamily="@font/helvetica"
         app:layout_constraintBottom_toTopOf="@+id/pas_signup"
         app:layout_constraintStart_toStartOf="@+id/pas_signup" />

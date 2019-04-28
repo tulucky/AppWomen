@@ -126,7 +126,7 @@
         android:layout_marginStart="10dp"
         android:text="TextView"
         android:textColor="#ffffff"
-        android:backgroundTint="@color/colorAccent"
+        android:backgroundTint="@color/pink"
         app:layout_constraintBottom_toBottomOf="@+id/origin_price"
         app:layout_constraintStart_toEndOf="@+id/origin_price" />
 

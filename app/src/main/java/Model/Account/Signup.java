@@ -1,5 +1,6 @@
 package Model.Account;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -19,6 +20,8 @@ import java.util.regex.Pattern;
 
 import Model.RetrofitO;
 import Model.ServiceApi;
+import lucky.dev.tu.devandroid.Login;
+import lucky.dev.tu.devandroid.MainActivity;
 import lucky.dev.tu.devandroid.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,7 +46,7 @@ public class Signup extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_signup,container,false);
         reGex = "[a-zA-Z0-9]{5,9}";
         reGexPass = "\\S+";
@@ -60,9 +63,9 @@ public class Signup extends Fragment {
         buttonUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                name = nameSignUp.getText().toString();
-                pass = passUp.getText().toString();
-                rePasswork = rePass.getText().toString();
+                name = nameSignUp.getText().toString().trim();
+                pass = passUp.getText().toString().trim();
+                rePasswork = rePass.getText().toString().trim();
                 if (!Pattern.matches(reGexPass, name)) {
                     nameAlter.setText("Vui lòng nhập nickname");
                     nameAlter.setVisibility(View.VISIBLE);
@@ -92,9 +95,17 @@ public class Signup extends Fragment {
                                 nameAlter.setText("Tài khoản đã tồn tại");
                                 nameAlter.setVisibility(View.VISIBLE);
                             } else {
-                                if (response.body().get(0).getAlter().equals("2"))
+                                if (response.body().get(0).getAlter().equals("2")) {
                                     succs.setVisibility(View.VISIBLE);
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Intent intent = new Intent(getActivity(), Login.class);
+                                            getActivity().startActivity(intent);
+                                        }
+                                    }, 2000);
 
+                                }
                             }
                         }
 

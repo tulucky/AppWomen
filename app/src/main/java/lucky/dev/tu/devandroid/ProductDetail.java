@@ -375,7 +375,7 @@ toolbar1.setVisibility(GONE);
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent(ProductDetail.this, MainActivity.class);
-                intent1.putExtra("bag", 2);
+                intent1.putExtra("ide", 2);
                 ProductDetail.this.startActivity(intent1);
             }
         });
@@ -383,7 +383,7 @@ toolbar1.setVisibility(GONE);
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent(ProductDetail.this, MainActivity.class);
-                intent1.putExtra("bag", 1);
+                intent1.putExtra("ide", 1);
                 ProductDetail.this.startActivity(intent1);
             }
         });

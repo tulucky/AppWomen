@@ -21,7 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" /></intent-filter>
         </activity>
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".Resum"></activity>
         <activity android:name=".Login"></activity>
         <activity android:name=".Wishlish"></activity>
         <activity android:name=".ProducBrandtActivity"></activity>

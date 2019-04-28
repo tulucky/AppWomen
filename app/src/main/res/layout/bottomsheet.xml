@@ -200,7 +200,7 @@
         android:layout_marginBottom="420dp"
         android:layout_marginStart="16dp"
         android:scaleType="centerCrop"
-        android:background="@color/colorAccent"
+        android:background="@color/pink"
         app:layout_constraintBottom_toBottomOf="@id/constraintLayout0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/constraintLayout0" />
@@ -209,7 +209,7 @@
         android:id="@+id/bottom"
         android:layout_width="match_parent"
         android:layout_height="42dp"
-        android:background="@color/colorAccent"
+        android:background="@color/pink"
         android:gravity="center"
         android:text="ADD TO BAG"
         android:textColor="@color/white"
