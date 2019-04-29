@@ -90,6 +90,7 @@ public class Search extends AppCompatActivity {
             }
         });
         return true;
+        //return true de no hien thi .if false ko hien thi
     }
 
 }

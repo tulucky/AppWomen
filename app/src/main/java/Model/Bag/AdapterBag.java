@@ -220,6 +220,7 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                                         data.get(i).getNumber());
                                 Call<List<OrderP>> call = serviceApi1.updateOrderProduct(data.get(i).getId(), data.get(i).getImagebag(),
                                         data.get(i).getSizebag(), data.get(i).getNumber()
+                                        //update by id of the orders
                                 );
                                 call.enqueue(new Callback<List<OrderP>>() {
                                     @Override

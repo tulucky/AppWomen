@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView love;
     ImageView search;
     ConstraintLayout actionBar;
+    //thay doi file php ko can chay lai app
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -153,6 +153,19 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView13" />
             </android.support.constraint.ConstraintLayout>
 
+            <ImageView
+                android:id="@+id/empty_bag"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/bagemty"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/ordered_rec"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/ordered_rec"
                 android:layout_width="match_parent"
@@ -189,6 +202,23 @@
                 android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@+id/profile_image2"
                 app:layout_constraintTop_toTopOf="@+id/profile_image2" />
+
+            <TextView
+                android:id="@+id/text_empty"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/american_sans"
+                android:gravity="center"
+                android:text="Bạn chưa mua sản phẩm nào !"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/empty_bag"
+                app:layout_constraintEnd_toEndOf="@+id/empty_bag"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/empty_bag" />
         </android.support.constraint.ConstraintLayout>
     </me.didik.component.StickyNestedScrollView>
 </android.support.constraint.ConstraintLayout>

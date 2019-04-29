@@ -1,6 +1,8 @@
 package lucky.dev.tu.devandroid;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -233,27 +235,41 @@ public class ProductDetail extends AppCompatActivity {
         detalBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Animation animation = AnimationUtils.loadAnimation(ProductDetail.this,R.anim.test);
-                toolbar1.setVisibility(GONE);
-                collapsingToolbarLayout.setVisibility(GONE);
-                bottomsheet.startAnimation(animation);
-                bottomsheet.setVisibility(VISIBLE);
-                final ServiceApi getOrders = RetrofitO.getmRetrofit().create(ServiceApi.class);
-                Call<List<OrderP>> callOrder = getOrders.getListOrder();
-                callOrder.enqueue(new Callback<List<OrderP>>() {
-                    @Override
-                    public void onResponse(Call<List<OrderP>> call, retrofit2.Response<List<OrderP>> response) {
-                        Toast.makeText(ProductDetail.this, " hhh", Toast.LENGTH_LONG).show();
-                        Log.i("hh", " " + response.body());
-                        temp = response.body();
-                    }
+                SharedPreferences sharedPref = ProductDetail.this.getSharedPreferences("Accout"
+                        , Context.MODE_PRIVATE);
+                final String name = sharedPref.getString("idName", "khong");
+                if (name.equals("khong")) {
+                    Intent intent = new Intent(ProductDetail.this, Login.class);
+                    intent.putExtra("ide", 1);
+                    startActivity(intent);
+                   /* SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.remove("idName");
+                    editor.apply();
+                    //doan xoa shared*/
+                } else {
+                    Animation animation = AnimationUtils.loadAnimation(ProductDetail.this, R.anim.test);
+                    toolbar1.setVisibility(GONE);
+                    collapsingToolbarLayout.setVisibility(GONE);
+                    bottomsheet.startAnimation(animation);
+                    bottomsheet.setVisibility(VISIBLE);
+                    final ServiceApi getOrders = RetrofitO.getmRetrofit().create(ServiceApi.class);
+                    Call<List<OrderP>> callOrder = getOrders.getListOrder(name);
+                    callOrder.enqueue(new Callback<List<OrderP>>() {
+                        @Override
+                        public void onResponse(Call<List<OrderP>> call, retrofit2.Response<List<OrderP>> response) {
+                            Toast.makeText(ProductDetail.this, " hhh", Toast.LENGTH_LONG).show();
+                            //chua co gi response is empty
+                            Log.i("hh", " " + response.body());
+                            temp = response.body();
+                        }
 
-                    @Override
-                    public void onFailure(Call<List<OrderP>> call, Throwable t) {
-                        t.getMessage();
+                        @Override
+                        public void onFailure(Call<List<OrderP>> call, Throwable t) {
+                            Log.i("hh", " " + t.getMessage());
 
-                    }
-                });
+                        }
+                    });
+                }
             }
         });
         bottomsheet.setOnTouchListener(new View.OnTouchListener() {
@@ -296,6 +312,9 @@ public class ProductDetail extends AppCompatActivity {
         bootom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences sharedPreferences = ProductDetail.this.getSharedPreferences("Accout", Context.MODE_PRIVATE);
+                String name = sharedPreferences.getString("idName", "khong");
+                //kiem tra dau vao truoc khi add nhu id,image,size de update number
                 switch (test) {
                     case 0:
                         for (int i = 0; i < temp.size(); i++) {
@@ -324,7 +343,7 @@ public class ProductDetail extends AppCompatActivity {
                         if (test == 2) {
                             test = 0;
                             break;
-                        }
+                            }
 
                     case 1:
                         Log.i("an", "haha");
@@ -334,7 +353,7 @@ public class ProductDetail extends AppCompatActivity {
                         if (orderP.getImagebag() == null | orderP.getSizebag() == null) {
                             Toast.makeText(ProductDetail.this, "vui long chon", Toast.LENGTH_LONG).show();
                         } else {
-                            Call<List<OrderP>> callInsert = serviceApi.setOrder(orderP.getIdProductb(), orderP.getImagebag(), orderP.getSizebag(), orderP.getNumber());
+                            Call<List<OrderP>> callInsert = serviceApi.setOrder(orderP.getIdProductb(), name, orderP.getImagebag(), orderP.getSizebag(), orderP.getNumber());
                             callInsert.enqueue(new Callback<List<OrderP>>() {
                                 @Override
                                 public void onResponse(Call<List<OrderP>> call, retrofit2.Response<List<OrderP>> response) {

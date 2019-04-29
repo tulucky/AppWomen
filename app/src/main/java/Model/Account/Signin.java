@@ -1,5 +1,6 @@
 package Model.Account;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -92,15 +93,22 @@ public class Signin extends Fragment {
                                 alertpass.setVisibility(View.VISIBLE);
                                 passIn.getText().clear();
                             } else if (response.body().get(0).getAlter().equals("0")) {
+                                getActivity().finish();
                                 Toast.makeText(getActivity(), "dang nhap ok", Toast.LENGTH_LONG).show();
                                 SharedPreferences sharedPref = getActivity().getSharedPreferences(
-                                        "Accout", getActivity().MODE_PRIVATE);
+                                        "Accout", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPref.edit();
                                 editor.putString("idName", name);
                                 editor.apply();
-                                Intent intent = new Intent(getActivity(), MainActivity.class);
-                                intent.putExtra("ide", 3);
-                                getActivity().startActivity(intent);
+                                Intent detail = getActivity().getIntent();
+                                int ide = detail.getIntExtra("ide", 0);
+                                if (ide == 1) {
+                                    getActivity().finish();
+                                } else {
+                                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                                    intent.putExtra("ide", 3);
+                                    getActivity().startActivity(intent);
+                                }
                             }
                         }
 

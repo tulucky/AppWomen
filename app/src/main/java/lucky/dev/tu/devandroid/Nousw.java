@@ -202,8 +202,8 @@
 //
 //    ImageListener imageListener = new ImageListener() {
 //        @Override
-//        public void setImageForPosition(int position, ImageView imageView) {
-//            //  imageView.setImageResource(sampleImages[position]);
+//        public void setImageForPosition(int position, ImageView empty_bag) {
+//            //  empty_bag.setImageResource(sampleImages[position]);
 //        }
 //    };
 //

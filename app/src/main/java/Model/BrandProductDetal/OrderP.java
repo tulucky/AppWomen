@@ -19,6 +19,13 @@ public class OrderP {
     @SerializedName("number")
     @Expose
     int number;
+    @SerializedName("checked")
+    @Expose
+    int checked;
+
+    public int getChecked() {
+        return checked;
+    }
 
     public void setId(int id) {
         this.id = id;

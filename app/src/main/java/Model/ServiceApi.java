@@ -44,10 +44,11 @@ public interface ServiceApi {
 
     @FormUrlEncoded
     @POST("orders.php")
-    Call<List<OrderP>> setOrder(@Field("idProduct") int id, @Field("image") String image, @Field("size") String size, @Field("number") int number);
+    Call<List<OrderP>> setOrder(@Field("idProduct") int id, @Field("name") String name, @Field("image") String image, @Field("size") String size, @Field("number") int number);
     //the value of a Field is option as long as match with $_post[value]
-    @GET("listorders.php")
-    Call<List<OrderP>> getListOrder();
+    @FormUrlEncoded
+    @POST("listorders.php")
+    Call<List<OrderP>> getListOrder(@Field("name") String name);
 
     @FormUrlEncoded
     @POST("upnumber.php")

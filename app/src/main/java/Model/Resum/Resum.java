@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -20,8 +19,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import Model.Resum.OrderedAda;
-import Model.Resum.OrderedP;
 import Model.RetrofitO;
 import Model.ServiceApi;
 import lucky.dev.tu.devandroid.MainActivity;
@@ -34,6 +31,8 @@ public class Resum extends Fragment {
     RecyclerView productLists;
     TextView nickName;
     ImageView setting;
+    ImageView emptyBag;
+    TextView emptyText;
 
     public Resum() {
     }
@@ -46,6 +45,10 @@ public class Resum extends Fragment {
         productLists = view.findViewById(R.id.ordered_rec);
         nickName = view.findViewById(R.id.nick_name);
         setting = view.findViewById(R.id.setting);
+        emptyBag = view.findViewById(R.id.empty_bag);
+        emptyText = view.findViewById(R.id.text_empty);
+        emptyBag.setVisibility(View.VISIBLE);
+        emptyText.setVisibility(View.VISIBLE);
         SharedPreferences sharedPref = getActivity().getSharedPreferences("Accout"
                 , getActivity().MODE_PRIVATE);
         String name = sharedPref.getString("idName", "khong");
@@ -85,12 +88,18 @@ public class Resum extends Fragment {
             @Override
             public void onResponse(Call<List<OrderedP>> call, Response<List<OrderedP>> response) {
                 Log.i("ll", "lol");
-                productLists.setHasFixedSize(true);
-                productLists.setNestedScrollingEnabled(false);
-                productLists.setLayoutManager(new LinearLayoutManager(getActivity()));
-                OrderedAda orderedAda = new OrderedAda(getActivity(), response.body());
-                productLists.setAdapter(orderedAda);
-
+                Log.i("ll", "lol");
+                if (response.body().size() == 0) {
+                    productLists.setVisibility(View.GONE);
+                } else {
+                    emptyBag.setVisibility(View.GONE);
+                    emptyText.setVisibility(View.GONE);
+                    productLists.setHasFixedSize(true);
+                    productLists.setNestedScrollingEnabled(false);
+                    productLists.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    OrderedAda orderedAda = new OrderedAda(getActivity(), response.body());
+                    productLists.setAdapter(orderedAda);
+                }
             }
 
             @Override

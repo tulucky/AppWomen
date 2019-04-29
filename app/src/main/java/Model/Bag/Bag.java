@@ -1,5 +1,6 @@
 package Model.Bag;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -77,18 +78,10 @@ public class Bag extends Fragment {
             @Override
             public void onClick(View v) {
                 SharedPreferences sharedPref = getActivity().getSharedPreferences("Accout"
-                        , getActivity().MODE_PRIVATE);
+                        , Context.MODE_PRIVATE);
                 final String name = sharedPref.getString("idName", "khong");
-                if (name.equals("khong")) {
-                    Intent intent = new Intent(getActivity(), Login.class);
-                    startActivity(intent);
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.remove("idName");
-                    editor.apply();
-                    //doan xoa shared
-                } else {
                     ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
-                    Call<List<OrderP>> call = serviceApi.getListOrder();
+                Call<List<OrderP>> call = serviceApi.getListOrder(name);
                     call.enqueue(new Callback<List<OrderP>>() {
                         @Override
                         public void onResponse(Call<List<OrderP>> call, Response<List<OrderP>> response) {
@@ -114,22 +107,22 @@ public class Bag extends Fragment {
 
                         @Override
                         public void onFailure(Call<List<OrderP>> call, Throwable t) {
-
+                            Log.i("ooo", t.getMessage());
                         }
                     });
 
-                    Log.i("ll", name);
+                Log.i("ooo", name);
                 }
-
-            }
         });
         return view;
 
     }
 
     private void getListOrder() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("Accout", Context.MODE_PRIVATE);
+        String name = sharedPreferences.getString("idName", "khong");
         final ServiceApi getOrders = RetrofitO.getmRetrofit().create(ServiceApi.class);
-        Call<List<OrderP>> callOrder = getOrders.getListOrder();
+        Call<List<OrderP>> callOrder = getOrders.getListOrder(name);
         callOrder.enqueue(new Callback<List<OrderP>>() {
             @Override
             public void onResponse(Call<List<OrderP>> call, retrofit2.Response<List<OrderP>> response) {
