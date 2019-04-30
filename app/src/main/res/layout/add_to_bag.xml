@@ -56,13 +56,13 @@
 
     <TextView
         android:id="@+id/count"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/backg_card"
         android:gravity="center"
-        android:text="2"
+        android:text="36"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"

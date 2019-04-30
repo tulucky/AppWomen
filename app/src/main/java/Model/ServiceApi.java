@@ -72,4 +72,8 @@ public interface ServiceApi {
     @FormUrlEncoded
     @POST("orderedproducts.php")
     Call<List<OrderedP>> orderedProducts(@Field("name") String name);
+
+    @FormUrlEncoded
+    @POST("soluong.php")
+    Call<List<SoLuong>> getSoLuong(@Field("name") String name);
 }

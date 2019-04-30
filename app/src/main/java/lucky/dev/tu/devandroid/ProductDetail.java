@@ -53,6 +53,7 @@ import Model.MySingleton;
 import Model.Product;
 import Model.RetrofitO;
 import Model.ServiceApi;
+import Model.SoLuong;
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -99,6 +100,7 @@ public class ProductDetail extends AppCompatActivity {
     int addNumber;
     int quantity = 1;
     int test = 0;
+    TextView count;
     List<OrderP> temp;
     CollapsingToolbarLayout collapsingToolbarLayout;
     private static final String urlData0 = "http://192.168.1.109/wmshop/tops.php";
@@ -161,6 +163,29 @@ public class ProductDetail extends AppCompatActivity {
         bagd = findViewById(R.id.bagd);
         cancel = findViewById(R.id.cancel_d);
         toBag = findViewById(R.id.to_bag);
+        count = findViewById(R.id.count);
+        SharedPreferences sharedPref = ProductDetail.this.getSharedPreferences("Accout"
+                , Context.MODE_PRIVATE);
+        final String name = sharedPref.getString("idName", "khong");
+        final SoLuong soLuong = new SoLuong();
+        ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
+        Call<List<SoLuong>> call = serviceApi.getSoLuong(name);
+        call.enqueue(new Callback<List<SoLuong>>() {
+            @Override
+            public void onResponse(Call<List<SoLuong>> call, retrofit2.Response<List<SoLuong>> response) {
+                if (response.body().get(0).getSoLuong() == 0) {
+                    count.setVisibility(GONE);
+                } else {
+                    count.setVisibility(VISIBLE);
+                    count.setText("" + response.body().get(0).getSoLuong());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<SoLuong>> call, Throwable t) {
+
+            }
+        });
         toBag.setVisibility(GONE);
         sizeDes.setVisibility(GONE);
         bottomsheet.setVisibility(GONE);
@@ -180,6 +205,7 @@ public class ProductDetail extends AppCompatActivity {
         String image = intent.getStringExtra("image");
         Log.i("id", " " + id);
         final OrderP orderP = new OrderP();
+        //luu lai su lua chon cua user moi lan click on item lai sinh ra 1 ob moi
         orderP.setIdProductb(id);
         orderP.setNumber(quantity);
         getaProduct(id);
@@ -243,9 +269,6 @@ public class ProductDetail extends AppCompatActivity {
         detalBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences sharedPref = ProductDetail.this.getSharedPreferences("Accout"
-                        , Context.MODE_PRIVATE);
-                final String name = sharedPref.getString("idName", "khong");
                 if (name.equals("khong")) {
                     Intent intent = new Intent(ProductDetail.this, Login.class);
                     intent.putExtra("ide", 1);
@@ -261,7 +284,7 @@ public class ProductDetail extends AppCompatActivity {
                     //de no ko bat su kien
                     bottomsheet.startAnimation(animation);
                     bottomsheet.setVisibility(VISIBLE);
-                    final ServiceApi getOrders = RetrofitO.getmRetrofit().create(ServiceApi.class);
+                    ServiceApi getOrders = RetrofitO.getmRetrofit().create(ServiceApi.class);
                     Call<List<OrderP>> callOrder = getOrders.getListOrder(name);
                     callOrder.enqueue(new Callback<List<OrderP>>() {
                         @Override
@@ -330,7 +353,7 @@ public class ProductDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SharedPreferences sharedPreferences = ProductDetail.this.getSharedPreferences("Accout", Context.MODE_PRIVATE);
-                String name = sharedPreferences.getString("idName", "khong");
+                final String name = sharedPreferences.getString("idName", "khong");
                 //kiem tra dau vao truoc khi add nhu id,image,size de update number
                 switch (test) {
                     case 0:
@@ -367,6 +390,23 @@ public class ProductDetail extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     toBag.setVisibility(GONE);
+                                    ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
+                                    Call<List<SoLuong>> call = serviceApi.getSoLuong(name);
+                                    call.enqueue(new Callback<List<SoLuong>>() {
+                                        @Override
+                                        public void onResponse(Call<List<SoLuong>> call, retrofit2.Response<List<SoLuong>> response) {
+                                            count.setText("" + response.body().get(0).getSoLuong());
+                                            //trean da up to db
+                                            Animation animation = AnimationUtils.loadAnimation(ProductDetail.this, R.anim.count);
+                                            count.startAnimation(animation);
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<List<SoLuong>> call, Throwable t) {
+
+                                        }
+                                    });
+
                                 }
                             }, 1500);
                             test = 0;
@@ -421,6 +461,23 @@ public class ProductDetail extends AppCompatActivity {
                                         @Override
                                         public void run() {
                                             toBag.setVisibility(GONE);
+                                            ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
+                                            Call<List<SoLuong>> call = serviceApi.getSoLuong(name);
+                                            call.enqueue(new Callback<List<SoLuong>>() {
+                                                @Override
+                                                public void onResponse(Call<List<SoLuong>> call, retrofit2.Response<List<SoLuong>> response) {
+                                                    count.setVisibility(VISIBLE);
+                                                    count.setText("" + response.body().get(0).getSoLuong());
+                                                    //tren da up to db
+                                                    Animation animation = AnimationUtils.loadAnimation(ProductDetail.this, R.anim.count);
+                                                    count.startAnimation(animation);
+                                                }
+
+                                                @Override
+                                                public void onFailure(Call<List<SoLuong>> call, Throwable t) {
+
+                                                }
+                                            });
                                         }
                                     }, 1500);
                                 }
