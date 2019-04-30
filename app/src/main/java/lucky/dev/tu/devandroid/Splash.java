@@ -8,7 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.FoldingCube;
 
 public class Splash extends AppCompatActivity {
     ImageView brandLogo;
@@ -23,6 +27,9 @@ public class Splash extends AppCompatActivity {
         brandLogo.startAnimation(animation);
         Animation animation1 = AnimationUtils.loadAnimation(Splash.this, R.anim.text_logo);
         textLogo.startAnimation(animation1);
+        ProgressBar progressBar = findViewById(R.id.spin_kit);
+        Sprite foldingCube = new FoldingCube();
+        progressBar.setIndeterminateDrawable(foldingCube);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

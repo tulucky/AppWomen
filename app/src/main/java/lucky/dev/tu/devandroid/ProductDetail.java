@@ -3,7 +3,9 @@ package lucky.dev.tu.devandroid;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -32,6 +34,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.antonyt.infiniteviewpager.InfinitePagerAdapter;
 import com.bumptech.glide.Glide;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -91,6 +94,8 @@ public class ProductDetail extends AppCompatActivity {
     ImageView loved;
     ImageView bagd;
     String sizeBag;
+    ImageView cancel;
+    ImageView toBag;
     int addNumber;
     int quantity = 1;
     int test = 0;
@@ -154,6 +159,9 @@ public class ProductDetail extends AppCompatActivity {
         homed = findViewById(R.id.homed);
         loved = findViewById(R.id.loved);
         bagd = findViewById(R.id.bagd);
+        cancel = findViewById(R.id.cancel_d);
+        toBag = findViewById(R.id.to_bag);
+        toBag.setVisibility(GONE);
         sizeDes.setVisibility(GONE);
         bottomsheet.setVisibility(GONE);
         aProduct = new ArrayList<>();
@@ -250,6 +258,7 @@ public class ProductDetail extends AppCompatActivity {
                     Animation animation = AnimationUtils.loadAnimation(ProductDetail.this, R.anim.test);
                     toolbar1.setVisibility(GONE);
                     collapsingToolbarLayout.setVisibility(GONE);
+                    //de no ko bat su kien
                     bottomsheet.startAnimation(animation);
                     bottomsheet.setVisibility(VISIBLE);
                     final ServiceApi getOrders = RetrofitO.getmRetrofit().create(ServiceApi.class);
@@ -279,6 +288,23 @@ public class ProductDetail extends AppCompatActivity {
                 //the listener has consumed the event so that parent dont have it
             }
         });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toolbar1.setVisibility(VISIBLE);
+                collapsingToolbarLayout.setVisibility(VISIBLE);
+                bottomsheet.setVisibility(GONE);
+            }
+        });
+        backgroun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toolbar1.setVisibility(VISIBLE);
+                collapsingToolbarLayout.setVisibility(VISIBLE);
+                bottomsheet.setVisibility(GONE);
+
+            }
+        });
         sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -298,15 +324,6 @@ public class ProductDetail extends AppCompatActivity {
                 quantity++;
                 amount.setText(" " + quantity);
                 orderP.setNumber(quantity);
-            }
-        });
-        backgroun.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toolbar1.setVisibility(VISIBLE);
-                collapsingToolbarLayout.setVisibility(VISIBLE);
-                bottomsheet.setVisibility(GONE);
-
             }
         });
         bootom.setOnClickListener(new View.OnClickListener() {
@@ -341,9 +358,23 @@ public class ProductDetail extends AppCompatActivity {
                             }
                         }
                         if (test == 2) {
+                            toBag.setVisibility(VISIBLE);
+                            Glide.with(ProductDetail.this).load(RetrofitO.url + orderP.getImagebag())
+                                    .into(toBag);
+                            Animation animation = AnimationUtils.loadAnimation(ProductDetail.this, R.anim.to_bag);
+                            toBag.startAnimation(animation);
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    toBag.setVisibility(GONE);
+                                }
+                            }, 1500);
                             test = 0;
+                            toolbar1.setVisibility(VISIBLE);
+                            collapsingToolbarLayout.setVisibility(VISIBLE);
+                            bottomsheet.setVisibility(GONE);
                             break;
-                            }
+                        }
 
                     case 1:
                         Log.i("an", "haha");
@@ -353,6 +384,14 @@ public class ProductDetail extends AppCompatActivity {
                         if (orderP.getImagebag() == null | orderP.getSizebag() == null) {
                             Toast.makeText(ProductDetail.this, "vui long chon", Toast.LENGTH_LONG).show();
                         } else {
+                            final KProgressHUD kProgressHUD = KProgressHUD.create(ProductDetail.this)
+                                    .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                                    .setCancellable(true)
+                                    .setBackgroundColor(Color.GRAY)
+                                    .setAnimationSpeed(2)
+                                    .setSize(100, 100)
+                                    .setDimAmount(0.5f)
+                                    .show();
                             Call<List<OrderP>> callInsert = serviceApi.setOrder(orderP.getIdProductb(), name, orderP.getImagebag(), orderP.getSizebag(), orderP.getNumber());
                             callInsert.enqueue(new Callback<List<OrderP>>() {
                                 @Override
@@ -365,6 +404,27 @@ public class ProductDetail extends AppCompatActivity {
 
                                 }
                             });
+
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    kProgressHUD.dismiss();
+                                    toBag.setVisibility(VISIBLE);
+                                    Glide.with(ProductDetail.this).load(RetrofitO.url + orderP.getImagebag())
+                                            .into(toBag);
+                                    Animation animation = AnimationUtils.loadAnimation(ProductDetail.this, R.anim.to_bag);
+                                    toBag.startAnimation(animation);
+                                    toolbar1.setVisibility(VISIBLE);
+                                    collapsingToolbarLayout.setVisibility(VISIBLE);
+                                    bottomsheet.setVisibility(GONE);
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            toBag.setVisibility(GONE);
+                                        }
+                                    }, 1500);
+                                }
+                            }, 1500);
                         }
                         test = 0;
                 }

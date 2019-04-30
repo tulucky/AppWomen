@@ -19,12 +19,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.FoldingCube;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
@@ -77,6 +80,10 @@ public class Home extends Fragment {
         grid = view.findViewById(R.id.grid);
         progress = view.findViewById(R.id.progress);
         progress.setVisibility(View.GONE);
+        final ProgressBar progressBar = view.findViewById(R.id.spin_kit);
+        Sprite foldingCube = new FoldingCube();
+        progressBar.setIndeterminateDrawable(foldingCube);
+        progressBar.setVisibility(View.GONE);
         grid.setVisibility(View.GONE);
         mRecycleZezo = view.findViewById(R.id.Recycle_one);
         getDataRecyZezo();
@@ -89,41 +96,42 @@ public class Home extends Fragment {
         GridProduct gridProduct = new GridProduct();
         transaction.add(R.id.recy_main, gridProduct);
         transaction.commit();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
                 list.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         grid.setVisibility(View.VISIBLE);
                         list.setVisibility(View.GONE);
-                        FragmentTransaction transaction = fragmentManager.beginTransaction();
-                        ListProduct listProduct = new ListProduct();
-                        transaction.replace(R.id.recy_main, listProduct);
-                        transaction.commit();
-
+                        progressBar.setVisibility(View.VISIBLE);
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                                ListProduct listProduct = new ListProduct();
+                                transaction.replace(R.id.recy_main, listProduct);
+                                transaction.commit();
+                                progressBar.setVisibility(View.GONE);
+                            }
+                        }, 1500);
                     }
-
                 });
-            }
-        }, 100);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
                 grid.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         list.setVisibility(View.VISIBLE);
                         grid.setVisibility(View.GONE);
-                        final FragmentTransaction transaction = fragmentManager.beginTransaction();
-                        GridProduct gridProduct = new GridProduct();
-                        transaction.replace(R.id.recy_main, gridProduct);
-                        transaction.commit();
+                        progressBar.setVisibility(View.VISIBLE);
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                final FragmentTransaction transaction = fragmentManager.beginTransaction();
+                                GridProduct gridProduct = new GridProduct();
+                                transaction.replace(R.id.recy_main, gridProduct);
+                                transaction.commit();
+                                progressBar.setVisibility(View.GONE);
+                            }
+                        }, 1500);
                     }
                 });
-            }
-        }, 100);
         nestMain.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView nestedScrollView, int i, int i1, int i2, int i3) {

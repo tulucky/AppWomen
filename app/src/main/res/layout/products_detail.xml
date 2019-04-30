@@ -90,6 +90,14 @@
     <include layout="@layout/add_to_bag" />
 
     <include layout="@layout/bottomsheet" />
+
+    <ImageView
+        android:id="@+id/to_bag"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/vay1"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="160dp" />
 </android.support.design.widget.CoordinatorLayout>
 
 
