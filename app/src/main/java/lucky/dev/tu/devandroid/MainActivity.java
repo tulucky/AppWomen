@@ -12,11 +12,21 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 import Model.Account.Account;
 import Model.Resum.Resum;
 import Model.Bag.Bag;
 import Model.Brand.Brand;
 import Model.Home.Home;
+import Model.RetrofitO;
+import Model.ServiceApi;
+import Model.SoLuong;
+import retrofit2.Call;
+import retrofit2.Callback;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     ImageView home;
@@ -30,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView love;
     ImageView search;
     ConstraintLayout actionBar;
+    TextView number;
+    String name;
     //thay doi file php ko can chay lai app
 
     @Override
@@ -51,6 +63,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         home.setImageResource(R.drawable.home1);
         actionBar = findViewById(R.id.action_bar);
         search = findViewById(R.id.search_a);
+        number = findViewById(R.id.number);
+        SharedPreferences preferences = this.getSharedPreferences("Accout", this.MODE_PRIVATE);
+        name = preferences.getString("idName", "khong");
+        ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
+        Call<List<SoLuong>> call = serviceApi.getSoLuong(name);
+        call.enqueue(new Callback<List<SoLuong>>() {
+            @Override
+            public void onResponse(Call<List<SoLuong>> call, retrofit2.Response<List<SoLuong>> response) {
+                if (response.body().get(0).getSoLuong() == 0) {
+                    number.setVisibility(GONE);
+                } else {
+                    number.setVisibility(VISIBLE);
+                    number.setText("" + response.body().get(0).getSoLuong());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<SoLuong>> call, Throwable t) {
+
+            }
+        });
         tHome.setTextColor(getResources().getColor(R.color.pink));
         love = findViewById(R.id.loved);
         love.setOnClickListener(new View.OnClickListener() {
@@ -167,8 +200,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 transaction1.commit();
                 break;
             case R.id.avatar:
-                SharedPreferences preferences = this.getSharedPreferences("Accout", this.MODE_PRIVATE);
-                String name = preferences.getString("idName", "khong");
                 if (name.equals("khong")) {
                     actionBar.setVisibility(View.GONE);
                     bag.setImageResource(R.drawable.bag);
@@ -227,5 +258,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.recy_main);
             getSupportFragmentManager().beginTransaction().detach(fragment).attach(fragment).commit();
         }
+        ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
+        Call<List<SoLuong>> call = serviceApi.getSoLuong(name);
+        call.enqueue(new Callback<List<SoLuong>>() {
+            @Override
+            public void onResponse(Call<List<SoLuong>> call, retrofit2.Response<List<SoLuong>> response) {
+                if (response.body().get(0).getSoLuong() == 0) {
+                    number.setVisibility(GONE);
+                } else {
+                    number.setVisibility(VISIBLE);
+                    number.setText("" + response.body().get(0).getSoLuong());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<SoLuong>> call, Throwable t) {
+
+            }
+        });
     }
 }

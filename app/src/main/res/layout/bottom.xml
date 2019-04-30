@@ -108,17 +108,17 @@
         tools:layout_editor_absoluteY="38dp" />
 
     <TextView
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:layout_marginStart="8dp"
+        android:id="@+id/number"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="10dp"
         android:background="@drawable/backg_card"
         android:gravity="center"
-        android:text="2"
+        android:text="36"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/bag"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.514" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

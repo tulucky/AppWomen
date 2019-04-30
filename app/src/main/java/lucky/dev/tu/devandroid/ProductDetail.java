@@ -167,7 +167,6 @@ public class ProductDetail extends AppCompatActivity {
         SharedPreferences sharedPref = ProductDetail.this.getSharedPreferences("Accout"
                 , Context.MODE_PRIVATE);
         final String name = sharedPref.getString("idName", "khong");
-        final SoLuong soLuong = new SoLuong();
         ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
         Call<List<SoLuong>> call = serviceApi.getSoLuong(name);
         call.enqueue(new Callback<List<SoLuong>>() {
