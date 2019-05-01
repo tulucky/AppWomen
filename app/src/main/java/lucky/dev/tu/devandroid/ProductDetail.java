@@ -188,6 +188,7 @@ public class ProductDetail extends AppCompatActivity {
         toBag.setVisibility(GONE);
         sizeDes.setVisibility(GONE);
         bottomsheet.setVisibility(GONE);
+        final SoLuong soLuong = new SoLuong();
         aProduct = new ArrayList<>();
         daTa = new ArrayList<>();
        /* findViewById(R.id.share1).setOnClickListener(new View.OnClickListener() {
@@ -207,7 +208,7 @@ public class ProductDetail extends AppCompatActivity {
         //luu lai su lua chon cua user moi lan click on item lai sinh ra 1 ob moi
         orderP.setIdProductb(id);
         orderP.setNumber(quantity);
-        getaProduct(id);
+        getaProduct(id, soLuong);
         getImageProduct(id, image, orderP);
         getImageSize(id, orderP);
         Log.i("k", " " + sizeBag);
@@ -364,9 +365,10 @@ public class ProductDetail extends AppCompatActivity {
                                 Toast.makeText(ProductDetail.this, "tao ra", Toast.LENGTH_LONG).show();
                                 test = 2;
                                 addNumber = temp.get(i).getNumber() + orderP.getNumber();
+                                float price = (addNumber * soLuong.getGia());
                                 ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
-                                Call<List<OrderP>> callupnumber = serviceApi.upNumber(temp.get(i).getId(), addNumber);
-                                callupnumber.enqueue(new Callback<List<OrderP>>() {
+                                Call<List<OrderP>> call = serviceApi.upNumberPrice(temp.get(i).getId(), addNumber, price);
+                                call.enqueue(new Callback<List<OrderP>>() {
                                     @Override
                                     public void onResponse(Call<List<OrderP>> call, retrofit2.Response<List<OrderP>> response) {
 
@@ -431,7 +433,7 @@ public class ProductDetail extends AppCompatActivity {
                                     .setSize(100, 100)
                                     .setDimAmount(0.5f)
                                     .show();
-                            Call<List<OrderP>> callInsert = serviceApi.setOrder(orderP.getIdProductb(), name, orderP.getImagebag(), orderP.getSizebag(), orderP.getNumber());
+                            Call<List<OrderP>> callInsert = serviceApi.setOrder(orderP.getIdProductb(), name, orderP.getImagebag(), orderP.getSizebag(), orderP.getNumber(), soLuong.getGia());
                             callInsert.enqueue(new Callback<List<OrderP>>() {
                                 @Override
                                 public void onResponse(Call<List<OrderP>> call, retrofit2.Response<List<OrderP>> response) {
@@ -547,7 +549,7 @@ toolbar1.setVisibility(GONE);
 
     }
 
-    private void getaProduct(int id) {
+    private void getaProduct(int id, final SoLuong soLuong) {
         ServiceApi service = RetrofitO.getmRetrofit().create(ServiceApi.class);
         Call<List<Product>> call = service.getaProduct(id);
         call.enqueue(new Callback<List<Product>>() {
@@ -555,6 +557,7 @@ toolbar1.setVisibility(GONE);
             public void onResponse(Call<List<Product>> call, retrofit2.Response<List<Product>> response) {
                 aProduct = response.body();
                 Log.i("pd", " " + daTa);
+                soLuong.setGia(aProduct.get(0).getPrice());
                 nameB.setText(aProduct.get(0).getNameB());
                 aProductDes.setText(aProduct.get(0).getTitle());
                 aProductName.setText(aProduct.get(0).getName());

@@ -7,7 +7,7 @@ public class SoLuong {
     @SerializedName("soluong")
     @Expose
     int soLuong;
-    @SerializedName("gia")
+    @SerializedName("price")
     @Expose
     float gia;
 

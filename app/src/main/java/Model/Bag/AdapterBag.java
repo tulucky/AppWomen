@@ -1,10 +1,10 @@
 package Model.Bag;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
-import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,20 +17,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.antonyt.infiniteviewpager.InfinitePagerAdapter;
 import com.bumptech.glide.Glide;
 
+import java.io.IOException;
 import java.util.List;
 
 import Model.BrandProductDetal.BottomAdapImage;
 import Model.BrandProductDetal.BottomAdapSize;
 import Model.BrandProductDetal.OrderP;
-import Model.BrandProductDetal.ViewPagerProduct;
 import Model.Product;
 import Model.RetrofitO;
-import Model.Service;
 import Model.ServiceApi;
-import lucky.dev.tu.devandroid.ProductDetail;
+import Model.SoLuong;
 import lucky.dev.tu.devandroid.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,30 +36,34 @@ import retrofit2.Response;
 
 public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context mcontext;
-    List<OrderP> data;
-    List<Product> dataProduct;
-    ConstraintLayout updateProduct;
+    private List<OrderP> data;
+    private List<Product> dataProduct;
+    private ConstraintLayout updateProduct;
     TextView price;
-    TextView originPrice;
-    TextView name;
-    RecyclerView recColor;
-    RecyclerView size;
-    TextView number;
-    ImageView imageUpdateSheet;
-    TextView sizeDes;
-    ImageView sub;
-    ImageView plus;
-    ImageView subUp;
-    ImageView plusUp;
-    TextView update;
-    ConstraintLayout checkOut;
+    private TextView originPrice;
+    private TextView name;
+    private RecyclerView recColor;
+    private RecyclerView size;
+    private TextView number;
+    private ImageView imageUpdateSheet;
+    private TextView sizeDes;
+    private ImageView subUp;
+    private ImageView plusUp;
+    private TextView update;
+    private ConstraintLayout checkOut;
+    TextView priceCheck;
+    String nameUser;
+    float priceUp;
 
 
-    public AdapterBag(Context mcontext, List<OrderP> data, ConstraintLayout updateProduct, ConstraintLayout check) {
+    public AdapterBag(Context mcontext, List<OrderP> data, ConstraintLayout updateProduct, ConstraintLayout check, TextView priceCheck) {
         this.mcontext = mcontext;
         this.data = data;
         this.updateProduct = updateProduct;
         this.checkOut = check;
+        this.priceCheck = priceCheck;
+        SharedPreferences sharedPreferences = mcontext.getSharedPreferences("Accout", Context.MODE_PRIVATE);
+        nameUser = sharedPreferences.getString("idName", "khong");
     }
 
     @NonNull
@@ -73,10 +75,24 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
+        ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
+        Call<List<SoLuong>> call2 = serviceApi.getPriceCheck(nameUser);
+        call2.enqueue(new Callback<List<SoLuong>>() {
+            @Override
+            public void onResponse(Call<List<SoLuong>> call, Response<List<SoLuong>> response) {
+                Log.i("mop", "" + response.body().get(0).getGia());
+                priceCheck.setText("" + response.body().get(0).getGia() + "$");
+            }
+
+            @Override
+            public void onFailure(Call<List<SoLuong>> call, Throwable t) {
+            }
+        });
         final ViewHolderBag holder = (ViewHolderBag) viewHolder;
         Glide.with(mcontext).load(RetrofitO.url + data.get(i).getImagebag()).into(holder.imageBag);
         holder.textEdit.setText(data.get(i).getSizebag());
         holder.amount.setText("" + data.get(i).getNumber());
+        final SoLuong soLuong = new SoLuong();
         Log.i("mn", "" + data.get(i).getIdProductb());
         int id = data.get(i).getIdProductb();
         if (data.get(i).getNumber() == 1) {
@@ -92,6 +108,7 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             @Override
             public void onResponse(Call<List<Product>> call, retrofit2.Response<List<Product>> response) {
                 dataProduct = response.body();
+                soLuong.setGia(dataProduct.get(0).getPrice());
                 holder.priceBag.setText(dataProduct.get(0).getName());
                 holder.originPriBag.setText(dataProduct.get(0).getOriginprice());
                 holder.sale.setText(dataProduct.get(0).getSale());
@@ -118,20 +135,9 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 int k = data.get(i).getNumber();
                 k++;
                 data.get(i).setNumber(k);
-                notifyDataSetChanged();
-                ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
-                Call<List<OrderP>> call = serviceApi.upNumber(data.get(i).getId(), k);
-                call.enqueue(new Callback<List<OrderP>>() {
-                    @Override
-                    public void onResponse(Call<List<OrderP>> call, Response<List<OrderP>> response) {
+                priceUp = (k * soLuong.getGia());
+                new Asyn().execute(i, k);
 
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<OrderP>> call, Throwable t) {
-
-                    }
-                });
             }
         });
         holder.sub.setOnClickListener(new View.OnClickListener() {
@@ -140,21 +146,8 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 int k = data.get(i).getNumber();
                 k--;
                 data.get(i).setNumber(k);
-                notifyDataSetChanged();
-                ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
-                Call<List<OrderP>> call = serviceApi.upNumber(data.get(i).getId(), k);
-                call.enqueue(new Callback<List<OrderP>>() {
-                    @Override
-                    public void onResponse(Call<List<OrderP>> call, Response<List<OrderP>> response) {
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<OrderP>> call, Throwable t) {
-
-                    }
-                });
-                notifyDataSetChanged();
+                priceUp = (k * soLuong.getGia());
+                new Asyn().execute(i, k);
             }
         });
         holder.imageEdit.setOnClickListener(new View.OnClickListener() {
@@ -297,6 +290,26 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 updateProduct.setVisibility(View.VISIBLE);
             }
         });
+    }
+
+    class Asyn extends AsyncTask<Integer, Void, Void> {
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            notifyDataSetChanged();
+        }
+
+        @Override
+        protected Void doInBackground(Integer... integers) {
+            ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
+            Call<List<OrderP>> call = serviceApi.upNumberPrice(data.get(integers[0]).getId(), integers[1], priceUp);
+            try {
+                call.execute();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 
     @Override

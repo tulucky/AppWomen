@@ -39,8 +39,9 @@
 
     <TextView
         android:id="@+id/detail_bottom"
-        android:layout_width="140dp"
+        android:layout_width="0dp"
         android:layout_height="56dp"
+        android:layout_marginStart="30dp"
         android:background="@color/pink"
         android:fontFamily="@font/helvetica"
         android:gravity="center"

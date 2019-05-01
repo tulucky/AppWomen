@@ -36,6 +36,7 @@ public class Bag extends Fragment {
     ImageView exitBackground;
     ImageView cancel;
     TextView checkOut;
+    TextView priceCheck;
     ConstraintLayout layoutCheck;
 
     public Bag() {
@@ -53,6 +54,7 @@ public class Bag extends Fragment {
         exitBackground = view.findViewById(R.id.exit_backgroud);
         cancel = view.findViewById(R.id.cancel_d);
         layoutCheck = view.findViewById(R.id.check);
+        priceCheck = view.findViewById(R.id.price_check);
         getListOrder();
         exitBackground.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,7 +132,7 @@ public class Bag extends Fragment {
                 Log.i("hh", " " + response.body());
                 daTa = response.body();
                 listOrder.setNestedScrollingEnabled(false);
-                AdapterBag adapterBag = new AdapterBag(getActivity(), daTa, updateProduct, layoutCheck);
+                AdapterBag adapterBag = new AdapterBag(getActivity(), daTa, updateProduct, layoutCheck, priceCheck);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                 listOrder.setLayoutManager(linearLayoutManager);
                 listOrder.setAdapter(adapterBag);

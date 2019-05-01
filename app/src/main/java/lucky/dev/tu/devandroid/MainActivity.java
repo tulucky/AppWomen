@@ -168,6 +168,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         FragmentManager fragmentManager = getSupportFragmentManager();
+        ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
+        Call<List<SoLuong>> call = serviceApi.getSoLuong(name);
+        call.enqueue(new Callback<List<SoLuong>>() {
+            @Override
+            public void onResponse(Call<List<SoLuong>> call, retrofit2.Response<List<SoLuong>> response) {
+                if (response.body().get(0).getSoLuong() == 0) {
+                    number.setVisibility(GONE);
+                } else {
+                    number.setVisibility(VISIBLE);
+                    number.setText("" + response.body().get(0).getSoLuong());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<SoLuong>> call, Throwable t) {
+
+            }
+        });
         switch (v.getId()) {
             case R.id.brand:
                 actionBar.setVisibility(View.VISIBLE);
