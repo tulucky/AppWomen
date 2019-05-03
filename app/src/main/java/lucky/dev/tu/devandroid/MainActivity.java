@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         Intent intent = getIntent();
         int k = intent.getIntExtra("ide", 0);
+        int checked = intent.getIntExtra("checked", 0);
         FragmentManager fragmentManager = getSupportFragmentManager();
         switch (k) {
             case 1:
@@ -126,6 +127,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 transaction1.commit();
                 break;
             case 3:
+                if (checked == 1) {
+                    number.setText("0");
+                }
                 actionBar.setVisibility(View.GONE);
                 bag.setImageResource(R.drawable.bag);
                 tBag.setTextColor(getResources().getColor(R.color.black));

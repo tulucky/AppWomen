@@ -2,6 +2,7 @@ package Model.Bag;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -111,6 +112,7 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 soLuong.setGia(dataProduct.get(0).getPrice());
                 holder.priceBag.setText(dataProduct.get(0).getName());
                 holder.originPriBag.setText(dataProduct.get(0).getOriginprice());
+                holder.originPriBag.setPaintFlags(holder.originPriBag.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 holder.sale.setText(dataProduct.get(0).getSale());
                 holder.desBag.setText(dataProduct.get(0).getDestile());
 
@@ -172,6 +174,7 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         update = updateProduct.findViewById(R.id.bottom_update);
                         price.setText(response.body().get(0).getName());
                         originPrice.setText(response.body().get(0).getOriginprice());
+                        originPrice.setPaintFlags(originPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                         name.setText(response.body().get(0).getDestile());
                         number.setText("" + data.get(i).getNumber());
                         getImageProduct(response.body().get(0).getId(), data.get(i).getImagebag(), data.get(i));

@@ -109,7 +109,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/seperate"
                     android:layout_marginTop="15dp"
-                    android:fontFamily="@font/helvetica"
+                    android:fontFamily="@font/sans_prob"
                     android:text="Giảm Giá Đặc Biệt "
                     android:textColor="#0b0b0b"
                     android:textSize="20sp" />
@@ -120,9 +120,10 @@
                     android:layout_alignEnd="@+id/seperate"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="25dp"
-                    android:fontFamily="@font/utm_avor"
-                    android:text="Xem Nhiều >>"
-                    android:textColor="#0b0b0b" />
+                    android:fontFamily="@font/sans_prob"
+                    android:textSize="16sp"
+                    android:text="xem thêm >"
+                    android:textColor="@color/fullblack" />
             </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView
@@ -289,7 +290,19 @@
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
-
     <include layout="@layout/progress" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:backgroundTint="#8C000000"
+        app:borderWidth="0dp"
+        app:fabCustomSize="42dp"
+        app:elevation="0dp"
+        android:layout_gravity="end|bottom"
+        android:layout_marginBottom="100dp"
+        android:layout_marginEnd="32dp"
+        android:src="@drawable/fab" />
 
 </FrameLayout>

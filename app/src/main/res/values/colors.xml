@@ -10,4 +10,6 @@
     <color name="gray">#434242</color>
     <color name="yallow">#e1d992</color>
     <color name="brown">#745113</color>
+    <color name="fullblack">#1b1b1b</color>
+    <color name="ligpink">#f9dbe5</color>
 </resources>

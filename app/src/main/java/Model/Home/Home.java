@@ -59,6 +59,8 @@ public class Home extends Fragment {
     RelativeLayout recyMain;
     RelativeLayout relativ;
     ConstraintLayout progress;
+    android.support.design.widget.FloatingActionButton fab;
+
     public NestedScrollView nestMain;
     private static final String urlData0 = "http://192.168.1.109/wmshop/tops.php";
     private static final String urlData3 = "http://192.168.1.109/wmshop/tops.php";
@@ -80,6 +82,8 @@ public class Home extends Fragment {
         grid = view.findViewById(R.id.grid);
         progress = view.findViewById(R.id.progress);
         progress.setVisibility(View.GONE);
+        fab = view.findViewById(R.id.fab);
+        fab.hide();
         final ProgressBar progressBar = view.findViewById(R.id.spin_kit);
         Sprite foldingCube = new FoldingCube();
         progressBar.setIndeterminateDrawable(foldingCube);
@@ -132,9 +136,20 @@ public class Home extends Fragment {
                         }, 1500);
                     }
                 });
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nestMain.smoothScrollTo(0, 0);
+            }
+        });
         nestMain.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView nestedScrollView, int i, int i1, int i2, int i3) {
+                if (i1 > 2500) {
+                    fab.show();
+                } else {
+                    fab.hide();
+                }
                 if (!nestMain.canScrollVertically(1)) {
                     progress.setVisibility(View.VISIBLE);
                     new Handler().postDelayed(new Runnable() {
@@ -148,7 +163,6 @@ public class Home extends Fragment {
         });
         return view;
     }
-
     private void getDataRecyZezo() {
         mRecycleZezo.setHasFixedSize(true);
         mRecycleZezo.setNestedScrollingEnabled(false);

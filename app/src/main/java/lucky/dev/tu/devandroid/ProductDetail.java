@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
@@ -102,6 +104,8 @@ public class ProductDetail extends AppCompatActivity {
     int test = 0;
     TextView count;
     List<OrderP> temp;
+    FloatingActionButton fab;
+    android.support.design.widget.AppBarLayout appbar;
     CollapsingToolbarLayout collapsingToolbarLayout;
     private static final String urlData0 = "http://192.168.1.109/wmshop/tops.php";
     List<String> daTa;
@@ -164,6 +168,9 @@ public class ProductDetail extends AppCompatActivity {
         cancel = findViewById(R.id.cancel_d);
         toBag = findViewById(R.id.to_bag);
         count = findViewById(R.id.count);
+        fab = findViewById(R.id.fab);
+        appbar = findViewById(R.id.app_bar_layout);
+        fab.hide();
         SharedPreferences sharedPref = ProductDetail.this.getSharedPreferences("Accout"
                 , Context.MODE_PRIVATE);
         final String name = sharedPref.getString("idName", "khong");
@@ -239,11 +246,25 @@ public class ProductDetail extends AppCompatActivity {
         scrollDetail.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView nestedScrollView, int i, int i1, int i2, int i3) {
-
+/*
                 if (!scrollDetail.canScrollVertically(1)) {
                     Log.i("ss", "llol ");
                     content.setPadding(0, 0, 0, 112);
+                }*/
+                if (i1 > 1500) {
+                    fab.show();
+                    fab.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            scrollDetail.fullScroll(View.FOCUS_UP);
+                            scrollDetail.scrollTo(0, 0);
+                            appbar.setExpanded(true);
+                        }
+                    });
+                } else {
+                    fab.hide();
                 }
+
 
                 if(i1>112){
                     toolbar1.setVisibility(VISIBLE);
@@ -420,10 +441,10 @@ public class ProductDetail extends AppCompatActivity {
                     case 1:
                         Log.i("an", "haha");
                         final ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
-                        Toast.makeText(ProductDetail.this, "vao tao roi", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(ProductDetail.this, "vao tao roi", Toast.LENGTH_LONG).show();
                         Toast.makeText(ProductDetail.this, " " + orderP.getIdProductb() + " " + orderP.getImagebag() + " " + orderP.getSizebag() + orderP.getNumber(), Toast.LENGTH_SHORT).show();
                         if (orderP.getImagebag() == null | orderP.getSizebag() == null) {
-                            Toast.makeText(ProductDetail.this, "vui long chon", Toast.LENGTH_LONG).show();
+                            Toast.makeText(ProductDetail.this, "Vui lòng chọn màu sắc và kích thước !", Toast.LENGTH_SHORT).show();
                         } else {
                             final KProgressHUD kProgressHUD = KProgressHUD.create(ProductDetail.this)
                                     .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
@@ -562,9 +583,11 @@ toolbar1.setVisibility(GONE);
                 aProductDes.setText(aProduct.get(0).getTitle());
                 aProductName.setText(aProduct.get(0).getName());
                 originPrice.setText(aProduct.get(0).getOriginprice());
+                originPrice.setPaintFlags(originPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 sale.setText(aProduct.get(0).getSale());
                 priceB.setText(aProduct.get(0).getName());
                 originPriceB.setText(aProduct.get(0).getOriginprice());
+                originPriceB.setPaintFlags(originPriceB.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 desscriptionB.setText(aProduct.get(0).getDestile());
 
             }

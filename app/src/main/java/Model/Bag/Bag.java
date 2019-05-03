@@ -4,10 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -21,15 +24,17 @@ import android.widget.Toast;
 import java.util.List;
 
 import Model.BrandProductDetal.OrderP;
+import Model.Dialog;
 import Model.RetrofitO;
 import Model.ServiceApi;
 import lucky.dev.tu.devandroid.Login;
+import lucky.dev.tu.devandroid.MainActivity;
 import lucky.dev.tu.devandroid.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Bag extends Fragment {
+public class Bag extends Fragment implements Dialog.NoticeDialogListener {
     List<OrderP> daTa;
     RecyclerView listOrder;
     ConstraintLayout updateProduct;
@@ -38,6 +43,9 @@ public class Bag extends Fragment {
     TextView checkOut;
     TextView priceCheck;
     ConstraintLayout layoutCheck;
+    ImageView bagBag;
+    TextView textBag;
+    DialogFragment dialog;
 
     public Bag() {
         super();
@@ -55,6 +63,10 @@ public class Bag extends Fragment {
         cancel = view.findViewById(R.id.cancel_d);
         layoutCheck = view.findViewById(R.id.check);
         priceCheck = view.findViewById(R.id.price_check);
+        bagBag = view.findViewById(R.id.bagbag);
+        textBag = view.findViewById(R.id.text_bagbag);
+        bagBag.setVisibility(View.GONE);
+        textBag.setVisibility(View.GONE);
         getListOrder();
         exitBackground.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,42 +91,11 @@ public class Bag extends Fragment {
         checkOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences sharedPref = getActivity().getSharedPreferences("Accout"
-                        , Context.MODE_PRIVATE);
-                final String name = sharedPref.getString("idName", "khong");
-                    ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
-                Call<List<OrderP>> call = serviceApi.getListOrder(name);
-                    call.enqueue(new Callback<List<OrderP>>() {
-                        @Override
-                        public void onResponse(Call<List<OrderP>> call, Response<List<OrderP>> response) {
+                dialog = new Dialog();
+                dialog.setTargetFragment(Bag.this, 1);
+                dialog.show(getActivity().getSupportFragmentManager(), "chon di");
 
-                            for (int i = 0; i < response.body().size(); i++) {
-                                int idOrder = response.body().get(i).getId();
-                                ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
-                                Call<List<String>> callCheck = serviceApi.checkOut(name, idOrder, "checked");
-                                callCheck.enqueue(new Callback<List<String>>() {
-                                    @Override
-                                    public void onResponse(Call<List<String>> call, Response<List<String>> response) {
-
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<List<String>> call, Throwable t) {
-
-                                    }
-                                });
-                            }
-
-                        }
-
-                        @Override
-                        public void onFailure(Call<List<OrderP>> call, Throwable t) {
-                            Log.i("ooo", t.getMessage());
-                        }
-                    });
-
-                Log.i("ooo", name);
-                }
+            }
         });
         return view;
 
@@ -128,6 +109,10 @@ public class Bag extends Fragment {
         callOrder.enqueue(new Callback<List<OrderP>>() {
             @Override
             public void onResponse(Call<List<OrderP>> call, retrofit2.Response<List<OrderP>> response) {
+                if (response.body().size() == 0) {
+                    bagBag.setVisibility(View.VISIBLE);
+                    textBag.setVisibility(View.VISIBLE);
+                }
                 Toast.makeText(getActivity(), " hhh", Toast.LENGTH_LONG).show();
                 Log.i("hh", " " + response.body());
                 daTa = response.body();
@@ -145,5 +130,61 @@ public class Bag extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        dialog.dismiss();
+
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+        SharedPreferences sharedPref = getActivity().getSharedPreferences("Accout"
+                , Context.MODE_PRIVATE);
+        final String name = sharedPref.getString("idName", "khong");
+        ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
+        Call<List<OrderP>> call = serviceApi.getListOrder(name);
+        call.enqueue(new Callback<List<OrderP>>() {
+            @Override
+            public void onResponse(Call<List<OrderP>> call, Response<List<OrderP>> response) {
+                for (int i = 0; i < response.body().size(); i++) {
+                    int idOrder = response.body().get(i).getId();
+                    ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
+                    Call<List<String>> callCheck = serviceApi.checkOut(name, idOrder, "checked");
+                    callCheck.enqueue(new Callback<List<String>>() {
+                        @Override
+                        public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<List<String>> call, Throwable t) {
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<OrderP>> call, Throwable t) {
+                Log.i("ooo", t.getMessage());
+            }
+        });
+
+        Log.i("ooo", name);
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.putExtra("ide", 3);
+        intent.putExtra("checked", 1);
+        getActivity().startActivity(intent);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                bagBag.setVisibility(View.VISIBLE);
+                textBag.setVisibility(View.VISIBLE);
+            }
+        }, 3000);
+
     }
 }

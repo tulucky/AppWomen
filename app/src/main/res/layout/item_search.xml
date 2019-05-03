@@ -7,14 +7,16 @@
 
     <TextView
         android:id="@+id/name_search"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="12dp"
+        android:fontFamily="@font/sans_prob"
         android:text="TextView"
         android:textColor="@color/black"
-        android:textSize="15sp"
-        android:fontFamily="@font/helvetica"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/image_search"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,18 +35,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/helvetica"
         android:text="TextView"
+        android:textColor="@color/red"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/image_search"
         app:layout_constraintTop_toBottomOf="@+id/name_search" />
 
     <TextView
         android:id="@+id/sale_search"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
-        android:text="TextView"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/helvetica"
+        android:text="20"
+        android:gravity="center"
+        android:padding="2dp"
+        android:textColor="@color/white"
+        android:background="@drawable/background"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/price_search"
         app:layout_constraintTop_toBottomOf="@+id/name_search" />
 

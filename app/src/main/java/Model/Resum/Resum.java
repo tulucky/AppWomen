@@ -47,8 +47,8 @@ public class Resum extends Fragment {
         setting = view.findViewById(R.id.setting);
         emptyBag = view.findViewById(R.id.empty_bag);
         emptyText = view.findViewById(R.id.text_empty);
-        emptyBag.setVisibility(View.VISIBLE);
-        emptyText.setVisibility(View.VISIBLE);
+        emptyBag.setVisibility(View.GONE);
+        emptyText.setVisibility(View.GONE);
         SharedPreferences sharedPref = getActivity().getSharedPreferences("Accout"
                 , getActivity().MODE_PRIVATE);
         String name = sharedPref.getString("idName", "khong");
@@ -91,9 +91,9 @@ public class Resum extends Fragment {
                 Log.i("ll", "lol");
                 if (response.body().size() == 0) {
                     productLists.setVisibility(View.GONE);
+                    emptyBag.setVisibility(View.VISIBLE);
+                    emptyText.setVisibility(View.VISIBLE);
                 } else {
-                    emptyBag.setVisibility(View.GONE);
-                    emptyText.setVisibility(View.GONE);
                     productLists.setHasFixedSize(true);
                     productLists.setNestedScrollingEnabled(false);
                     productLists.setLayoutManager(new LinearLayoutManager(getActivity()));

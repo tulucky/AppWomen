@@ -27,12 +27,17 @@ public class AdapterInfor extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        view = LayoutInflater.from(mcontext).inflate(R.layout.item_info,viewGroup,false);
+        view = LayoutInflater.from(mcontext).inflate(R.layout.item_info_detail, viewGroup, false);
         return new MyHold(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+        if (i == 0) {
+            view.setBackgroundResource(R.drawable.border_top_bot);
+        } else {
+            view.setBackgroundResource(R.drawable.sticky_product_brand);
+        }
         MyHold myHold = (MyHold)viewHolder;
         myHold.textView.setText(listInfor.get(i));
         myHold.imageView.setImageResource(R.drawable.right_chevron);

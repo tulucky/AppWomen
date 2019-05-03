@@ -1,6 +1,7 @@
 package Model.WishL;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -44,6 +45,7 @@ public class Wishada extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 .into(holder.imageWl);
         holder.nameWl.setText(products.get(i).getTitle());
         holder.oPriceWl.setText(products.get(i).getOriginprice());
+        holder.oPriceWl.setPaintFlags(holder.oPriceWl.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         holder.priceWl.setText(products.get(i).getName());
         holder.saleWl.setText(products.get(i).getSale());
         holder.lovedwl.setOnClickListener(new View.OnClickListener() {

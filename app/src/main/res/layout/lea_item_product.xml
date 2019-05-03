@@ -25,8 +25,8 @@
         android:layout_marginTop="20dp"
         android:text="TextView"
         android:textSize="18sp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/utm_avor"
+        android:textColor="@color/fullblack"
+        android:fontFamily="@font/sans_prob"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/image"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,6 +37,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
+        android:textSize="16sp"
+        android:textColor="@color/fullblack"
+        android:fontFamily="@font/helvetica"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/image"
         app:layout_constraintTop_toBottomOf="@+id/title_name" />
@@ -47,19 +50,28 @@
         android:layout_height="0dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="25dp"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/helvetica"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/size"
         app:layout_constraintTop_toBottomOf="@+id/title_name" />
 
     <TextView
         android:id="@+id/phantram"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="25dp"
-        android:text="TextView"
+        android:background="@drawable/background"
+        android:text="10%"
+        android:gravity="center"
+        android:padding="2dp"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:fontFamily="@font/utm_avob"
+        app:layout_constraintBottom_toBottomOf="@+id/price_1"
         app:layout_constraintStart_toEndOf="@+id/price_1"
-        app:layout_constraintTop_toBottomOf="@+id/title_name" />
+        app:layout_constraintTop_toTopOf="@+id/price_1" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -117,7 +129,7 @@
         android:layout_width="28dp"
         android:layout_height="28dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phantram"
         app:srcCompat="@drawable/ic_favorite_border_gray_24dp" />
