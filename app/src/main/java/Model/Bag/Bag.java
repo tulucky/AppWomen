@@ -3,6 +3,7 @@ package Model.Bag;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -21,6 +22,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.kaopiz.kprogresshud.KProgressHUD;
+
 import java.util.List;
 
 import Model.BrandProductDetal.OrderP;
@@ -29,6 +32,7 @@ import Model.RetrofitO;
 import Model.ServiceApi;
 import lucky.dev.tu.devandroid.Login;
 import lucky.dev.tu.devandroid.MainActivity;
+import lucky.dev.tu.devandroid.ProductDetail;
 import lucky.dev.tu.devandroid.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -163,19 +167,27 @@ public class Bag extends Fragment implements Dialog.NoticeDialogListener {
 
                         }
                     });
-                }
-                Log.i("ooo", name);
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                intent.putExtra("ide", 3);
-                intent.putExtra("checked", 1);
-                getActivity().startActivity(intent);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        bagBag.setVisibility(View.VISIBLE);
-                        textBag.setVisibility(View.VISIBLE);
+                    if (i == response.body().size() - 1) {
+                        final KProgressHUD kProgressHUD = KProgressHUD.create(getActivity())
+                                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                                .setCancellable(true)
+                                .setBackgroundColor(Color.GRAY)
+                                .setAnimationSpeed(2)
+                                .setSize(100, 100)
+                                .setDimAmount(0.5f)
+                                .show();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Log.i("ooo", name);
+                                Intent intent = new Intent(getActivity(), MainActivity.class);
+                                intent.putExtra("ide", 3);
+                                getActivity().startActivity(intent);
+                                kProgressHUD.dismiss();
+                            }
+                        }, 2000);
                     }
-                }, 3000);
+                }
             }
 
             @Override
@@ -183,6 +195,5 @@ public class Bag extends Fragment implements Dialog.NoticeDialogListener {
                 Log.i("ooo", t.getMessage());
             }
         });
-
     }
 }

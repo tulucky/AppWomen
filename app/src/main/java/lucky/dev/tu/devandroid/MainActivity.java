@@ -104,8 +104,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         Intent intent = getIntent();
         int k = intent.getIntExtra("ide", 0);
-        int checked = intent.getIntExtra("checked", 0);
-        Log.i("ji", " " + checked);
         FragmentManager fragmentManager = getSupportFragmentManager();
         switch (k) {
             case 1:
