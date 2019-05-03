@@ -164,7 +164,18 @@ public class Bag extends Fragment implements Dialog.NoticeDialogListener {
                         }
                     });
                 }
-
+                Log.i("ooo", name);
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                intent.putExtra("ide", 3);
+                intent.putExtra("checked", 1);
+                getActivity().startActivity(intent);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        bagBag.setVisibility(View.VISIBLE);
+                        textBag.setVisibility(View.VISIBLE);
+                    }
+                }, 3000);
             }
 
             @Override
@@ -172,19 +183,6 @@ public class Bag extends Fragment implements Dialog.NoticeDialogListener {
                 Log.i("ooo", t.getMessage());
             }
         });
-
-        Log.i("ooo", name);
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        intent.putExtra("ide", 3);
-        intent.putExtra("checked", 1);
-        getActivity().startActivity(intent);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                bagBag.setVisibility(View.VISIBLE);
-                textBag.setVisibility(View.VISIBLE);
-            }
-        }, 3000);
 
     }
 }

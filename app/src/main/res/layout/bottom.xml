@@ -108,7 +108,7 @@
         tools:layout_editor_absoluteY="38dp" />
 
     <TextView
-        android:id="@+id/number"
+        android:id="@+id/text_number"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginStart="10dp"

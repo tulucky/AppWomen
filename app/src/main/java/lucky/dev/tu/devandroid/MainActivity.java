@@ -2,12 +2,14 @@ package lucky.dev.tu.devandroid;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -63,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         home.setImageResource(R.drawable.home1);
         actionBar = findViewById(R.id.action_bar);
         search = findViewById(R.id.search_a);
-        number = findViewById(R.id.number);
+        number = findViewById(R.id.text_number);
         SharedPreferences preferences = this.getSharedPreferences("Accout", this.MODE_PRIVATE);
         name = preferences.getString("idName", "khong");
         ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
@@ -103,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = getIntent();
         int k = intent.getIntExtra("ide", 0);
         int checked = intent.getIntExtra("checked", 0);
+        Log.i("ji", " " + checked);
         FragmentManager fragmentManager = getSupportFragmentManager();
         switch (k) {
             case 1:
@@ -127,9 +130,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 transaction1.commit();
                 break;
             case 3:
-                if (checked == 1) {
-                    number.setText("0");
-                }
                 actionBar.setVisibility(View.GONE);
                 bag.setImageResource(R.drawable.bag);
                 tBag.setTextColor(getResources().getColor(R.color.black));
@@ -280,6 +280,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.recy_main);
             getSupportFragmentManager().beginTransaction().detach(fragment).attach(fragment).commit();
         }
+        Log.i("tt", "haha");
         ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
         Call<List<SoLuong>> call = serviceApi.getSoLuong(name);
         call.enqueue(new Callback<List<SoLuong>>() {
