@@ -20,8 +20,7 @@
             <com.synnapps.carouselview.CarouselView
                 android:id="@+id/carouselView"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@color/pink"
+                android:layout_height="160dp"
                 app:fillColor="#fa2b2b"
                 app:pageColor="#00000000"
                 app:radius="3dp"
@@ -39,7 +38,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
+                android:layout_height="390dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="15dp"
@@ -61,7 +60,7 @@
                         android:layout_width="180dp"
                         android:layout_height="120dp"
                         android:layout_marginRight="8dp"
-                        android:src="@drawable/ha" />
+                        android:src="@drawable/intro5" />
 
                     <ImageView
                         android:layout_width="180dp"
@@ -73,7 +72,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -86,7 +85,7 @@
                     <ImageView
                         android:layout_width="180dp"
                         android:layout_height="120dp"
-                        android:src="@drawable/hi" />
+                        android:src="@drawable/intro6" />
 
                 </LinearLayout>
 
@@ -96,7 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="18dp">
 
                 <ImageView
                     android:id="@+id/seperate"
@@ -120,10 +119,10 @@
                     android:layout_alignEnd="@+id/seperate"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="25dp"
-                    android:fontFamily="@font/sans_prob"
+                    android:fontFamily="@font/utm_avor"
                     android:textSize="16sp"
-                    android:text="xem thêm >"
-                    android:textColor="@color/fullblack" />
+                    android:text="MORE  >"
+                    android:textColor="@color/light_black" />
             </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView
@@ -165,12 +164,12 @@
                     android:layout_width="180dp"
                     android:layout_height="120dp"
                     android:layout_marginRight="8dp"
-                    android:src="@drawable/ha" />
+                    android:src="@drawable/intro3" />
 
                 <ImageView
                     android:layout_width="180dp"
                     android:layout_height="120dp"
-                    android:src="@drawable/hi" />
+                    android:src="@drawable/intro2" />
 
             </LinearLayout>
 
@@ -190,7 +189,7 @@
                 <ImageView
                     android:layout_width="180dp"
                     android:layout_height="120dp"
-                    android:src="@drawable/hi" />
+                    android:src="@drawable/intro6" />
 
             </LinearLayout>
 
@@ -224,17 +223,19 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/sans_prob"
-                android:text="What's Hot"
+                android:text="Có gì mới"
                 android:textColor="#0b0b0b"
                 android:textSize="20sp" />
 
-            <LinearLayout
+            <ImageView
+                android:id="@+id/news"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="135dp"
                 android:layout_marginTop="15dp"
-                android:background="@color/pink">
+                android:background="@color/pink"
+                android:scaleType="centerCrop">
 
-            </LinearLayout>
+            </ImageView>
 
             <RelativeLayout
                 android:id="@+id/relativ"

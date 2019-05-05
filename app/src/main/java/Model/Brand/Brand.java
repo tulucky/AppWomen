@@ -7,12 +7,14 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
@@ -20,6 +22,7 @@ import java.util.List;
 
 import Model.RetrofitO;
 import Model.ServiceApi;
+import Model.Slide;
 import lucky.dev.tu.devandroid.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -69,8 +72,34 @@ public class Brand extends Fragment {
 
     ImageListener imageListener = new ImageListener() {
         @Override
-        public void setImageForPosition(int position, ImageView imageView) {
-            imageView.setImageResource(sampleImages[position]);
+        public void setImageForPosition(final int position, final ImageView imageView) {
+            ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
+            Call<List<Slide>> call = serviceApi.getSlideBrand();
+            call.enqueue(new Callback<List<Slide>>() {
+                @Override
+                public void onResponse(Call<List<Slide>> call, retrofit2.Response<List<Slide>> response) {
+                    Log.i("kk", "" + response.body());
+                    switch (position) {
+                        case 0:
+                            Glide.with(getActivity()).load(RetrofitO.url + response.body().get(position).getImage()).into(imageView);
+                            break;
+                        case 1:
+                            Glide.with(getActivity()).load(RetrofitO.url + response.body().get(position).getImage()).into(imageView);
+                            break;
+                        case 2:
+                            Glide.with(getActivity()).load(RetrofitO.url + response.body().get(position).getImage()).into(imageView);
+                            break;
+                        case 3:
+                            Glide.with(getActivity()).load(RetrofitO.url + response.body().get(position).getImage()).into(imageView);
+                            break;
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<Slide>> call, Throwable t) {
+                    Log.i("kk", "" + t.getMessage());
+                }
+            });
         }
     };
 }

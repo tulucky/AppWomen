@@ -57,10 +57,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="25dp"
-                android:fontFamily="@font/sans_prob"
-                android:text="xem ngay >"
-                android:textColor="@color/fullblack"
-                android:textSize="18sp"
+                android:fontFamily="@font/utm_avor"
+                android:text="SEE  >"
+                android:textColor="@color/light_black"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/carouselView" />
 
@@ -101,7 +101,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="56dp"
+                android:layout_marginBottom="80dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"

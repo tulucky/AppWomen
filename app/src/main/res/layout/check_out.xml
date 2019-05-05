@@ -16,7 +16,7 @@
         android:text="Tổng Giá :"
         android:textSize="18sp"
         android:fontFamily="@font/sans_prob"
-        android:textColor="@color/fullblack"
+        android:textColor="@color/light_black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/price_check"
         app:layout_constraintHorizontal_bias="0.5"

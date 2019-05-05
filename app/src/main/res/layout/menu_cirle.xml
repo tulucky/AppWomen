@@ -6,34 +6,34 @@
     android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/profile_image1"
+        android:id="@+id/jeans"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/image_3"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/jeans"
+        app:layout_constraintEnd_toStartOf="@+id/more"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/profile_image3"
+        app:layout_constraintStart_toEndOf="@+id/dressdress"
         app:layout_constraintTop_toTopOf="parent" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image3"
+        android:id="@+id/dressdress"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/image_3"
-        app:layout_constraintEnd_toStartOf="@+id/profile_image1"
+        android:src="@drawable/dressdress"
+        app:layout_constraintEnd_toStartOf="@+id/jeans"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/profile_image2"
+        app:layout_constraintStart_toEndOf="@+id/tops"
         app:layout_constraintTop_toTopOf="parent" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image2"
+        android:id="@+id/tops"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/image_3"
-        app:layout_constraintEnd_toStartOf="@+id/profile_image3"
+        android:src="@drawable/tops"
+        app:layout_constraintEnd_toStartOf="@+id/dressdress"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -43,38 +43,64 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:textSize="16sp"
-        android:textColor="@color/fullblack"
         android:fontFamily="@font/helvetica"
         android:text="Tops"
-        app:layout_constraintEnd_toEndOf="@+id/profile_image2"
-        app:layout_constraintStart_toStartOf="@+id/profile_image2"
-        app:layout_constraintTop_toBottomOf="@+id/profile_image2" />
+        android:textColor="@color/light_black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/tops"
+        app:layout_constraintStart_toEndOf="@+id/tops"
+        app:layout_constraintStart_toStartOf="@+id/tops"
+        app:layout_constraintTop_toBottomOf="@+id/tops" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Dress"
-        android:textSize="16sp"
-        android:textColor="@color/fullblack"
         android:fontFamily="@font/helvetica"
-        app:layout_constraintEnd_toEndOf="@+id/profile_image3"
-        app:layout_constraintStart_toStartOf="@+id/profile_image3"
-        app:layout_constraintTop_toBottomOf="@+id/profile_image3" />
+        android:text="Dress"
+        android:textColor="@color/light_black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/dressdress"
+        app:layout_constraintStart_toStartOf="@+id/dressdress"
+        app:layout_constraintTop_toBottomOf="@+id/dressdress" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="bottoms"
-        android:textSize="16sp"
-        android:textColor="@color/fullblack"
         android:fontFamily="@font/helvetica"
-        app:layout_constraintEnd_toEndOf="@+id/profile_image1"
-        app:layout_constraintStart_toStartOf="@+id/profile_image1"
-        app:layout_constraintTop_toBottomOf="@+id/profile_image1" />
+        android:text="Bottoms"
+        android:textColor="@color/light_black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/jeans"
+        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintStart_toStartOf="@+id/jeans"
+        app:layout_constraintTop_toBottomOf="@+id/jeans" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/more"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/more"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/jeans"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/helvetica"
+        android:text="More"
+        android:textColor="@color/light_black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/more"
+        app:layout_constraintStart_toStartOf="@+id/more"
+        app:layout_constraintTop_toBottomOf="@+id/more" />
 
 </android.support.constraint.ConstraintLayout>

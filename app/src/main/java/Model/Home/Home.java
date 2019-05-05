@@ -21,14 +21,17 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bumptech.glide.Glide;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.FoldingCube;
 import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageClickListener;
 import com.synnapps.carouselview.ImageListener;
 
 import org.json.JSONArray;
@@ -43,9 +46,14 @@ import Model.GridProduct;
 import Model.ItemRecy0;
 import Model.ListProduct;
 import Model.MySingleton;
+import Model.RetrofitO;
+import Model.ServiceApi;
+import Model.Slide;
 import lucky.dev.tu.devandroid.MainActivity;
 import lucky.dev.tu.devandroid.R;
 import lucky.dev.tu.devandroid.Wishlish;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class Home extends Fragment {
     List<ItemRecy0> containerZezo;
@@ -59,12 +67,13 @@ public class Home extends Fragment {
     RelativeLayout recyMain;
     RelativeLayout relativ;
     ConstraintLayout progress;
+    ImageView news;
     android.support.design.widget.FloatingActionButton fab;
 
     public NestedScrollView nestMain;
     private static final String urlData0 = "http://192.168.1.109/wmshop/tops.php";
     private static final String urlData3 = "http://192.168.1.109/wmshop/tops.php";
-    int[] sampleImages = {R.drawable.image_3, R.drawable.lko, R.drawable.image_4, R.drawable.image_2, R.drawable.image_3};
+    int[] sampleImages = {R.drawable.image_3, R.drawable.image_4, R.drawable.image_2, R.drawable.image_3};
 
     public Home() {
         super();
@@ -83,6 +92,8 @@ public class Home extends Fragment {
         progress = view.findViewById(R.id.progress);
         progress.setVisibility(View.GONE);
         fab = view.findViewById(R.id.fab);
+        news = view.findViewById(R.id.news);
+        news.setImageResource(R.drawable.slide2);
         fab.hide();
         final ProgressBar progressBar = view.findViewById(R.id.spin_kit);
         Sprite foldingCube = new FoldingCube();
@@ -161,6 +172,12 @@ public class Home extends Fragment {
                 }
             }
         });
+        carouselView.setImageClickListener(new ImageClickListener() {
+            @Override
+            public void onClick(int position) {
+                Toast.makeText(getActivity(), "Clicked item: " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
         return view;
     }
     private void getDataRecyZezo() {
@@ -207,8 +224,34 @@ public class Home extends Fragment {
 
     ImageListener imageListener = new ImageListener() {
         @Override
-        public void setImageForPosition(int position, ImageView imageView) {
-            //  b_logo.setImageResource(sampleImages[position]);
+        public void setImageForPosition(final int position, final ImageView imageView) {
+            ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
+            Call<List<Slide>> call = serviceApi.getSlide();
+            call.enqueue(new Callback<List<Slide>>() {
+                @Override
+                public void onResponse(Call<List<Slide>> call, retrofit2.Response<List<Slide>> response) {
+                    Log.i("kk", "" + response.body());
+                    switch (position) {
+                        case 0:
+                            Glide.with(getActivity()).load(RetrofitO.url + response.body().get(position).getImage()).into(imageView);
+                            break;
+                        case 1:
+                            Glide.with(getActivity()).load(RetrofitO.url + response.body().get(position).getImage()).into(imageView);
+                            break;
+                        case 2:
+                            Glide.with(getActivity()).load(RetrofitO.url + response.body().get(position).getImage()).into(imageView);
+                            break;
+                        case 3:
+                            Glide.with(getActivity()).load(RetrofitO.url + response.body().get(position).getImage()).into(imageView);
+                            break;
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<Slide>> call, Throwable t) {
+                    Log.i("kk", "" + t.getMessage());
+                }
+            });
         }
     };
 

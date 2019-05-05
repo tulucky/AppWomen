@@ -18,13 +18,13 @@
             android:layout_height="match_parent">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_image2"
+                android:id="@+id/tops"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="15dp"
                 android:src="@drawable/image_3"
-                app:layout_constraintEnd_toStartOf="@+id/profile_image3"
+                app:layout_constraintEnd_toStartOf="@+id/dressdress"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -53,9 +53,9 @@
                 android:textSize="15sp"
                 android:fontFamily="@font/sans_prob"
                 android:text="Thay avatar"
-                app:layout_constraintEnd_toEndOf="@+id/profile_image2"
-                app:layout_constraintStart_toStartOf="@+id/profile_image2"
-        app:layout_constraintTop_toBottomOf="@+id/profile_image2" />
+                app:layout_constraintEnd_toEndOf="@+id/tops"
+                app:layout_constraintStart_toStartOf="@+id/tops"
+                app:layout_constraintTop_toBottomOf="@+id/tops" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -200,8 +200,8 @@
                 android:text="Xin Chào"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/profile_image2"
-                app:layout_constraintTop_toTopOf="@+id/profile_image2" />
+                app:layout_constraintStart_toEndOf="@+id/tops"
+                app:layout_constraintTop_toTopOf="@+id/tops" />
 
             <TextView
                 android:id="@+id/text_empty"

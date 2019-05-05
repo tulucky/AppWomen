@@ -80,4 +80,10 @@ public interface ServiceApi {
     @FormUrlEncoded
     @POST("giacheck.php")
     Call<List<SoLuong>> getPriceCheck(@Field("name") String name);
+
+    @GET("homeslide.php")
+    Call<List<Slide>> getSlide();
+
+    @GET("brandslide.php")
+    Call<List<Slide>> getSlideBrand();
 }

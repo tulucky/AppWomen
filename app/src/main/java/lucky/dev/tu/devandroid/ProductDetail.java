@@ -600,12 +600,13 @@ toolbar1.setVisibility(GONE);
 
     }
 
-    private void getImageProduct(int id, final String image, final OrderP orderP) {
+    private void getImageProduct(final int id, final String image, final OrderP orderP) {
         ServiceApi service = RetrofitO.getmRetrofit().create(ServiceApi.class);
         Call<List<String>> call = service.getColor(id);
         call.enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, retrofit2.Response<List<String>> response) {
+                //tra ve mang[] number =>ok
                 daTa = response.body();
                 Log.i("pd", " " + daTa);
                 if (daTa.contains(image)) {
@@ -615,7 +616,7 @@ toolbar1.setVisibility(GONE);
                 Glide.with(ProductDetail.this)
                         .load(RetrofitO.url + image)
                         .into(imageBotSheet);
-                ViewPagerProduct adapter = new ViewPagerProduct(ProductDetail.this, daTa);
+                ViewPagerProduct adapter = new ViewPagerProduct(ProductDetail.this, daTa, id, 0);
                 PagerAdapter wrappedAdapter = new InfinitePagerAdapter(adapter);
                 viewPager.setAdapter(wrappedAdapter);
                 BottomAdapImage adapImage = new BottomAdapImage(ProductDetail.this, daTa, imageBotSheet, orderP);
