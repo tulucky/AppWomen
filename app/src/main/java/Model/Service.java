@@ -11,9 +11,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 public class Service {
-   private static Context context;
-   private static RecyclerView mrecycle;
-  private static Call<List<Product>> call= null;
+    private static Context context;
+    private static RecyclerView mrecycle;
+    private static Call<List<Product>> call = null;
 
     public Service(Context mcontext, RecyclerView mrecycleView) {
         this.context = mcontext;
@@ -27,13 +27,13 @@ public class Service {
                 call = mService.getProducts();
                 break;
             case 1:
-                 call = mService.getDress();
+                call = mService.getDress();
                 break;
             case 2:
-                 call = mService.getTops();
+                call = mService.getTops();
                 break;
             case 3:
-                 call = mService.getBottoms();
+                call = mService.getBottoms();
                 break;
         }
         call.enqueue(new Callback<List<Product>>() {
@@ -53,10 +53,10 @@ public class Service {
         mrecycle.setNestedScrollingEnabled(false);
         mrecycle.setHasFixedSize(true);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context,2);
-       mrecycle.setLayoutManager(gridLayoutManager);
+        mrecycle.setLayoutManager(gridLayoutManager);
         GridAdapter adapter = new GridAdapter(context, body);
         mrecycle.setAdapter(adapter);
-       // Log.i("m",""+mscroll.getHeight());
+        // Log.i("m",""+mscroll.getHeight());
 
     }
 }

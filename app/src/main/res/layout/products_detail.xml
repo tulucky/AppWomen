@@ -99,7 +99,7 @@
                     android:textSize="25sp"
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/sans_prob"
-                    android:textColor="@color/light_black"
+                    android:textColor="@color/cam"
                     android:text="Sản Phẩm Mới" />
 
                 <ImageView

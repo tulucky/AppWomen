@@ -11,7 +11,7 @@
         android:layout_marginLeft="16sp"
         android:textSize="18sp"
         android:textColor="@color/fullblack"
-        android:fontFamily="@font/utm_avor"
+        android:fontFamily="@font/helvetica"
         android:layout_centerVertical="true"
         android:text="hahahaha" />
     <ImageView

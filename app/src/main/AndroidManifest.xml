@@ -27,6 +27,7 @@
         <activity android:name=".ProductDetail"></activity>
         <activity android:name=".Search"></activity>
         <activity android:name=".ImageZoom"></activity>
+        <activity android:name=".Sale"></activity>
     </application>
 
 </manifest>

@@ -76,7 +76,7 @@ public class ProductDetail extends AppCompatActivity {
     TextView detalBottom;
     ConstraintLayout bottomsheet;
     ImageView backgroun;
-   ImageView sub;
+    ImageView sub;
     ImageView plus;
     TextView amount;
     TextView bootom;
@@ -136,7 +136,7 @@ public class ProductDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.products_detail);
         viewPager =findViewById(R.id.view_pager_product);
-         text=findViewById(R.id.text_page);
+        text = findViewById(R.id.text_page);
         recInfo =findViewById(R.id.danhsachinfor);
         scrollDetail = findViewById(R.id.scroll_dital);
         contrains1 = findViewById(R.id.contrains1);
@@ -212,7 +212,7 @@ public class ProductDetail extends AppCompatActivity {
         String image = intent.getStringExtra("image");
         Log.i("id", " " + id);
         final OrderP orderP = new OrderP();
-        //luu lai su lua chon cua user moi lan click on item lai sinh ra 1 ob moi
+        //luu lai su lua chon cua user
         orderP.setIdProductb(id);
         orderP.setNumber(quantity);
         getaProduct(id, soLuong);
@@ -222,7 +222,7 @@ public class ProductDetail extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
-              pagePosition=viewPager.getCurrentItem()+1;
+                pagePosition = viewPager.getCurrentItem() + 1;
                 text.setText("" + pagePosition + "/" + daTa.size());
 
             }
@@ -269,7 +269,7 @@ public class ProductDetail extends AppCompatActivity {
                 if(i1>112){
                     toolbar1.setVisibility(VISIBLE);
                     //khi nesdscroll bat dau dc cuon
-                  //  Current vertical scroll origin.
+                    //  Current vertical scroll origin.
                     //diem bat dau de cuon vertical hien tai in pixcel
                 }
                 else toolbar1.setVisibility(GONE);
@@ -454,7 +454,8 @@ public class ProductDetail extends AppCompatActivity {
                                     .setSize(100, 100)
                                     .setDimAmount(0.5f)
                                     .show();
-                            Call<List<OrderP>> callInsert = serviceApi.setOrder(orderP.getIdProductb(), name, orderP.getImagebag(), orderP.getSizebag(), orderP.getNumber(), soLuong.getGia());
+                            float price = (orderP.getNumber() * soLuong.getGia());
+                            Call<List<OrderP>> callInsert = serviceApi.setOrder(orderP.getIdProductb(), name, orderP.getImagebag(), orderP.getSizebag(), orderP.getNumber(), price);
                             callInsert.enqueue(new Callback<List<OrderP>>() {
                                 @Override
                                 public void onResponse(Call<List<OrderP>> call, retrofit2.Response<List<OrderP>> response) {
@@ -512,16 +513,16 @@ public class ProductDetail extends AppCompatActivity {
         });
 
         getDataRecyZezo();
-  setSupportActionBar(toolbar1);
-  getSupportActionBar().setTitle("");
- toolbar1.setNavigationIcon(R.drawable.left_chevron);
+        setSupportActionBar(toolbar1);
+        getSupportActionBar().setTitle("");
+        toolbar1.setNavigationIcon(R.drawable.left_chevron);
         toolbar1.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ProductDetail.this.finish();
             }
         });
-toolbar1.setVisibility(GONE);
+        toolbar1.setVisibility(GONE);
         loved.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -51,6 +51,7 @@ import Model.ServiceApi;
 import Model.Slide;
 import lucky.dev.tu.devandroid.MainActivity;
 import lucky.dev.tu.devandroid.R;
+import lucky.dev.tu.devandroid.Sale;
 import lucky.dev.tu.devandroid.Wishlish;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -174,7 +175,8 @@ public class Home extends Fragment {
         carouselView.setImageClickListener(new ImageClickListener() {
             @Override
             public void onClick(int position) {
-                Toast.makeText(getActivity(), "Clicked item: " + position, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), Sale.class);
+                getActivity().startActivity(intent);
             }
         });
         return view;
@@ -253,5 +255,6 @@ public class Home extends Fragment {
             });
         }
     };
+
 
 }

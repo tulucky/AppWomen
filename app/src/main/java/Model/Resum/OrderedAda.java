@@ -13,9 +13,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import Model.Product;
 import Model.RetrofitO;
-import Model.State;
 import lucky.dev.tu.devandroid.R;
 
 public class OrderedAda extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
