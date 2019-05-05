@@ -86,6 +86,7 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             public void onResponse(Call<List<SoLuong>> call, Response<List<SoLuong>> response) {
                 Log.i("mop", "" + response.body().get(0).getGia());
                 priceCheck.setText("" + response.body().get(0).getGia() + "$");
+                //get price
             }
 
             @Override
@@ -109,6 +110,7 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         final ServiceApi service = RetrofitO.getmRetrofit().create(ServiceApi.class);
         final Call<List<Product>> call = service.getaProduct(id);
         call.enqueue(new Callback<List<Product>>() {
+            //get a product
             @Override
             public void onResponse(Call<List<Product>> call, retrofit2.Response<List<Product>> response) {
                 dataProduct = response.body();
@@ -164,6 +166,7 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     @Override
                     public void onResponse(final Call<List<Product>> call, Response<List<Product>> response) {
                         checkOut.setVisibility(View.GONE);
+                        //checkout an do do khi cai nay an set checkout víible
                         price = updateProduct.findViewById(R.id.price_b);
                         originPrice = updateProduct.findViewById(R.id.origin_price_b);
                         name = updateProduct.findViewById(R.id.description_b);
@@ -214,11 +217,12 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                             @Override
                             public void onClick(View v) {
                                 Toast.makeText(mcontext, "hhahah", Toast.LENGTH_LONG).show();
+                                float price = (data.get(i).getNumber() * soLuong.getGia());
                                 ServiceApi serviceApi1 = RetrofitO.getmRetrofit().create(ServiceApi.class);
                                 Log.i("ji", "" + data.get(i).getId() + " " + data.get(i).getImagebag() + " " + data.get(i).getSizebag() + " " +
                                         data.get(i).getNumber());
                                 Call<List<OrderP>> call = serviceApi1.updateOrderProduct(data.get(i).getId(), data.get(i).getImagebag(),
-                                        data.get(i).getSizebag(), data.get(i).getNumber()
+                                        data.get(i).getSizebag(), data.get(i).getNumber(), price
                                         //update by id of the orders
                                 );
                                 call.enqueue(new Callback<List<OrderP>>() {
@@ -244,6 +248,7 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                                     @Override
                                     public void run() {
                                         kProgressHUD.dismiss();
+                                        checkOut.setVisibility(View.VISIBLE);
                                         updateProduct.setVisibility(View.GONE);
                                         notifyDataSetChanged();
                                     }

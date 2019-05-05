@@ -56,7 +56,7 @@ public interface ServiceApi {
 
     @FormUrlEncoded
     @POST("updateorder.php")
-    Call<List<OrderP>> updateOrderProduct(@Field("id") int id, @Field("image") String image, @Field("size") String size, @Field("number") int number);
+    Call<List<OrderP>> updateOrderProduct(@Field("id") int id, @Field("image") String image, @Field("size") String size, @Field("number") int number, @Field("price") float price);
 
     @FormUrlEncoded
     @POST("login.php")
