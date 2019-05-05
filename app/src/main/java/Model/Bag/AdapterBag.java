@@ -2,8 +2,10 @@ package Model.Bag;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.io.IOException;
 import java.util.List;
@@ -229,6 +232,22 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                                     }
                                 });
+                                final KProgressHUD kProgressHUD = KProgressHUD.create(mcontext)
+                                        .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                                        .setCancellable(true)
+                                        .setBackgroundColor(Color.GRAY)
+                                        .setAnimationSpeed(2)
+                                        .setSize(100, 100)
+                                        .setDimAmount(0.5f)
+                                        .show();
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        kProgressHUD.dismiss();
+                                        updateProduct.setVisibility(View.GONE);
+                                        notifyDataSetChanged();
+                                    }
+                                }, 1500);
 
                             }
                         });
