@@ -43,7 +43,7 @@ public class Search extends AppCompatActivity {
         });
         setSupportActionBar(toolbar);
         ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
-        Call<List<Product>> call = serviceApi.getProduct();
+        Call<List<Product>> call = serviceApi.getProducts();
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {

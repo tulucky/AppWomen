@@ -17,7 +17,7 @@ import retrofit2.http.Query;
 
 public interface ServiceApi {
     @GET("tops.php")
-    Call<List<Product>> getProduct();
+    Call<List<Product>> getProducts();
     @GET("dress.php")
     Call<List<Product>> getDress();
     @GET("tops")

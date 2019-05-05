@@ -35,7 +35,7 @@ public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
         LayoutInflater myInflater = LayoutInflater.from(viewGroup.getContext());
-        itemView = myInflater.inflate(R.layout.grid_item_product, viewGroup, false);
+        itemView = myInflater.inflate(R.layout.item_grid_product, viewGroup, false);
         return new MyHolder(itemView);
     }
 

@@ -1,12 +1,9 @@
 package Model;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,19 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.List;
 
-import lucky.dev.tu.devandroid.MainActivity;
 import lucky.dev.tu.devandroid.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -56,7 +42,7 @@ public class GridProduct extends Fragment {
     private void getGrid() {
         listProduct.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
-        Call<List<Product>> call = serviceApi.getProduct();
+        Call<List<Product>> call = serviceApi.getProducts();
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, retrofit2.Response<List<Product>> response) {

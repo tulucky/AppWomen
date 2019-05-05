@@ -24,7 +24,7 @@ public class Service {
         ServiceApi mService = RetrofitO.getmRetrofit().create(ServiceApi.class);
         switch (k){
             case 0:
-                call = mService.getProduct();
+                call = mService.getProducts();
                 break;
             case 1:
                  call = mService.getDress();

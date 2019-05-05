@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ public class Resum extends Fragment {
     ImageView setting;
     ImageView emptyBag;
     TextView emptyText;
+    Button changeAvatar;
 
     public Resum() {
     }
@@ -49,6 +51,16 @@ public class Resum extends Fragment {
         emptyText = view.findViewById(R.id.text_empty);
         emptyBag.setVisibility(View.GONE);
         emptyText.setVisibility(View.GONE);
+        changeAvatar = view.findViewById(R.id.change_avatar);
+        changeAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");//nhieu kieu anh
+                getActivity().startActivityForResult(intent, 1);
+
+            }
+        });
         SharedPreferences sharedPref = getActivity().getSharedPreferences("Accout"
                 , getActivity().MODE_PRIVATE);
         String name = sharedPref.getString("idName", "khong");

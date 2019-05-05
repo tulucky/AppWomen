@@ -23,7 +23,7 @@
                 android:layout_height="80dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="15dp"
-                android:src="@drawable/image_3"
+                android:src="@drawable/girl"
                 app:layout_constraintEnd_toStartOf="@+id/dressdress"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +37,7 @@
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/american_sans"
                 android:text="TextView"
-                android:textColor="@color/pink"
+                android:textColor="@color/cam"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView19"
                 app:layout_constraintStart_toEndOf="@+id/textView19"
@@ -45,7 +45,7 @@
                 app:layout_constraintVertical_bias="1.0" />
 
             <Button
-        android:id="@+id/textView12"
+                android:id="@+id/change_avatar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -72,11 +72,11 @@
                 android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="60dp"
                 android:tag="sticky"
                 android:background="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView12">
+                app:layout_constraintTop_toBottomOf="@+id/change_avatar">
 
                 <TextView
                     android:id="@+id/textView13"
@@ -184,11 +184,11 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/american_sans"
                 android:text="Sản phẩm bạn đặt mua"
-                android:textColor="@color/gray"
+                android:textColor="@color/cam"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView12" />
+                app:layout_constraintTop_toBottomOf="@+id/change_avatar" />
 
             <TextView
                 android:id="@+id/textView19"

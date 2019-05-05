@@ -72,7 +72,6 @@ public class Home extends Fragment {
 
     public NestedScrollView nestMain;
     private static final String urlData0 = "http://192.168.1.109/wmshop/tops.php";
-    private static final String urlData3 = "http://192.168.1.109/wmshop/tops.php";
     int[] sampleImages = {R.drawable.image_3, R.drawable.image_4, R.drawable.image_2, R.drawable.image_3};
 
     public Home() {
