@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.List;
 
 import Model.Account.Account;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView love;
     ImageView search;
     ConstraintLayout actionBar;
-    TextView number;
+    public TextView number;
     String name;
     //thay doi file php ko can chay lai app
 

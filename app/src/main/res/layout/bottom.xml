@@ -114,9 +114,9 @@
         android:layout_marginStart="10dp"
         android:background="@drawable/backg_card"
         android:gravity="center"
-        android:text="36"
         android:textColor="@color/white"
         android:textSize="14sp"
+        android:text="0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/bag"
         app:layout_constraintTop_toTopOf="parent" />

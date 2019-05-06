@@ -33,6 +33,7 @@ import Model.Product;
 import Model.RetrofitO;
 import Model.ServiceApi;
 import Model.SoLuong;
+import lucky.dev.tu.devandroid.MainActivity;
 import lucky.dev.tu.devandroid.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -58,10 +59,19 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     TextView priceCheck;
     String nameUser;
     float priceUp;
+    int s;
 
+    public int tongSoLuong() {
+        s = 0;
+        for (int i = 0; i < data.size(); i++) {
+            s = s + data.get(i).getNumber();
+        }
+        return s;
+    }
 
     public AdapterBag(Context mcontext, List<OrderP> data, ConstraintLayout updateProduct, ConstraintLayout check, TextView priceCheck) {
         this.mcontext = mcontext;
+        Log.i("lp", " " + mcontext);
         this.data = data;
         this.updateProduct = updateProduct;
         this.checkOut = check;
@@ -143,6 +153,7 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 k++;
                 data.get(i).setNumber(k);
                 priceUp = (k * soLuong.getGia());
+                ((MainActivity) mcontext).number.setText("" + tongSoLuong());
                 new Asyn().execute(i, k);
 
             }
@@ -152,8 +163,10 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             public void onClick(View v) {
                 int k = data.get(i).getNumber();
                 k--;
+                ((MainActivity) mcontext).number.setText("" + k);
                 data.get(i).setNumber(k);
                 priceUp = (k * soLuong.getGia());
+                ((MainActivity) mcontext).number.setText("" + tongSoLuong());
                 new Asyn().execute(i, k);
             }
         });
@@ -216,6 +229,7 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         update.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                ((MainActivity) mcontext).number.setText("" + tongSoLuong());
                                 Toast.makeText(mcontext, "hhahah", Toast.LENGTH_LONG).show();
                                 float price = (data.get(i).getNumber() * soLuong.getGia());
                                 ServiceApi serviceApi1 = RetrofitO.getmRetrofit().create(ServiceApi.class);
