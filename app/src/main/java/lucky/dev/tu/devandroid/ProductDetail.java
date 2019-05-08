@@ -107,7 +107,7 @@ public class ProductDetail extends AppCompatActivity {
     FloatingActionButton fab;
     android.support.design.widget.AppBarLayout appbar;
     CollapsingToolbarLayout collapsingToolbarLayout;
-    private static final String urlData0 = "https://shoplady668.000webhostapp.com/tops.php";
+    private static final String urlData0 = "http://192.168.1.108/wmshop/allproducts.php";
     List<String> daTa;
 
     @Override

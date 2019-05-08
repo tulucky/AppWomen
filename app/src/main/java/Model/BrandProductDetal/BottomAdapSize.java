@@ -35,10 +35,11 @@ public class BottomAdapSize extends RecyclerView.Adapter<RecyclerView.ViewHolder
         this.slected = i;
     }
 
+    //coutructo2 to get a size from db for adapterbag for update to show
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(mcontext).inflate(R.layout.bottomsheet_size, viewGroup, false);
+        View view = LayoutInflater.from(mcontext).inflate(R.layout.item_bottomsheet_size, viewGroup, false);
         return new SizeHolder(view);
     }
 

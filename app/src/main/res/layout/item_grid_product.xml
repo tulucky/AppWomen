@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Vai468đ"
-        android:fontFamily="@font/helvetica"
+        android:fontFamily="@font/helveticaheue_medium"
         android:textSize="18sp"
         android:textColor="#e61414"
         android:layout_below="@id/image"

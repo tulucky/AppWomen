@@ -10,6 +10,7 @@ import android.support.annotation.RequiresApi;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,18 +18,21 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.Brand.BrandModel;
 import Model.Product;
-import Model.ProductBrand.AdapterMenu;
+import Model.ProductBrand.AdapterCate;
 
+import Model.ProductBrand.AdapterSort;
+import Model.ProductBrand.Colorada;
+import Model.ProductBrand.FilterText;
 import Model.ProductBrand.MenuList;
+import Model.ProductBrand.Muaada;
+import Model.ProductBrand.StateHolder;
 import Model.RetrofitO;
 import Model.Service;
 import Model.ServiceApi;
@@ -41,6 +45,7 @@ import retrofit2.Response;
 public class ProducBrandtActivity extends AppCompatActivity {
     FrameLayout theLoai;
     FrameLayout sapxep;
+    FrameLayout loc;
     RecyclerView recyclerView;
     RecyclerView product;
     List<MenuList> catlist;
@@ -49,6 +54,7 @@ public class ProducBrandtActivity extends AppCompatActivity {
     ImageView iconTheLoai;
     ConstraintLayout menu;
     ImageView iconSort;
+    ImageView iconFilter;
     LinearLayoutManager linearLayoutManager;
     ImageView imageBrandp;
     ImageView logoBrandp;
@@ -68,17 +74,23 @@ public class ProducBrandtActivity extends AppCompatActivity {
     TextView sale3p;
     ImageView backTo;
     ImageView share;
+    ConstraintLayout filter;
+    RecyclerView recyMua;
+    RecyclerView recyColor;
+    List<FilterText> season;
+    List<FilterText> colors;
+
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_brand);
-       theLoai = findViewById(R.id.theloai);
-       sapxep = findViewById(R.id.sort);
-       recyclerView= findViewById(R.id.menu_list);
-       mscroll=findViewById(R.id.stickyone);
-       iconTheLoai=findViewById(R.id.icon_theloai);
+        theLoai = findViewById(R.id.theloai);
+        sapxep = findViewById(R.id.sort);
+        recyclerView= findViewById(R.id.menu_list);
+        mscroll=findViewById(R.id.stickyone);
+        iconTheLoai=findViewById(R.id.icon_theloai);
         product= findViewById(R.id.product_rec);
         menu = findViewById(R.id.constraintLayout2);
         iconSort= findViewById(R.id.image_sort);
@@ -100,16 +112,24 @@ public class ProducBrandtActivity extends AppCompatActivity {
         sale3p = findViewById(R.id.sale3_p);
         backTo = findViewById(R.id.backto);
         share = findViewById(R.id.share);
+        filter = findViewById(R.id.filter);
+        filter.setVisibility(View.GONE);
+        recyMua = findViewById(R.id.recy_mua);
+        recyColor = findViewById(R.id.recy_color);
+        loc = findViewById(R.id.filterby);
+        iconFilter = findViewById(R.id.icon_filter);
 
-       int a= theLoai.getTop();
+        int a= theLoai.getTop();
         catlist= new ArrayList<>();
         catlist.add(new MenuList("Dress", Color.BLACK,0));
         catlist.add(new MenuList("Tops", Color.BLACK,0));
         catlist.add(new MenuList("Bottoms", Color.BLACK,0));
         sortList= new ArrayList<>();
-        sortList.add(new MenuList("Tăng dần", Color.BLACK, 0));
         sortList.add(new MenuList("Giảm dần", Color.BLACK, 0));
-        sortList.add(new MenuList("Phổ biến", Color.BLACK, 0));
+        sortList.add(new MenuList("Tăng dần", Color.BLACK, 0));
+       /* loc= new ArrayList<>();
+        sortList.add(new MenuList("mau", Color.BLACK, 0));
+        sortList.add(new MenuList("Giảm dần", Color.BLACK, 0));*/
         recyclerView.setNestedScrollingEnabled(false);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setVisibility(View.GONE);
@@ -120,28 +140,36 @@ public class ProducBrandtActivity extends AppCompatActivity {
         String nameb = intent.getStringExtra("nameb");
         String desbrand = intent.getStringExtra("description");
         getaBrand(id, brandImage, logo, nameb, desbrand);
-       theLoai.setOnClickListener(new View.OnClickListener() {
+        theLoai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 iconSort.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
-               theLoai();
+                theLoai();
             }
         });
         sapxep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 iconTheLoai.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
-                  Sort();
+                Sort();
                   /*  new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
                         }
                     },100);*/
-                    }
-                });
+            }
+        });
+        loc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iconSort.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
+                loc();
+            }
+        });
         backTo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                StateHolder.reset();
                 ProducBrandtActivity.this.finish();
             }
         });
@@ -164,9 +192,46 @@ public class ProducBrandtActivity extends AppCompatActivity {
                 popup.show();
             }
         });*/
-       Service service= new Service(this,product);
-       service.Request(0);
+        Service service= new Service(this,product);
+        service.Request();
+        season = new ArrayList<>();
+        season.add(new FilterText("Xuân"));
+        season.add(new FilterText("Hạ"));
+        season.add(new FilterText("Thu"));
+        season.add(new FilterText("Đông"));
+        colors = new ArrayList<>();
+        colors.add(new FilterText("White"));
+        colors.add(new FilterText("Blue"));
+        colors.add(new FilterText("Green"));
+        colors.add(new FilterText("Black"));
+        colors.add(new FilterText("Brown"));
+        colors.add(new FilterText("Yallow"));
+        colors.add(new FilterText("Gray"));
+        colors.add(new FilterText("Pink"));
 
+    }
+
+    private void loc() {
+        recyMua.setHasFixedSize(true);
+        recyMua.setLayoutManager(new GridLayoutManager(this, 4));
+        Muaada muaada = new Muaada(this, season);
+        recyMua.setAdapter(muaada);
+        recyColor.setHasFixedSize(true);
+        recyColor.setLayoutManager(new GridLayoutManager(this, 4));
+        Colorada colorada = new Colorada(this, colors);
+        recyColor.setAdapter(colorada);
+        if (filter.getVisibility() == View.GONE) {
+            int s = menu.getTop();
+            mscroll.smoothScrollTo(0, menu.getTop());
+            filter.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+            iconSort.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
+            iconTheLoai.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
+            iconFilter.setImageResource(R.drawable.ic_arrow_drop_up_black_24dp2);
+        } else {
+            filter.setVisibility(View.GONE);
+            iconFilter.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
+        }
     }
 
     private void getaBrand(int id, final String brandImage, final String logo, final String nameb, final String desbrand) {
@@ -244,15 +309,17 @@ public class ProducBrandtActivity extends AppCompatActivity {
     }
 
     private void Sort() {
-        AdapterMenu adapterMenu= new AdapterMenu(this,sortList,recyclerView,iconSort);
+        AdapterSort adapterSort = new AdapterSort(this, sortList, recyclerView, iconSort);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(adapterMenu);
+        recyclerView.setAdapter(adapterSort);
         if(recyclerView.getVisibility()==View.GONE){
             int s= menu.getTop();
             mscroll.smoothScrollTo(0,menu.getTop());
             Log.i("s",""+s+" "+mscroll.getHeight()+recyclerView.getTop());
             recyclerView.setVisibility(View.VISIBLE);
             iconSort.setImageResource(R.drawable.ic_arrow_drop_up_black_24dp2);
+            filter.setVisibility(View.GONE);
+            iconFilter.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
         }
         else
         {
@@ -278,9 +345,9 @@ public class ProducBrandtActivity extends AppCompatActivity {
     }
 
     private void theLoai() {
-        AdapterMenu adapterMenu= new AdapterMenu(this,catlist,recyclerView,iconTheLoai);
+        AdapterCate adapterCate = new AdapterCate(this, catlist, recyclerView, iconTheLoai);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(adapterMenu);
+        recyclerView.setAdapter(adapterCate);
         if(recyclerView.getVisibility()==View.GONE){
             int s= menu.getTop();
             mscroll.smoothScrollTo(0,menu.getTop());
@@ -288,6 +355,8 @@ public class ProducBrandtActivity extends AppCompatActivity {
             Log.i("s",""+s+" "+mscroll.getHeight()+recyclerView.getTop());
             recyclerView.setVisibility(View.VISIBLE);
             iconTheLoai.setImageResource(R.drawable.ic_arrow_drop_up_black_24dp2);
+            filter.setVisibility(View.GONE);
+            iconFilter.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
         }
         else
         {

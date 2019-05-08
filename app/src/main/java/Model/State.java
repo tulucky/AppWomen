@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class State {
-    int on;
+    public int on;
     public static List<Product> ids = new ArrayList<>();
     public static List<Product> products;
 

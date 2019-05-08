@@ -41,7 +41,7 @@ public class BottomAdapImage extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(mcontext).inflate(R.layout.bottomsheet_image, viewGroup, false);
+        View view = LayoutInflater.from(mcontext).inflate(R.layout.item_bottomsheet_image, viewGroup, false);
         return new ImageHolder(view);
     }
 

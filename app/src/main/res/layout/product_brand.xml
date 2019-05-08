@@ -114,7 +114,7 @@
             android:layout_marginStart="18dp"
             android:fontFamily="@font/helvetica"
             android:text="TextView hsh s"
-            android:textColor="@color/fullblack"
+            android:textColor="@color/cam"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -180,7 +180,7 @@
             android:text="TextView"
             android:textSize="18sp"
             android:textColor="@color/red"
-            android:fontFamily="@font/helvetica"
+            android:fontFamily="@font/helveticaheue_medium"
             app:layout_constraintEnd_toEndOf="@+id/image1_p"
             app:layout_constraintHorizontal_bias="0.411"
             app:layout_constraintStart_toStartOf="@+id/image1_p"
@@ -196,7 +196,7 @@
             android:text="TextView"
             android:textSize="18sp"
             android:textColor="@color/red"
-            android:fontFamily="@font/helvetica"
+            android:fontFamily="@font/helveticaheue_medium"
             app:layout_constraintBottom_toBottomOf="@+id/gia1_p"
             app:layout_constraintEnd_toEndOf="@+id/image2_p"
             app:layout_constraintHorizontal_bias="0.558"
@@ -211,7 +211,7 @@
             android:text="TextView"
             android:textSize="18sp"
             android:textColor="@color/red"
-            android:fontFamily="@font/helvetica"
+            android:fontFamily="@font/helveticaheue_medium"
             app:layout_constraintBottom_toBottomOf="@+id/gia2_p"
             app:layout_constraintEnd_toEndOf="@+id/image3_p"
             app:layout_constraintStart_toStartOf="@+id/image3_p" />
@@ -277,7 +277,7 @@
                     android:layout_height="30dp"
                     android:layout_marginRight="30dp"
                     android:text="Thể Loại"
-                    android:fontFamily="@font/helvetica"
+                    android:fontFamily="@font/helveticaheue_medium"
                     android:textColor="@color/fullblack"
                     android:textSize="18sp" />
 
@@ -294,7 +294,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginTop="15dp"
-                app:layout_constraintEnd_toStartOf="@+id/loc"
+                app:layout_constraintEnd_toStartOf="@+id/filterby"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/theloai"
                 app:layout_constraintTop_toTopOf="parent">
@@ -304,7 +304,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="30dp"
                     android:text="Sắp xếp"
-                    android:fontFamily="@font/helvetica"
+                    android:fontFamily="@font/helveticaheue_medium"
                     android:textColor="@color/fullblack"
                     android:textSize="18sp" />
 
@@ -317,7 +317,7 @@
             </FrameLayout>
 
             <FrameLayout
-                android:id="@+id/loc"
+                android:id="@+id/filterby"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginTop="15dp"
@@ -332,10 +332,11 @@
                     android:layout_marginRight="30dp"
                     android:text="Lọc"
                     android:textSize="18sp"
-                    android:fontFamily="@font/helvetica"
+                    android:fontFamily="@font/helveticaheue_medium"
                     android:textColor="@color/fullblack" />
 
                 <ImageView
+                    android:id="@+id/icon_filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
@@ -358,8 +359,15 @@
                 android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/line">
-
             </android.support.v7.widget.RecyclerView>
+
+            <include
+                android:id="@+id/filter"
+                layout="@layout/pbrand_filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line" />
         </android.support.constraint.ConstraintLayout>
     </android.support.constraint.ConstraintLayout>
     </me.didik.component.StickyNestedScrollView>

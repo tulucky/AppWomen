@@ -9,9 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.kaopiz.kprogresshud.KProgressHUD;
 
@@ -19,10 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Model.Service;
-import lucky.dev.tu.devandroid.MainActivity;
 import lucky.dev.tu.devandroid.R;
 
-public class AdapterMenu extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AdapterCate extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     View view;
     Context mcontext;
     List<MenuList> menuListItem;
@@ -30,7 +27,7 @@ public class AdapterMenu extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     KProgressHUD kProgressHUD;
     ImageView iconMenu;
 
-    public AdapterMenu(Context mcontext, List<MenuList> menuList,RecyclerView recyclerView,ImageView imageView) {
+    public AdapterCate(Context mcontext, List<MenuList> menuList, RecyclerView recyclerView, ImageView imageView) {
         this.mcontext = mcontext;
         menuListItem= new ArrayList<>();
         this.menuListItem = menuList;
@@ -58,6 +55,13 @@ public class AdapterMenu extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                recyclerV.setVisibility(View.GONE);
                for(int k=0;k<menuListItem.size();k++){
                    if(k==i){
+                       if (i == 0) {
+                           StateHolder.setLoai("dress");
+                       } else if (i == 1) {
+                           StateHolder.setLoai("top");
+                       } else if (i == 2) {
+                           StateHolder.setLoai("bottom");
+                       }
                        menuListItem.get(k).setColor(Color.RED);
                        menuListItem.get(k).setImageicon(R.drawable.ic_check_black_24dp);
                }
@@ -66,12 +70,13 @@ public class AdapterMenu extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                    menuListItem.get(k).setImageicon(0);}
                }
                    notifyDataSetChanged();
-               new Asyn().execute(i);
+               new Asyn().execute();
 
            }
        });
     }
-    public class Asyn extends AsyncTask<Integer,Void,Void>{
+
+    public class Asyn extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
            kProgressHUD =  KProgressHUD.create(mcontext)
@@ -83,13 +88,13 @@ public class AdapterMenu extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     .show();
         }
         @Override
-        protected Void doInBackground(Integer... integers) {
+        protected Void doInBackground(Void... voids) {
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            Service.Request(integers[0]);
+            Service.Request();
            return null;
         }
 

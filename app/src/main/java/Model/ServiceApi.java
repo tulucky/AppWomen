@@ -16,18 +16,19 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ServiceApi {
-    @GET("tops.php")
+    @GET("allproducts.php")
     Call<List<Product>> getProducts();
     @GET("dress.php")
     Call<List<Product>> getDress();
 
-    @GET("sort.php")
-    Call<List<Product>> getDesc();
+    @GET("sortproducts.php")
+    Call<List<Product>> sortProducts(@Query("sort") String sort);
 
-    @GET("asc.php")
-    Call<List<Product>> getAsc();
-    @GET("bottoms")
-    Call<List<Product>> getBottoms();
+    @GET("filterbytype.php")
+    Call<List<Product>> filterByType(@Query("loai") String loai);
+
+    @GET("sorttypebyprice.php")
+    Call<List<Product>> sortTypesbyPrice(@Query("loai") String loai, @Query("sort") String sort);
 
     @GET("brand3image.php")
     Call<List<Product>> brandImages(@Query("brand") int brand);

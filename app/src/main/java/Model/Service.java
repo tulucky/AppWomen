@@ -7,6 +7,8 @@ import android.util.Log;
 
 import java.util.List;
 
+import Model.ProductBrand.Adapterpb;
+import Model.ProductBrand.StateHolder;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -20,19 +22,17 @@ public class Service {
         this.mrecycle = mrecycleView;
     }
 
-    public static void Request(int k) {
+    public static void Request() {
         ServiceApi mService = RetrofitO.getmRetrofit().create(ServiceApi.class);
-        switch (k){
-            case 0:
-                call = mService.getAsc();
-                break;
-            case 1:
-                call = mService.getDesc();
-                break;
-            case 2:
-                // call = mService.getTops();
-                break;
+        if (StateHolder.loai == null && StateHolder.sapxep == null) {
+            call = mService.getProducts();
+        } else if (StateHolder.loai == null) {
+            call = mService.sortProducts(StateHolder.sapxep);
+        } else if (StateHolder.sapxep == null) {
+            call = mService.filterByType(StateHolder.loai);
 
+        } else if (StateHolder.loai != null && StateHolder.sapxep != null) {
+            call = mService.sortTypesbyPrice(StateHolder.loai, StateHolder.sapxep);
         }
         call.enqueue(new Callback<List<Product>>() {
             @Override
@@ -52,8 +52,8 @@ public class Service {
         mrecycle.setHasFixedSize(true);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context,2);
         mrecycle.setLayoutManager(gridLayoutManager);
-        GridAdapter adapter = new GridAdapter(context, body);
-        mrecycle.setAdapter(adapter);
+        Adapterpb adapterpb = new Adapterpb(context, body);
+        mrecycle.setAdapter(adapterpb);
         // Log.i("m",""+mscroll.getHeight());
 
     }
