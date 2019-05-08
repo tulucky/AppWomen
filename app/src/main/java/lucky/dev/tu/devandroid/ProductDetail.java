@@ -107,7 +107,7 @@ public class ProductDetail extends AppCompatActivity {
     FloatingActionButton fab;
     android.support.design.widget.AppBarLayout appbar;
     CollapsingToolbarLayout collapsingToolbarLayout;
-    private static final String urlData0 = "http://192.168.1.109/wmshop/tops.php";
+    private static final String urlData0 = "https://shoplady668.000webhostapp.com/tops.php";
     List<String> daTa;
 
     @Override
@@ -210,7 +210,6 @@ public class ProductDetail extends AppCompatActivity {
         Intent intent = getIntent();
         int id = intent.getIntExtra("id", 0);
         String image = intent.getStringExtra("image");
-        Log.i("id", " " + id);
         final OrderP orderP = new OrderP();
         //luu lai su lua chon cua user
         orderP.setIdProductb(id);
@@ -281,7 +280,7 @@ public class ProductDetail extends AppCompatActivity {
         inFor = new ArrayList<>();
         inFor.add("Chọn Màu Và Kích Thước");
         inFor.add("Miêu Tả");
-        inFor.add("Hiểu Về Kích Thước");
+        inFor.add("Về Kích Thước");
         inFor.add("Thông Tin Giao Hàng");
         AdapterInfor adapterInfor = new AdapterInfor(this,inFor);
         recInfo.setNestedScrollingEnabled(false);
@@ -290,6 +289,9 @@ public class ProductDetail extends AppCompatActivity {
         detalBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences sharedPref = ProductDetail.this.getSharedPreferences("Accout"
+                        , Context.MODE_PRIVATE);
+                String name = sharedPref.getString("idName", "khong");
                 if (name.equals("khong")) {
                     Intent intent = new Intent(ProductDetail.this, Login.class);
                     intent.putExtra("ide", 1);
@@ -379,11 +381,11 @@ public class ProductDetail extends AppCompatActivity {
                 switch (test) {
                     case 0:
                         for (int i = 0; i < temp.size(); i++) {
-                            Toast.makeText(ProductDetail.this, "nna nanh", Toast.LENGTH_LONG).show();
+                            /* Toast.makeText(ProductDetail.this, "nna nanh", Toast.LENGTH_LONG).show();*/
                             if (temp.get(i).getIdProductb() == orderP.getIdProductb() && temp.get(i).getImagebag()
                                     .equals(orderP.getImagebag()) && temp.get(i).getSizebag().equals(orderP.getSizebag())) {
                                 Log.i("pl", " davao day" + temp.get(i).getId());
-                                Toast.makeText(ProductDetail.this, "tao ra", Toast.LENGTH_LONG).show();
+                                /*  Toast.makeText(ProductDetail.this, "tao ra", Toast.LENGTH_LONG).show();*/
                                 test = 2;
                                 addNumber = temp.get(i).getNumber() + orderP.getNumber();
                                 float price = (addNumber * soLuong.getGia());

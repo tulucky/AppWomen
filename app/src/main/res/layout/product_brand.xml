@@ -17,18 +17,26 @@
         <TextView
             android:id="@+id/giagoc3_p"
             android:layout_width="wrap_content"
-            android:layout_height="18dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:fontFamily="@font/helvetica"
             android:text="TextView"
+            android:textColor="@color/fullblack"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/gia3_p"
             app:layout_constraintStart_toStartOf="@+id/gia3_p"
             app:layout_constraintTop_toBottomOf="@+id/gia3_p" />
 
         <TextView
             android:id="@+id/giagoc2_p"
             android:layout_width="wrap_content"
-            android:layout_height="18dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:fontFamily="@font/helvetica"
             android:text="TextView"
+            android:textColor="@color/fullblack"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/gia2_p"
             app:layout_constraintStart_toStartOf="@+id/gia2_p"
             app:layout_constraintTop_toBottomOf="@+id/gia2_p" />
 
@@ -92,17 +100,22 @@
             android:layout_marginTop="12dp"
             android:gravity="center"
             android:text="TextView"
+            android:textColor="@color/fullblack"
+            android:fontFamily="@font/utm_avob"
+            android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/logo_brand_p"
             app:layout_constraintTop_toBottomOf="@+id/image_brand_p" />
 
         <TextView
             android:id="@+id/des_brand_p"
             android:layout_width="0dp"
-            android:layout_height="27dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
             android:layout_marginStart="18dp"
+            android:fontFamily="@font/helvetica"
             android:text="TextView hsh s"
-            android:textSize="20sp"
+            android:textColor="@color/fullblack"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -126,6 +139,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/custom_giamgia"
             android:text="TextView"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:padding="2dp"
             app:layout_constraintStart_toStartOf="@+id/image1_p"
             app:layout_constraintTop_toTopOf="@+id/image1_p" />
 
@@ -135,6 +151,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/custom_giamgia"
             android:text="TextView"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:padding="2dp"
             app:layout_constraintStart_toStartOf="@+id/image3_p"
             app:layout_constraintTop_toTopOf="@+id/image3_p" />
 
@@ -144,6 +163,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/custom_giamgia"
             android:text="TextView"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:padding="2dp"
             app:layout_constraintStart_toStartOf="@+id/image2_p"
             app:layout_constraintTop_toTopOf="@+id/image2_p" />
 
@@ -156,6 +178,9 @@
             android:layout_marginTop="16dp"
             android:gravity="center"
             android:text="TextView"
+            android:textSize="18sp"
+            android:textColor="@color/red"
+            android:fontFamily="@font/helvetica"
             app:layout_constraintEnd_toEndOf="@+id/image1_p"
             app:layout_constraintHorizontal_bias="0.411"
             app:layout_constraintStart_toStartOf="@+id/image1_p"
@@ -169,6 +194,9 @@
             android:layout_marginStart="8dp"
             android:gravity="center"
             android:text="TextView"
+            android:textSize="18sp"
+            android:textColor="@color/red"
+            android:fontFamily="@font/helvetica"
             app:layout_constraintBottom_toBottomOf="@+id/gia1_p"
             app:layout_constraintEnd_toEndOf="@+id/image2_p"
             app:layout_constraintHorizontal_bias="0.558"
@@ -181,6 +209,9 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:text="TextView"
+            android:textSize="18sp"
+            android:textColor="@color/red"
+            android:fontFamily="@font/helvetica"
             app:layout_constraintBottom_toBottomOf="@+id/gia2_p"
             app:layout_constraintEnd_toEndOf="@+id/image3_p"
             app:layout_constraintStart_toStartOf="@+id/image3_p" />
@@ -188,9 +219,13 @@
         <TextView
             android:id="@+id/giagoc1_p"
             android:layout_width="wrap_content"
-            android:layout_height="18dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:fontFamily="@font/helvetica"
             android:text="TextView"
+            android:textColor="@color/fullblack"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/gia1_p"
             app:layout_constraintStart_toStartOf="@+id/gia1_p"
             app:layout_constraintTop_toBottomOf="@+id/gia1_p" />
 
@@ -243,7 +278,7 @@
                     android:layout_marginRight="30dp"
                     android:text="Thể Loại"
                     android:fontFamily="@font/helvetica"
-                    android:textColor="@color/black"
+                    android:textColor="@color/fullblack"
                     android:textSize="18sp" />
 
                 <ImageView
@@ -270,7 +305,7 @@
                     android:layout_marginRight="30dp"
                     android:text="Sắp xếp"
                     android:fontFamily="@font/helvetica"
-                    android:textColor="@color/black"
+                    android:textColor="@color/fullblack"
                     android:textSize="18sp" />
 
                 <ImageView
@@ -298,7 +333,7 @@
                     android:text="Lọc"
                     android:textSize="18sp"
                     android:fontFamily="@font/helvetica"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/fullblack" />
 
                 <ImageView
                     android:layout_width="wrap_content"

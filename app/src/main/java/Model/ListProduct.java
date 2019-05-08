@@ -28,7 +28,7 @@ import lucky.dev.tu.devandroid.R;
 public class ListProduct extends Fragment {
     RecyclerView listProduct;
     List<Product> listData;
-    private static final String urlData3 = "http://192.168.1.109/wmshop/tops.php";
+    private static final String urlData3 = "https://shoplady668.000webhostapp.com//tops.php";
 
     public ListProduct() {
     }

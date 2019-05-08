@@ -42,7 +42,7 @@ public class SaleAda extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return products.size();
+        return 26;
     }
 
     private class ViewHolder extends RecyclerView.ViewHolder {

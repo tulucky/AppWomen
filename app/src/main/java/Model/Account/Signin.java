@@ -62,10 +62,10 @@ public class Signin extends Fragment {
             public void onClick(View v) {
                 name = nameIn.getText().toString().trim();
                 pass = passIn.getText().toString().trim();
-                Log.i("kk", name);
-                Log.i("kk", pass);
+              /*  Log.i("kk", name);
+                Log.i("kk", pass);*/
                 if (!Pattern.matches(regex, name)) {
-                    Log.i("pk", "kska");
+                    /*   Log.i("pk", "kska");*/
                     alertname.setText("Vui lòng nhập name");
                     alertname.setVisibility(View.VISIBLE);
                 } else if (!Pattern.matches(regex, pass)) {
@@ -94,7 +94,7 @@ public class Signin extends Fragment {
                                 passIn.getText().clear();
                             } else if (response.body().get(0).getAlter().equals("0")) {
                                 getActivity().finish();
-                                Toast.makeText(getActivity(), "dang nhap ok", Toast.LENGTH_LONG).show();
+                                /*   Toast.makeText(getActivity(), "dang nhap ok", Toast.LENGTH_LONG).show();*/
                                 SharedPreferences sharedPref = getActivity().getSharedPreferences(
                                         "Accout", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPref.edit();

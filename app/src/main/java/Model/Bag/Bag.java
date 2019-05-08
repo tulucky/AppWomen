@@ -117,7 +117,6 @@ public class Bag extends Fragment implements Dialog.NoticeDialogListener {
                     bagBag.setVisibility(View.VISIBLE);
                     textBag.setVisibility(View.VISIBLE);
                 }
-                Toast.makeText(getActivity(), " hhh", Toast.LENGTH_LONG).show();
                 Log.i("hh", " " + response.body());
                 daTa = response.body();
                 listOrder.setNestedScrollingEnabled(false);

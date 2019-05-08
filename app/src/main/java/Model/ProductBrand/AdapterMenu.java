@@ -66,10 +66,7 @@ public class AdapterMenu extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                    menuListItem.get(k).setImageicon(0);}
                }
                    notifyDataSetChanged();
-               switch (i){
-                   case 0:
-                       new Asyn().execute(1);
-               }
+               new Asyn().execute(i);
 
            }
        });

@@ -64,7 +64,7 @@
         android:layout_marginStart="18dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/background_color"
-        android:fontFamily="@font/sans_prob"
+        android:fontFamily="@font/utm_avob"
         android:paddingBottom="2dp"
         android:paddingEnd="5dp"
         android:paddingStart="5dp"

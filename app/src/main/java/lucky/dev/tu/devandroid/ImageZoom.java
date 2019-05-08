@@ -80,7 +80,6 @@ public class ImageZoom extends AppCompatActivity {
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
                 //tra ve mang[] number =>ok
                 data = response.body();
-                Log.i("pd", " " + data);
                 if (data.contains(image)) {
                     data.remove(data.indexOf(image));
                 }

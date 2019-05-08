@@ -79,19 +79,21 @@ public class Brand extends Fragment {
                 @Override
                 public void onResponse(Call<List<Slide>> call, retrofit2.Response<List<Slide>> response) {
                     Log.i("kk", "" + response.body());
-                    switch (position) {
-                        case 0:
-                            Glide.with(getActivity()).load(RetrofitO.url + response.body().get(position).getImage()).into(imageView);
-                            break;
-                        case 1:
-                            Glide.with(getActivity()).load(RetrofitO.url + response.body().get(position).getImage()).into(imageView);
-                            break;
-                        case 2:
-                            Glide.with(getActivity()).load(RetrofitO.url + response.body().get(position).getImage()).into(imageView);
-                            break;
-                        case 3:
-                            Glide.with(getActivity()).load(RetrofitO.url + response.body().get(position).getImage()).into(imageView);
-                            break;
+                    if (getActivity() != null) {
+                        switch (position) {
+                            case 0:
+                                Glide.with(getActivity()).load(RetrofitO.url + response.body().get(position).getImage()).into(imageView);
+                                break;
+                            case 1:
+                                Glide.with(getActivity()).load(RetrofitO.url + response.body().get(position).getImage()).into(imageView);
+                                break;
+                            case 2:
+                                Glide.with(getActivity()).load(RetrofitO.url + response.body().get(position).getImage()).into(imageView);
+                                break;
+                            case 3:
+                                Glide.with(getActivity()).load(RetrofitO.url + response.body().get(position).getImage()).into(imageView);
+                                break;
+                        }
                     }
                 }
 

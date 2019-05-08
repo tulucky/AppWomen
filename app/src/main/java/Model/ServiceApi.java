@@ -20,12 +20,16 @@ public interface ServiceApi {
     Call<List<Product>> getProducts();
     @GET("dress.php")
     Call<List<Product>> getDress();
-    @GET("tops")
-    Call<List<Product>> getTops();
+
+    @GET("sort.php")
+    Call<List<Product>> getDesc();
+
+    @GET("asc.php")
+    Call<List<Product>> getAsc();
     @GET("bottoms")
     Call<List<Product>> getBottoms();
 
-    @GET("a.php")
+    @GET("brand3image.php")
     Call<List<Product>> brandImages(@Query("brand") int brand);
     @GET("brand.php")
     Call<List<BrandModel>> brandList();

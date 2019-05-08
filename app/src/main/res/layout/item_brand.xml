@@ -66,8 +66,8 @@
                 android:layout_height="wrap_content"
                 android:text="Vai368"
                 android:fontFamily="@font/helvetica"
-                android:textSize="20sp"
-                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textColor="@color/fullblack"
                 android:layout_gravity="center_horizontal|bottom"/>
             <TextView
                 android:id="@+id/sale1"
@@ -96,8 +96,8 @@
                 android:layout_height="wrap_content"
                 android:text="Vai368"
                 android:fontFamily="@font/helvetica"
-                android:textSize="20sp"
-                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textColor="@color/fullblack"
                 android:layout_gravity="center_horizontal|bottom"
                 />
             <TextView
@@ -127,8 +127,8 @@
                 android:layout_height="wrap_content"
                 android:text="Vai368"
                 android:fontFamily="@font/helvetica"
-                android:textSize="20sp"
-                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textColor="@color/fullblack"
                 android:layout_gravity="center_horizontal|bottom"
                 />
             <TextView

@@ -7,6 +7,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ConstraintLayout actionBar;
     public TextView number;
     String name;
+    public NestedScrollView nestedScrollView;
     //thay doi file php ko can chay lai app
 
     @Override
@@ -162,6 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 FragmentTransaction transaction3 = fragmentManager.beginTransaction();
                 Home home = new Home();
                 transaction3.add(R.id.container, home);
+                transaction3.addToBackStack(null);
                 transaction3.commit();
         }
 
@@ -203,6 +206,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 Brand brandM = new Brand();
                 transaction.replace(R.id.container, brandM);
+                transaction.addToBackStack(null);
                 transaction.commit();
                 break;
             case R.id.bag:
@@ -218,6 +222,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 FragmentTransaction transaction1 = fragmentManager.beginTransaction();
                 Bag bagM = new Bag();
                 transaction1.replace(R.id.container, bagM);
+                transaction1.addToBackStack(null);
                 transaction1.commit();
                 break;
             case R.id.avatar:
@@ -234,6 +239,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     FragmentTransaction transaction2 = fragmentManager.beginTransaction();
                     Account accountM = new Account();
                     transaction2.replace(R.id.container, accountM);
+                    transaction2.addToBackStack(null);
                     transaction2.commit();
                     break;
                 } else {
@@ -249,6 +255,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     FragmentTransaction transaction2 = fragmentManager.beginTransaction();
                     Resum resum = new Resum();
                     transaction2.replace(R.id.container, resum);
+                    transaction2.addToBackStack(null);
                     transaction2.commit();
                     break;
                 }
@@ -266,6 +273,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 FragmentTransaction transaction3 = fragmentManager.beginTransaction();
                 Home home = new Home();
                 transaction3.replace(R.id.container, home);
+                transaction3.addToBackStack(null);
                 transaction3.commit();
                 break;
         }
@@ -279,7 +287,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.recy_main);
             getSupportFragmentManager().beginTransaction().detach(fragment).attach(fragment).commit();
         }
-        Log.i("tt", "haha");
+
         ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
         Call<List<SoLuong>> call = serviceApi.getSoLuong(name);
         call.enqueue(new Callback<List<SoLuong>>() {

@@ -2,6 +2,7 @@ package lucky.dev.tu.devandroid;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -106,9 +107,9 @@ public class ProducBrandtActivity extends AppCompatActivity {
         catlist.add(new MenuList("Tops", Color.BLACK,0));
         catlist.add(new MenuList("Bottoms", Color.BLACK,0));
         sortList= new ArrayList<>();
-        sortList.add(new MenuList("Tang dan", Color.BLACK,0));
-        sortList.add(new MenuList("Giamdan", Color.BLACK,0));
-        sortList.add(new MenuList("Bottoms", Color.BLACK,0));
+        sortList.add(new MenuList("Tăng dần", Color.BLACK, 0));
+        sortList.add(new MenuList("Giảm dần", Color.BLACK, 0));
+        sortList.add(new MenuList("Phổ biến", Color.BLACK, 0));
         recyclerView.setNestedScrollingEnabled(false);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setVisibility(View.GONE);
@@ -119,7 +120,6 @@ public class ProducBrandtActivity extends AppCompatActivity {
         String nameb = intent.getStringExtra("nameb");
         String desbrand = intent.getStringExtra("description");
         getaBrand(id, brandImage, logo, nameb, desbrand);
-       Log.i("mn",""+a);
        theLoai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,7 +148,6 @@ public class ProducBrandtActivity extends AppCompatActivity {
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("kp", "jaja");
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
@@ -191,8 +190,7 @@ public class ProducBrandtActivity extends AppCompatActivity {
                 gia1p.setText(response.body().get(0).getName());
                 sale1p.setText(response.body().get(0).getSale());
                 giagoc1p.setText(response.body().get(0).getOriginprice());
-                Log.i("ko", " " + response.body().get(0).getSale());
-                Log.i("ko", " " + response.body().get(0).getOriginprice());
+                giagoc1p.setPaintFlags(giagoc1p.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 //null do ko chon cot originprice trong file php
                 Glide.with(ProducBrandtActivity.this)
                         .load(RetrofitO.url + response.body().get(1).getImage())
@@ -200,12 +198,14 @@ public class ProducBrandtActivity extends AppCompatActivity {
                 gia2p.setText(response.body().get(1).getName());
                 sale2p.setText(response.body().get(1).getSale());
                 giagoc2p.setText(response.body().get(1).getOriginprice());
+                giagoc2p.setPaintFlags(giagoc2p.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 Glide.with(ProducBrandtActivity.this)
                         .load(RetrofitO.url + response.body().get(2).getImage())
                         .into(image3p);
                 gia3p.setText(response.body().get(2).getName());
                 sale3p.setText(response.body().get(2).getSale());
                 giagoc3p.setText(response.body().get(2).getOriginprice());
+                giagoc3p.setPaintFlags(giagoc3p.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
                 image1p.setOnClickListener(new View.OnClickListener() {
                     @Override

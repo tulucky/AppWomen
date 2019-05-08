@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="56dp">
+        android:layout_marginBottom="56dp"
+        android:layout_marginTop="56dp"
+        android:scrollbars="vertical">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -22,17 +25,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView13"
                 app:layout_constraintTop_toBottomOf="@+id/imageView16"
-                app:srcCompat="@drawable/image_4" />
+                app:srcCompat="@drawable/intro3" />
 
             <com.synnapps.carouselview.CarouselView
                 android:id="@+id/carouselView"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                app:pageTransformer="slide_over"
                 app:fillColor="#fa2b2b"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:pageColor="#00000000"
+                app:pageTransformer="slide_over"
                 app:radius="3dp"
                 app:slideInterval="3000"
                 app:strokeColor="#FF777777"
@@ -64,26 +67,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/carouselView" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.476"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
             <ImageView
                 android:id="@+id/imageView16"
                 android:layout_width="match_parent"
                 android:layout_height="8dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="25dp"
                 android:background="#e2dede"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+                app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
             <ImageView
                 android:id="@+id/imageView13"
@@ -94,14 +87,13 @@
                 app:layout_constraintEnd_toStartOf="@+id/imageView14"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imageView16"
-                app:srcCompat="@drawable/image_4" />
+                app:srcCompat="@drawable/intro2" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/list_brand"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="80dp"
+                android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"

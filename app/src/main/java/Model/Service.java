@@ -24,17 +24,15 @@ public class Service {
         ServiceApi mService = RetrofitO.getmRetrofit().create(ServiceApi.class);
         switch (k){
             case 0:
-                call = mService.getProducts();
+                call = mService.getAsc();
                 break;
             case 1:
-                call = mService.getDress();
+                call = mService.getDesc();
                 break;
             case 2:
-                call = mService.getTops();
+                // call = mService.getTops();
                 break;
-            case 3:
-                call = mService.getBottoms();
-                break;
+
         }
         call.enqueue(new Callback<List<Product>>() {
             @Override

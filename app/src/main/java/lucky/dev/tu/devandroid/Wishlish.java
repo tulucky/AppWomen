@@ -39,7 +39,6 @@ public class Wishlish extends AppCompatActivity {
                 finish();
             }
         });
-        Log.i("lo", " " + State.ids);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Wishlish.this);
         recyWl.setLayoutManager(linearLayoutManager);

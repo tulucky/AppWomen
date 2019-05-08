@@ -76,8 +76,10 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.updateProduct = updateProduct;
         this.checkOut = check;
         this.priceCheck = priceCheck;
-        SharedPreferences sharedPreferences = mcontext.getSharedPreferences("Accout", Context.MODE_PRIVATE);
-        nameUser = sharedPreferences.getString("idName", "khong");
+        if (mcontext != null) {
+            SharedPreferences sharedPreferences = mcontext.getSharedPreferences("Accout", Context.MODE_PRIVATE);
+            nameUser = sharedPreferences.getString("idName", "khong");
+        }
     }
 
     @NonNull

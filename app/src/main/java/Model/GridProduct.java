@@ -20,7 +20,6 @@ import retrofit2.Callback;
 public class GridProduct extends Fragment {
     RecyclerView listProduct;
     List<Product> listData;
-    private static final String urlData3 = "http://192.168.1.108/wmshop/tops.php";
 
     public GridProduct() {
     }
