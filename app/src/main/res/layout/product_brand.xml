@@ -112,9 +112,10 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
             android:layout_marginStart="18dp"
-            android:fontFamily="@font/helvetica"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/sans_prob"
             android:text="TextView hsh s"
-            android:textColor="@color/cam"
+            android:textColor="@color/fullblack"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -366,6 +367,7 @@
                 layout="@layout/pbrand_filter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/line" />
         </android.support.constraint.ConstraintLayout>
