@@ -24,11 +24,23 @@ public interface ServiceApi {
     @GET("sortproducts.php")
     Call<List<Product>> sortProducts(@Query("sort") String sort);
 
-    @GET("filterbytype.php")
-    Call<List<Product>> filterByType(@Query("loai") String loai);
+    @GET("colorbytype.php")
+    Call<List<Product>> colorByType(@Query("type") String type);
 
     @GET("sorttypebyprice.php")
-    Call<List<Product>> sortTypesbyPrice(@Query("loai") String loai, @Query("sort") String sort);
+    Call<List<Product>> sortTypesbyPrice(@Query("type") String loai, @Query("sort") String sort);
+
+    @GET("typecolorbyprice.php")
+    Call<List<Product>> typeColorByPrice(@Query("type") String type, @Query("sort") String sort, @Query("color") String color);
+
+    @GET("loaimau.php")
+    Call<List<Product>> loaiTheoMau(@Query("type") String type, @Query("color") String color);
+
+    @GET("productbycolor.php")
+    Call<List<Product>> productByColor(@Query("color") String color);
+
+    @GET("sortcolorbyprice.php")
+    Call<List<Product>> sortColorByPrice(@Query("color") String color, @Query("sort") String sort);
 
     @GET("brand3image.php")
     Call<List<Product>> brandImages(@Query("brand") int brand);

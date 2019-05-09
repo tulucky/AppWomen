@@ -24,16 +24,24 @@ public class Service {
 
     public static void Request() {
         ServiceApi mService = RetrofitO.getmRetrofit().create(ServiceApi.class);
-        if (StateHolder.loai == null && StateHolder.sapxep == null) {
+        if (StateHolder.loai == null && StateHolder.sapxep == null && StateHolder.mausac == null) {
             call = mService.getProducts();
-        } else if (StateHolder.loai == null) {
+        } else if (StateHolder.sapxep == null && StateHolder.mausac == null && StateHolder.loai != null) {
+            call = mService.colorByType(StateHolder.loai);
+        } else if (StateHolder.loai == null && StateHolder.mausac == null && StateHolder.sapxep != null) {
             call = mService.sortProducts(StateHolder.sapxep);
-        } else if (StateHolder.sapxep == null) {
-            call = mService.filterByType(StateHolder.loai);
-
-        } else if (StateHolder.loai != null && StateHolder.sapxep != null) {
+        } else if (StateHolder.sapxep == null && StateHolder.loai == null && StateHolder.mausac != null) {
+            call = mService.productByColor(StateHolder.mausac);
+        } else if (StateHolder.loai != null && StateHolder.sapxep != null && StateHolder.mausac == null) {
             call = mService.sortTypesbyPrice(StateHolder.loai, StateHolder.sapxep);
+        } else if (StateHolder.loai != null && StateHolder.sapxep == null && StateHolder.mausac != null) {
+            call = mService.loaiTheoMau(StateHolder.loai, StateHolder.mausac);
+        } else if (StateHolder.loai == null && StateHolder.sapxep != null && StateHolder.mausac != null) {
+            call = mService.sortColorByPrice(StateHolder.mausac, StateHolder.sapxep);
+        } else if (StateHolder.loai != null && StateHolder.sapxep != null && StateHolder.mausac != null) {
+            call = mService.typeColorByPrice(StateHolder.loai, StateHolder.sapxep, StateHolder.mausac);
         }
+
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {

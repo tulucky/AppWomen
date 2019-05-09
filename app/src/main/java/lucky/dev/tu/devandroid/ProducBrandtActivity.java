@@ -31,7 +31,6 @@ import Model.ProductBrand.AdapterSort;
 import Model.ProductBrand.Colorada;
 import Model.ProductBrand.FilterText;
 import Model.ProductBrand.MenuList;
-import Model.ProductBrand.Muaada;
 import Model.ProductBrand.StateHolder;
 import Model.RetrofitO;
 import Model.Service;
@@ -114,7 +113,6 @@ public class ProducBrandtActivity extends AppCompatActivity {
         share = findViewById(R.id.share);
         filter = findViewById(R.id.filter);
         filter.setVisibility(View.GONE);
-        recyMua = findViewById(R.id.recy_mua);
         recyColor = findViewById(R.id.recy_color);
         loc = findViewById(R.id.filterby);
         iconFilter = findViewById(R.id.icon_filter);
@@ -194,11 +192,11 @@ public class ProducBrandtActivity extends AppCompatActivity {
         });*/
         Service service= new Service(this,product);
         service.Request();
-        season = new ArrayList<>();
+       /* season = new ArrayList<>();
         season.add(new FilterText("Xuân"));
         season.add(new FilterText("Hạ"));
         season.add(new FilterText("Thu"));
-        season.add(new FilterText("Đông"));
+        season.add(new FilterText("Đông"));*/
         colors = new ArrayList<>();
         colors.add(new FilterText("White"));
         colors.add(new FilterText("Blue"));
@@ -212,13 +210,12 @@ public class ProducBrandtActivity extends AppCompatActivity {
     }
 
     private void loc() {
-        recyMua.setHasFixedSize(true);
+       /* recyMua.setHasFixedSize(true);
         recyMua.setLayoutManager(new GridLayoutManager(this, 4));
         Muaada muaada = new Muaada(this, season);
-        recyMua.setAdapter(muaada);
-        recyColor.setHasFixedSize(true);
+        recyMua.setAdapter(muaada);*/
         recyColor.setLayoutManager(new GridLayoutManager(this, 4));
-        Colorada colorada = new Colorada(this, colors);
+        Colorada colorada = new Colorada(this, colors, iconFilter, filter);
         recyColor.setAdapter(colorada);
         if (filter.getVisibility() == View.GONE) {
             int s = menu.getTop();

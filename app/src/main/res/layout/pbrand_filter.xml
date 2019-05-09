@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:layout_marginTop="18dp">
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/textView24"
@@ -19,57 +18,17 @@
         android:textColor="@color/fullblack"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recy_mua" />
-
-
-    <TextView
-        android:id="@+id/textView31"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:fontFamily="@font/utm_avob"
-        android:text="Mùa"
-        android:textColor="@color/fullblack"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recy_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:layout_marginTop="6dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView24" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recy_mua"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView31" />
-
-    <TextView
-        android:id="@+id/textView26"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/border"
-        android:backgroundTint="@color/pink"
-        android:fontFamily="@font/helveticaheue_medium"
-        android:gravity="center"
-        android:text="Xong"
-        android:textColor="@color/white"
-        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recy_color" />
+        app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
 </android.support.constraint.ConstraintLayout>
