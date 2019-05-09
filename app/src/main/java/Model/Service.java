@@ -23,6 +23,7 @@ public class Service {
     }
 
     public static void Request() {
+        Log.i("opo", "Request: " + StateHolder.loai + " " + StateHolder.mausac);
         ServiceApi mService = RetrofitO.getmRetrofit().create(ServiceApi.class);
         if (StateHolder.loai == null && StateHolder.sapxep == null && StateHolder.mausac == null) {
             call = mService.getProducts();
@@ -40,6 +41,7 @@ public class Service {
             call = mService.sortTypesbyPrice(StateHolder.loai, StateHolder.sapxep);
             //get typebycolor
         } else if (StateHolder.loai != null && StateHolder.sapxep == null && StateHolder.mausac != null) {
+            Log.i("opo", "jo");
             call = mService.typeByColor(StateHolder.loai, StateHolder.mausac);
             //getcolors va sort
         } else if (StateHolder.loai == null && StateHolder.sapxep != null && StateHolder.mausac != null) {
@@ -58,6 +60,7 @@ public class Service {
 
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
+                Log.i("aa", " " + t.getMessage());
 
             }
         });

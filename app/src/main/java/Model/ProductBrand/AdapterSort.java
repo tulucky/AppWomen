@@ -52,7 +52,6 @@ public class AdapterSort extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         holder.textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                recyclerV.setVisibility(View.GONE);
                 for (int k = 0; k < menuListItem.size(); k++) {
                     if (k == i) {
                         if (i == 0) {
@@ -101,6 +100,7 @@ public class AdapterSort extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         protected void onPostExecute(Void aVoid) {
             iconMenu.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
             kProgressHUD.dismiss();
+            recyclerV.setVisibility(View.GONE);
 
         }
 

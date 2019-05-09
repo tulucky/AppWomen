@@ -52,10 +52,31 @@ public class Adapterpb extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             Glide.with(mcontext)
                     .load(RetrofitO.url + listProduct.get(position).getColor(StateHolder.mausac))
                     .into(mholder.mImage);
+            mholder.mImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mcontext, ProductDetail.class);
+                    intent.putExtra("id", listProduct.get(position).getId());
+                    intent.putExtra("image", listProduct.get(position).getColor(StateHolder.mausac));
+                    Log.i("d", " " + listProduct.get(position).getId());
+                    mcontext.startActivity(intent);
+                }
+            });
+
         } else {
             Glide.with(mcontext)
                     .load(RetrofitO.url + listProduct.get(position).getImage())
                     .into(mholder.mImage);
+            mholder.mImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mcontext, ProductDetail.class);
+                    intent.putExtra("id", listProduct.get(position).getId());
+                    intent.putExtra("image", listProduct.get(position).getImage());
+                    Log.i("d", " " + listProduct.get(position).getId());
+                    mcontext.startActivity(intent);
+                }
+            });
         }
         mholder.mPrice.setText(listProduct.get(position).getName());
         mholder.mGiaGoc.setText(listProduct.get(position).getOriginprice());
@@ -90,16 +111,6 @@ public class Adapterpb extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         Log.i("iu", "lol");
-        mholder.mImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mcontext, ProductDetail.class);
-                intent.putExtra("id", listProduct.get(position).getId());
-                intent.putExtra("image", listProduct.get(position).getImage());
-                Log.i("d", " " + listProduct.get(position).getId());
-                mcontext.startActivity(intent);
-            }
-        });
 
     }
 

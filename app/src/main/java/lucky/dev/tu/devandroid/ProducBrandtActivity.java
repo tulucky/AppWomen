@@ -198,14 +198,14 @@ public class ProducBrandtActivity extends AppCompatActivity {
         season.add(new FilterText("Thu"));
         season.add(new FilterText("Đông"));*/
         colors = new ArrayList<>();
-        colors.add(new FilterText("White"));
-        colors.add(new FilterText("Blue"));
-        colors.add(new FilterText("Green"));
-        colors.add(new FilterText("Black"));
-        colors.add(new FilterText("Brown"));
-        colors.add(new FilterText("Yallow"));
-        colors.add(new FilterText("Gray"));
-        colors.add(new FilterText("Pink"));
+        colors.add(new FilterText("White", R.drawable.border, Color.BLACK));
+        colors.add(new FilterText("Blue", R.drawable.border, Color.BLACK));
+        colors.add(new FilterText("Green", R.drawable.border, Color.BLACK));
+        colors.add(new FilterText("Black", R.drawable.border, Color.BLACK));
+        colors.add(new FilterText("Brown", R.drawable.border, Color.BLACK));
+        colors.add(new FilterText("Yallow", R.drawable.border, Color.BLACK));
+        colors.add(new FilterText("Gray", R.drawable.border, Color.BLACK));
+        colors.add(new FilterText("Pink", R.drawable.border, Color.BLACK));
 
     }
 

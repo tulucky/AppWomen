@@ -47,20 +47,17 @@ public class Colorada extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
         final ViewHolder holder = (ViewHolder) viewHolder;
         holder.color.setText(colors.get(i).getContent());
+        holder.color.setTextColor(colors.get(i).getColor());
+        holder.color.setBackgroundResource(colors.get(i).getBacground());
         if (slected == i) {
-            holder.color.setBackgroundResource(R.drawable.background_color);
-            holder.color.setTextColor(Color.WHITE);
-            holder.color.setBackgroundResource(R.drawable.background_color);
-
-        } else {
-            holder.color.setText(colors.get(i).getContent());
-            holder.color.setTextColor(Color.parseColor("#0e0e0e"));
-            holder.color.setBackgroundResource(R.drawable.border);
+            colors.get(i).setBacground(R.drawable.background_color);
+            colors.get(i).setColor(Color.WHITE);
+            holder.color.setBackgroundResource(colors.get(i).getBacground());
+            holder.color.setTextColor(colors.get(i).getColor());
         }
         holder.color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.color.setBackgroundResource(R.drawable.background_color);
                 Log.i("ss", "onClick: ");
                 if (i == 0) {
                     StateHolder.setMausac("white");
@@ -79,17 +76,17 @@ public class Colorada extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 } else if (i == 7) {
                     StateHolder.setMausac("pink");
                 }
-                filter.setVisibility(View.GONE);
                 slected = i;
-                //set size for object to update;
                 notifyDataSetChanged();
-                new Asyn().execute();
+                //set size for object to update;
+
+                new Asyn().execute(i);
 
             }
         });
     }
 
-    public class Asyn extends AsyncTask<Void, Void, Void> {
+    public class Asyn extends AsyncTask<Integer, Void, Void> {
         @Override
         protected void onPreExecute() {
             kProgressHUD = KProgressHUD.create(mcontext)
@@ -102,11 +99,17 @@ public class Colorada extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected Void doInBackground(Integer... integers) {
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+            for (int k = 0; k < colors.size(); k++) {
+                if (k != integers[0]) {
+                    colors.get(k).setColor(Color.BLACK);
+                    colors.get(k).setBacground(R.drawable.border);
+                }
             }
             Service.Request();
             return null;
@@ -116,10 +119,9 @@ public class Colorada extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         protected void onPostExecute(Void aVoid) {
             iconFilter.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
             kProgressHUD.dismiss();
+            filter.setVisibility(View.GONE);
 
         }
-
-
     }
 
     @Override
