@@ -78,6 +78,11 @@ public class ProducBrandtActivity extends AppCompatActivity {
     RecyclerView recyColor;
     List<FilterText> season;
     List<FilterText> colors;
+    ConstraintLayout atler;
+    TextView soketqua;
+    Service service;
+    AdapterCate adapterCate;
+    Colorada colorada;
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -116,15 +121,18 @@ public class ProducBrandtActivity extends AppCompatActivity {
         recyColor = findViewById(R.id.recy_color);
         loc = findViewById(R.id.filterby);
         iconFilter = findViewById(R.id.icon_filter);
+        soketqua = findViewById(R.id.so_ket_qua);
+        atler = findViewById(R.id.atler);
 
         int a= theLoai.getTop();
         catlist= new ArrayList<>();
-        catlist.add(new MenuList("Dress", Color.BLACK,0));
-        catlist.add(new MenuList("Tops", Color.BLACK,0));
-        catlist.add(new MenuList("Bottoms", Color.BLACK,0));
+        catlist.add(new MenuList("  Dress", Color.BLACK, 0));
+        catlist.add(new MenuList("  Tops", Color.BLACK, 0));
+        catlist.add(new MenuList("  Bottoms", Color.BLACK, 0));
         sortList= new ArrayList<>();
-        sortList.add(new MenuList("Giảm dần", Color.BLACK, 0));
-        sortList.add(new MenuList("Tăng dần", Color.BLACK, 0));
+        sortList.add(new MenuList("  Giảm dần", Color.BLACK, 0));
+        sortList.add(new MenuList("  Tăng dần", Color.BLACK, 0));
+        sortList.add(new MenuList("  Xem tất", Color.BLACK, 0));
        /* loc= new ArrayList<>();
         sortList.add(new MenuList("mau", Color.BLACK, 0));
         sortList.add(new MenuList("Giảm dần", Color.BLACK, 0));*/
@@ -190,7 +198,7 @@ public class ProducBrandtActivity extends AppCompatActivity {
                 popup.show();
             }
         });*/
-        Service service= new Service(this,product);
+        service = new Service(this, product, soketqua, atler);
         service.Request();
        /* season = new ArrayList<>();
         season.add(new FilterText("Xuân"));
@@ -215,7 +223,7 @@ public class ProducBrandtActivity extends AppCompatActivity {
         Muaada muaada = new Muaada(this, season);
         recyMua.setAdapter(muaada);*/
         recyColor.setLayoutManager(new GridLayoutManager(this, 4));
-        Colorada colorada = new Colorada(this, colors, iconFilter, filter);
+        colorada = new Colorada(this, colors, iconFilter, filter, service);
         recyColor.setNestedScrollingEnabled(false);
         recyColor.setAdapter(colorada);
         if (filter.getVisibility() == View.GONE) {
@@ -307,7 +315,7 @@ public class ProducBrandtActivity extends AppCompatActivity {
     }
 
     private void Sort() {
-        AdapterSort adapterSort = new AdapterSort(this, sortList, recyclerView, iconSort);
+        AdapterSort adapterSort = new AdapterSort(this, sortList, recyclerView, iconSort, service, colorada, adapterCate);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(adapterSort);
@@ -325,7 +333,7 @@ public class ProducBrandtActivity extends AppCompatActivity {
             iconSort.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
             recyclerView.setVisibility(View.GONE);}
 
-        mscroll.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+       /* mscroll.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView nestedScrollView, int i, int i1, int i2, int i3) {
                 if (menu.getTop()-100<i1&&i1<menu.getTop()+100){
@@ -340,11 +348,11 @@ public class ProducBrandtActivity extends AppCompatActivity {
                     recyclerView.setVisibility(View.GONE);
                 }
             }
-        });
+        });*/
     }
 
     private void theLoai() {
-        AdapterCate adapterCate = new AdapterCate(this, catlist, recyclerView, iconTheLoai);
+        adapterCate = new AdapterCate(this, catlist, recyclerView, iconTheLoai, service);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapterCate);
         if(recyclerView.getVisibility()==View.GONE){
@@ -362,7 +370,7 @@ public class ProducBrandtActivity extends AppCompatActivity {
             iconTheLoai.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
             recyclerView.setVisibility(View.GONE);}
 
-        mscroll.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+      /*  mscroll.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView nestedScrollView, int i, int i1, int i2, int i3) {
                 if (menu.getTop()-100<i1&&i1<menu.getTop()+100){
@@ -377,7 +385,7 @@ public class ProducBrandtActivity extends AppCompatActivity {
                     recyclerView.setVisibility(View.GONE);
                 }
             }
-        });
+        });*/
     }
 
 

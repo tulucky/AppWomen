@@ -26,13 +26,30 @@ public class AdapterCate extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     RecyclerView recyclerV;
     KProgressHUD kProgressHUD;
     ImageView iconMenu;
+    Service service;
 
-    public AdapterCate(Context mcontext, List<MenuList> menuList, RecyclerView recyclerView, ImageView imageView) {
+    public AdapterCate(Context mcontext, List<MenuList> menuList, RecyclerView recyclerView, ImageView imageView, Service service) {
         this.mcontext = mcontext;
         menuListItem= new ArrayList<>();
         this.menuListItem = menuList;
         this.recyclerV= recyclerView;
         this.iconMenu =imageView;
+        this.service = service;
+    }
+
+    public void reset() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (StateHolder.loai == null) {
+                    for (int k = 0; k < menuListItem.size(); k++) {
+                        menuListItem.get(k).setColor(Color.BLACK);
+                        menuListItem.get(k).setImageicon(0);
+                    }
+                }
+            }
+        });
+        thread.start();
     }
 
     @NonNull
@@ -93,7 +110,7 @@ public class AdapterCate extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            Service.Request();
+            service.Request();
            return null;
         }
 

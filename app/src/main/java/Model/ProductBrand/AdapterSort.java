@@ -18,6 +18,7 @@ import java.util.List;
 
 import Model.Service;
 import lucky.dev.tu.devandroid.R;
+import lucky.dev.tu.devandroid.Sale;
 
 public class AdapterSort extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     View view;
@@ -26,13 +27,19 @@ public class AdapterSort extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     RecyclerView recyclerV;
     KProgressHUD kProgressHUD;
     ImageView iconMenu;
+    Service service;
+    Colorada colorada;
+    AdapterCate adapterCate;
 
-    public AdapterSort(Context mcontext, List<MenuList> menuList, RecyclerView recyclerView, ImageView imageView) {
+    public AdapterSort(Context mcontext, List<MenuList> menuList, RecyclerView recyclerView, ImageView imageView, Service service, Colorada colorada, AdapterCate adapterCate) {
         this.mcontext = mcontext;
         menuListItem = new ArrayList<>();
         this.menuListItem = menuList;
         this.recyclerV = recyclerView;
         this.iconMenu = imageView;
+        this.service = service;
+        this.adapterCate = adapterCate;
+        this.colorada = colorada;
     }
 
     @NonNull
@@ -58,6 +65,8 @@ public class AdapterSort extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                             StateHolder.setSapxep("desc");
                         } else if (i == 1) {
                             StateHolder.setSapxep("asc");
+                        } else if (i == 2) {
+                            StateHolder.setSapxep("reset");
                         }
                         menuListItem.get(k).setColor(Color.RED);
                         menuListItem.get(k).setImageicon(R.drawable.ic_check_black_24dp);
@@ -65,8 +74,16 @@ public class AdapterSort extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         menuListItem.get(k).setColor(Color.BLACK);
                         menuListItem.get(k).setImageicon(0);
                     }
+                    if (StateHolder.sapxep.equals("reset")) {
+                        StateHolder.reset();
+                        adapterCate.reset();
+                        colorada.reset();
+                        adapterCate.notifyDataSetChanged();
+                        colorada.notifyDataSetChanged();
+                    }
                 }
                 notifyDataSetChanged();
+
                 new Asyn().execute();
 
             }
@@ -92,15 +109,15 @@ public class AdapterSort extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            Service.Request();
+            service.Request();
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             iconMenu.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
-            kProgressHUD.dismiss();
             recyclerV.setVisibility(View.GONE);
+            kProgressHUD.dismiss();
 
         }
 

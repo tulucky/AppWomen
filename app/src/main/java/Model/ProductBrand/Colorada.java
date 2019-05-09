@@ -27,12 +27,29 @@ public class Colorada extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     ImageView iconFilter;
     KProgressHUD kProgressHUD;
     ConstraintLayout filter;
+    Service service;
 
-    public Colorada(Context mcontext, List<FilterText> colors, ImageView imageView, ConstraintLayout filter) {
+    public Colorada(Context mcontext, List<FilterText> colors, ImageView imageView, ConstraintLayout filter, Service service) {
         this.mcontext = mcontext;
         this.colors = colors;
         iconFilter = imageView;
         this.filter = filter;
+        this.service = service;
+    }
+
+    public void reset() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (StateHolder.loai == null) {
+                    for (int k = 0; k < colors.size(); k++) {
+                        colors.get(k).setColor(Color.BLACK);
+                        colors.get(k).setBacground(R.drawable.border);
+                    }
+                }
+            }
+        });
+        thread.start();
     }
 
     @NonNull
@@ -111,7 +128,7 @@ public class Colorada extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     colors.get(k).setBacground(R.drawable.border);
                 }
             }
-            Service.Request();
+            service.Request();
             return null;
         }
 

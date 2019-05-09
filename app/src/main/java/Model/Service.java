@@ -1,9 +1,12 @@
 package Model;
 
 import android.content.Context;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -13,16 +16,22 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 public class Service {
-    private static Context context;
-    private static RecyclerView mrecycle;
+    private Context context;
+    private RecyclerView mrecycle;
     private static Call<List<Product>> call = null;
+    TextView soketqua;
+    ConstraintLayout atler;
 
-    public Service(Context mcontext, RecyclerView mrecycleView) {
+
+    public Service(Context mcontext, RecyclerView mrecycleView, TextView soketqua, ConstraintLayout atler) {
         this.context = mcontext;
         this.mrecycle = mrecycleView;
+        this.soketqua = soketqua;
+        this.atler = atler;
+
     }
 
-    public static void Request() {
+    public void Request() {
         Log.i("opo", "Request: " + StateHolder.loai + " " + StateHolder.mausac);
         ServiceApi mService = RetrofitO.getmRetrofit().create(ServiceApi.class);
         if (StateHolder.loai == null && StateHolder.sapxep == null && StateHolder.mausac == null) {
@@ -67,7 +76,14 @@ public class Service {
             }
         });
     }
-    private static void showContent(List<Product> body) {
+
+    private void showContent(List<Product> body) {
+        if (body.size() <= 3) {
+            atler.setVisibility(View.VISIBLE);
+            soketqua.setText("" + body.size());
+        } else {
+            atler.setVisibility(View.GONE);
+        }
         mrecycle.setNestedScrollingEnabled(false);
         mrecycle.setHasFixedSize(true);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context,2);
