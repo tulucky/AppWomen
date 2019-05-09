@@ -100,8 +100,9 @@ public class AdapterCate extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @Override
         protected void onPostExecute(Void aVoid) {
             iconMenu.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
-            kProgressHUD.dismiss();
             recyclerV.setVisibility(View.GONE);
+            kProgressHUD.dismiss();
+
 
         }
 

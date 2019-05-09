@@ -28,7 +28,7 @@ public interface ServiceApi {
     Call<List<Product>> getType(@Query("type") String type);
 
     @GET("typebycolor.php")
-    Call<List<Product>> typeByColor(@Query("color") String color, @Query("type") String type);
+    Call<List<Product>> typeByColor(@Query("type") String type, @Query("color") String color);
 
     @GET("sorttypebyprice.php")
     Call<List<Product>> sortTypesbyPrice(@Query("type") String loai, @Query("sort") String sort);

@@ -43,6 +43,8 @@ public class Service {
         } else if (StateHolder.loai != null && StateHolder.sapxep == null && StateHolder.mausac != null) {
             Log.i("opo", "jo");
             call = mService.typeByColor(StateHolder.loai, StateHolder.mausac);
+            //chu y truyen dung thu tu cho method of severviece ko gay ra loi
+            //o day la type ,color => method(@ .. type,color)
             //getcolors va sort
         } else if (StateHolder.loai == null && StateHolder.sapxep != null && StateHolder.mausac != null) {
             call = mService.sortColorByPrice(StateHolder.mausac, StateHolder.sapxep);

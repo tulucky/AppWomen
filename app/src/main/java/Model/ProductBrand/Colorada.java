@@ -118,8 +118,9 @@ public class Colorada extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @Override
         protected void onPostExecute(Void aVoid) {
             iconFilter.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
-            kProgressHUD.dismiss();
             filter.setVisibility(View.GONE);
+            kProgressHUD.dismiss();
+
 
         }
     }
