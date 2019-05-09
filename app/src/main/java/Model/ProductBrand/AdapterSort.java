@@ -79,7 +79,6 @@ public class AdapterSort extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                                 colorada.reset();
                                 colorada.notifyDataSetChanged();
                             }
-
                         }
                         menuListItem.get(k).setColor(Color.RED);
                         menuListItem.get(k).setImageicon(R.drawable.ic_check_black_24dp);
@@ -123,6 +122,8 @@ public class AdapterSort extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @Override
         protected void onPostExecute(Void aVoid) {
             iconMenu.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
+            menuListItem.get(2).setColor(Color.BLACK);
+            menuListItem.get(2).setImageicon(0);
             recyclerV.setVisibility(View.GONE);
             kProgressHUD.dismiss();
 
