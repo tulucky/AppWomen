@@ -26,18 +26,25 @@ public class Service {
         ServiceApi mService = RetrofitO.getmRetrofit().create(ServiceApi.class);
         if (StateHolder.loai == null && StateHolder.sapxep == null && StateHolder.mausac == null) {
             call = mService.getProducts();
+            //get loai
         } else if (StateHolder.sapxep == null && StateHolder.mausac == null && StateHolder.loai != null) {
-            call = mService.colorByType(StateHolder.loai);
+            call = mService.getType(StateHolder.loai);
+            //sap xep sp
         } else if (StateHolder.loai == null && StateHolder.mausac == null && StateHolder.sapxep != null) {
             call = mService.sortProducts(StateHolder.sapxep);
+            //getcolors
         } else if (StateHolder.sapxep == null && StateHolder.loai == null && StateHolder.mausac != null) {
             call = mService.productByColor(StateHolder.mausac);
+            //get loai va sort
         } else if (StateHolder.loai != null && StateHolder.sapxep != null && StateHolder.mausac == null) {
             call = mService.sortTypesbyPrice(StateHolder.loai, StateHolder.sapxep);
+            //get typebycolor
         } else if (StateHolder.loai != null && StateHolder.sapxep == null && StateHolder.mausac != null) {
-            call = mService.loaiTheoMau(StateHolder.loai, StateHolder.mausac);
+            call = mService.typeByColor(StateHolder.loai, StateHolder.mausac);
+            //getcolors va sort
         } else if (StateHolder.loai == null && StateHolder.sapxep != null && StateHolder.mausac != null) {
             call = mService.sortColorByPrice(StateHolder.mausac, StateHolder.sapxep);
+            // get colors and a type and sort by price
         } else if (StateHolder.loai != null && StateHolder.sapxep != null && StateHolder.mausac != null) {
             call = mService.typeColorByPrice(StateHolder.loai, StateHolder.sapxep, StateHolder.mausac);
         }

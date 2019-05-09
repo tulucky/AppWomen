@@ -47,9 +47,16 @@ public class Adapterpb extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         Log.i("oo", " " + State.ids);
         //  Log.i("a", "" + listProduct.get(position).getImage());
         final MyHolder mholder = (MyHolder) holder;
-        Glide.with(mcontext)
-                .load(RetrofitO.url + listProduct.get(position).getImage())
-                .into(mholder.mImage);
+        if (StateHolder.mausac != null) {
+            Log.i("a", "" + listProduct.get(position).getColor(StateHolder.mausac));
+            Glide.with(mcontext)
+                    .load(RetrofitO.url + listProduct.get(position).getColor(StateHolder.mausac))
+                    .into(mholder.mImage);
+        } else {
+            Glide.with(mcontext)
+                    .load(RetrofitO.url + listProduct.get(position).getImage())
+                    .into(mholder.mImage);
+        }
         mholder.mPrice.setText(listProduct.get(position).getName());
         mholder.mGiaGoc.setText(listProduct.get(position).getOriginprice());
         mholder.phanTram.setText(listProduct.get(position).getSale());

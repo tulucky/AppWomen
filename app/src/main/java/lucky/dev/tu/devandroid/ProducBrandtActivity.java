@@ -216,6 +216,7 @@ public class ProducBrandtActivity extends AppCompatActivity {
         recyMua.setAdapter(muaada);*/
         recyColor.setLayoutManager(new GridLayoutManager(this, 4));
         Colorada colorada = new Colorada(this, colors, iconFilter, filter);
+        recyColor.setNestedScrollingEnabled(false);
         recyColor.setAdapter(colorada);
         if (filter.getVisibility() == View.GONE) {
             int s = menu.getTop();
@@ -308,6 +309,7 @@ public class ProducBrandtActivity extends AppCompatActivity {
     private void Sort() {
         AdapterSort adapterSort = new AdapterSort(this, sortList, recyclerView, iconSort);
         recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(adapterSort);
         if(recyclerView.getVisibility()==View.GONE){
             int s= menu.getTop();

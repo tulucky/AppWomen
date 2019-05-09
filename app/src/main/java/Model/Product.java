@@ -50,6 +50,61 @@ public class Product {
     @SerializedName("price")
     @Expose
     private float price;
+    @SerializedName("white")
+    @Expose
+    private String white;
+    @SerializedName("blue")
+    @Expose
+    private String blue;
+    @SerializedName("green")
+    @Expose
+    private String green;
+    @SerializedName("black")
+    @Expose
+    private String black;
+    @SerializedName("brown")
+    @Expose
+    private String brown;
+    @SerializedName("yallow")
+    @Expose
+    private String yallow;
+    @SerializedName("gray")
+    @Expose
+    private String gray;
+    @SerializedName("pink")
+    @Expose
+    private String pink;
+
+    public String getColor(String color) {
+        String mau = null;
+        switch (color) {
+            case "white":
+                mau = this.white;
+                break;
+            case "blue":
+                mau = this.blue;
+                break;
+            case "green":
+                mau = this.green;
+                break;
+            case "black":
+                mau = this.black;
+                break;
+            case "brown":
+                mau = this.brown;
+                break;
+            case "yallow":
+                mau = this.yallow;
+                break;
+            case "gray":
+                mau = this.gray;
+                break;
+            case "pink":
+                mau = this.pink;
+                break;
+        }
+        return mau;
+    }
 
     public void setPrice(float price) {
         this.price = price;

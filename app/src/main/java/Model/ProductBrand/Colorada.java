@@ -48,6 +48,7 @@ public class Colorada extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         final ViewHolder holder = (ViewHolder) viewHolder;
         holder.color.setText(colors.get(i).getContent());
         if (slected == i) {
+            holder.color.setBackgroundResource(R.drawable.background_color);
             holder.color.setTextColor(Color.WHITE);
             holder.color.setBackgroundResource(R.drawable.background_color);
 
@@ -59,6 +60,7 @@ public class Colorada extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         holder.color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                holder.color.setBackgroundResource(R.drawable.background_color);
                 Log.i("ss", "onClick: ");
                 if (i == 0) {
                     StateHolder.setMausac("white");
