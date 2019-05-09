@@ -118,7 +118,7 @@ public class Colorada extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @Override
         protected Void doInBackground(Integer... integers) {
             try {
-                Thread.sleep(2000);
+                Thread.sleep(1500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

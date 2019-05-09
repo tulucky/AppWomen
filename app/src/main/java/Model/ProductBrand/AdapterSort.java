@@ -66,7 +66,20 @@ public class AdapterSort extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         } else if (i == 1) {
                             StateHolder.setSapxep("asc");
                         } else if (i == 2) {
-                            StateHolder.setSapxep("reset");
+                            StateHolder.reset();
+                            if (colorada != null && adapterCate != null) {
+                                adapterCate.reset();
+                                colorada.reset();
+                                adapterCate.notifyDataSetChanged();
+                                colorada.notifyDataSetChanged();
+                            } else if (colorada == null && adapterCate != null) {
+                                adapterCate.reset();
+                                adapterCate.notifyDataSetChanged();
+                            } else if (colorada != null && adapterCate == null) {
+                                colorada.reset();
+                                colorada.notifyDataSetChanged();
+                            }
+
                         }
                         menuListItem.get(k).setColor(Color.RED);
                         menuListItem.get(k).setImageicon(R.drawable.ic_check_black_24dp);
@@ -74,13 +87,7 @@ public class AdapterSort extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         menuListItem.get(k).setColor(Color.BLACK);
                         menuListItem.get(k).setImageicon(0);
                     }
-                    if (StateHolder.sapxep.equals("reset")) {
-                        StateHolder.reset();
-                        adapterCate.reset();
-                        colorada.reset();
-                        adapterCate.notifyDataSetChanged();
-                        colorada.notifyDataSetChanged();
-                    }
+
                 }
                 notifyDataSetChanged();
 
@@ -105,7 +112,7 @@ public class AdapterSort extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                Thread.sleep(2000);
+                Thread.sleep(1500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

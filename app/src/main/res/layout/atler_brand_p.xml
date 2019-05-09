@@ -23,13 +23,25 @@
         android:id="@+id/so_ket_qua"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
         android:layout_marginStart="10dp"
-        android:textSize="20sp"
-        android:textColor="@color/pink"
-        android:fontFamily="@font/helveticaheue_medium"
+        android:fontFamily="@font/utm_avob"
         android:text="2"
+        android:textColor="@color/pink"
+        android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView27"
         app:layout_constraintStart_toEndOf="@+id/textView27"
         app:layout_constraintTop_toTopOf="@+id/textView27" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView27"
+        app:srcCompat="@drawable/hehe" />
 
 </android.support.constraint.ConstraintLayout>
