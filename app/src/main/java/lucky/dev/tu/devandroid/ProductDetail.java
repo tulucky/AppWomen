@@ -105,9 +105,11 @@ public class ProductDetail extends AppCompatActivity {
     TextView count;
     List<OrderP> temp;
     FloatingActionButton fab;
+    ConstraintLayout backtopb;
     android.support.design.widget.AppBarLayout appbar;
     CollapsingToolbarLayout collapsingToolbarLayout;
     private static final String urlData0 = "https://shoplady668.000webhostapp.com//allproducts.php";
+    /* private static final String urlData0 = "http://192.168.1.108/wmshop/allproducts.php";*/
     List<String> daTa;
 
     @Override
@@ -171,6 +173,7 @@ public class ProductDetail extends AppCompatActivity {
         fab = findViewById(R.id.fab);
         appbar = findViewById(R.id.app_bar_layout);
         fab.hide();
+        backtopb = findViewById(R.id.backtopb);
         SharedPreferences sharedPref = ProductDetail.this.getSharedPreferences("Accout"
                 , Context.MODE_PRIVATE);
         final String name = sharedPref.getString("idName", "khong");
@@ -190,6 +193,12 @@ public class ProductDetail extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<SoLuong>> call, Throwable t) {
 
+            }
+        });
+        backtopb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
         toBag.setVisibility(GONE);

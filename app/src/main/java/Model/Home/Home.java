@@ -49,6 +49,7 @@ import Model.MySingleton;
 import Model.RetrofitO;
 import Model.ServiceApi;
 import Model.Slide;
+import de.hdodenhof.circleimageview.CircleImageView;
 import lucky.dev.tu.devandroid.MainActivity;
 import lucky.dev.tu.devandroid.R;
 import lucky.dev.tu.devandroid.Sale;
@@ -69,6 +70,8 @@ public class Home extends Fragment {
     RelativeLayout relativ;
     ConstraintLayout progress;
     ImageView news;
+    CircleImageView dressdress;
+    CircleImageView tops;
     android.support.design.widget.FloatingActionButton fab;
 
     public NestedScrollView nestMain;
@@ -100,6 +103,22 @@ public class Home extends Fragment {
         progressBar.setIndeterminateDrawable(foldingCube);
         progressBar.setVisibility(View.GONE);
         grid.setVisibility(View.GONE);
+        dressdress = view.findViewById(R.id.dressdress);
+        tops = view.findViewById(R.id.tops);
+        dressdress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Sale.class);
+                getActivity().startActivity(intent);
+            }
+        });
+        tops.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Sale.class);
+                getActivity().startActivity(intent);
+            }
+        });
         mRecycleZezo = view.findViewById(R.id.Recycle_one);
         getDataRecyZezo();
         //cu truy cap tai nguen la phai r
