@@ -68,8 +68,8 @@ public interface ServiceApi {
     Call<List<OrderP>> getListOrder(@Field("name") String name);
 
     @FormUrlEncoded
-    @POST("upnumberPrice.php")
-    Call<List<OrderP>> upNumberPrice(@Field("id") int id, @Field("number") int number, @Field("price") float price);
+    @POST("upnumberprice.php")
+    Call<Void> upNumberPrice(@Field("id") int id, @Field("number") int number, @Field("price") float price);
 
     @FormUrlEncoded
     @POST("updateorder.php")

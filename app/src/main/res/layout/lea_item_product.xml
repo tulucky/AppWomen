@@ -61,17 +61,21 @@
         android:id="@+id/phantram"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
         android:layout_marginStart="12dp"
         android:background="@drawable/background"
-        android:text="10%"
+        android:fontFamily="@font/utm_avob"
         android:gravity="center"
         android:padding="2dp"
+        android:text="10%"
         android:textColor="@color/white"
         android:textSize="15sp"
-        android:fontFamily="@font/utm_avob"
         app:layout_constraintBottom_toBottomOf="@+id/price_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/price_1"
-        app:layout_constraintTop_toTopOf="@+id/price_1" />
+        app:layout_constraintTop_toTopOf="@+id/price_1"
+        app:layout_constraintVertical_bias="0.909" />
 
     <LinearLayout
         android:id="@+id/linearLayout"

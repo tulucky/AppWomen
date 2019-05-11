@@ -79,20 +79,17 @@ public class Signin extends Fragment {
                         @Override
                         public void onResponse(Call<List<Alter>> call, Response<List<Alter>> response) {
                             Log.i("haa", "" + response.body().get(0).getAlter());
-
-                            Toast.makeText(getActivity(), "kkll", Toast.LENGTH_LONG).show();
                             if (response.body().get(0).getAlter().equals("2")) {
-                                alertname.setText("Nickname không đúng");
                                 alertpass.setText("Password không đúng");
                                 alertname.setVisibility(View.VISIBLE);
                                 passIn.getText().clear();
-                                nameIn.getText().clear();
                                 alertpass.setVisibility(View.VISIBLE);
                             } else if (response.body().get(0).getAlter().equals("1")) {
                                 alertpass.setText("Password không đúng");
                                 alertpass.setVisibility(View.VISIBLE);
                                 passIn.getText().clear();
                             } else if (response.body().get(0).getAlter().equals("0")) {
+                                Toast.makeText(getActivity(), "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                                 getActivity().finish();
                                 /*   Toast.makeText(getActivity(), "dang nhap ok", Toast.LENGTH_LONG).show();*/
                                 SharedPreferences sharedPref = getActivity().getSharedPreferences(

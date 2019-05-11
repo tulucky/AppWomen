@@ -361,14 +361,14 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/sticky_product_brand" />
-
+        </android.support.constraint.ConstraintLayout>
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/menu_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="300dp"
                 android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/line">
+                app:layout_constraintTop_toBottomOf="@id/constraintLayout2">
             </android.support.v7.widget.RecyclerView>
 
             <include
@@ -378,9 +378,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/line" />
+                app:layout_constraintTop_toBottomOf="@id/constraintLayout2" />
 
-        </android.support.constraint.ConstraintLayout>
 
     </android.support.constraint.ConstraintLayout>
     </me.didik.component.StickyNestedScrollView>

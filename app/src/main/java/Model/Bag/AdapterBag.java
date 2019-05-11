@@ -345,7 +345,7 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @Override
         protected Void doInBackground(Integer... integers) {
             ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
-            Call<List<OrderP>> call = serviceApi.upNumberPrice(data.get(integers[0]).getId(), integers[1], priceUp);
+            Call<Void> call = serviceApi.upNumberPrice(data.get(integers[0]).getId(), integers[1], priceUp);
             try {
                 call.execute();
             } catch (IOException e) {

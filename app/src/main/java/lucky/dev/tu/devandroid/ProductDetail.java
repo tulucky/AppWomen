@@ -109,7 +109,7 @@ public class ProductDetail extends AppCompatActivity {
     android.support.design.widget.AppBarLayout appbar;
     CollapsingToolbarLayout collapsingToolbarLayout;
     private static final String urlData0 = "https://shoplady668.000webhostapp.com//allproducts.php";
-    /* private static final String urlData0 = "http://192.168.1.108/wmshop/allproducts.php";*/
+    /*  private static final String urlData0 = "http://192.168.1.108/wmshop/allproducts.php";*/
     List<String> daTa;
 
     @Override
@@ -399,15 +399,16 @@ public class ProductDetail extends AppCompatActivity {
                                 addNumber = temp.get(i).getNumber() + orderP.getNumber();
                                 float price = (addNumber * soLuong.getGia());
                                 ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
-                                Call<List<OrderP>> call = serviceApi.upNumberPrice(temp.get(i).getId(), addNumber, price);
-                                call.enqueue(new Callback<List<OrderP>>() {
+                                Call<Void> call = serviceApi.upNumberPrice(temp.get(i).getId(), addNumber, price);
+                                call.enqueue(new Callback<Void>() {
                                     @Override
-                                    public void onResponse(Call<List<OrderP>> call, retrofit2.Response<List<OrderP>> response) {
-
+                                    public void onResponse(Call<Void> call, retrofit2.Response<Void> response) {
+                                        Log.i("mm", "onResponse: " + response);
                                     }
 
                                     @Override
-                                    public void onFailure(Call<List<OrderP>> call, Throwable t) {
+                                    public void onFailure(Call<Void> call, Throwable t) {
+                                        Log.i("mm", "onFailure: " + t.getMessage());
 
                                     }
                                 });

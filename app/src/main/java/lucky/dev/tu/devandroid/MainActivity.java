@@ -227,6 +227,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 transaction1.commit();
                 break;
             case R.id.avatar:
+                SharedPreferences preferences = this.getSharedPreferences("Accout", this.MODE_PRIVATE);
+                name = preferences.getString("idName", "khong");
                 if (name.equals("khong")) {
                     actionBar.setVisibility(View.GONE);
                     bag.setImageResource(R.drawable.bag);

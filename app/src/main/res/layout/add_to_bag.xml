@@ -62,7 +62,6 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/backg_card"
         android:gravity="center"
-        android:text="36"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"

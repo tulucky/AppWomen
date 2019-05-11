@@ -116,7 +116,6 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="14sp"
-        android:text="0"
         android:fontFamily="@font/helveticaheue_medium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/bag"

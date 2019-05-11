@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DevAndroid</string>
+    <string name="app_name">LadyShop</string>
     <string name="StrikePrice"><strike>600.000đ</strike></string>
     <string name="singup">Tôi đồng ý với<u><b> điều khoản</b></u> và<u><b> chính sách</b></u> </string>
     <string name="atler">Sản phẩm bạn chọn bạn chọn <b> không có</b> hoặc <b> đang có ít</b> chọn sản phẩm khác để xem nhiều!</string>

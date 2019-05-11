@@ -227,17 +227,16 @@ public class ProducBrandtActivity extends AppCompatActivity {
         recyColor.setNestedScrollingEnabled(false);
         recyColor.setAdapter(colorada);
         if (filter.getVisibility() == View.GONE) {
+            filter.setVisibility(View.VISIBLE);
             int s = menu.getTop();
             mscroll.smoothScrollTo(0, menu.getTop());
-            filter.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
             iconSort.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
             iconTheLoai.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
             iconFilter.setImageResource(R.drawable.ic_arrow_drop_up_black_24dp2);
-        } else {
+        } else
             filter.setVisibility(View.GONE);
             iconFilter.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
-        }
     }
 
     private void getaBrand(int id, final String brandImage, final String logo, final String nameb, final String desbrand) {
