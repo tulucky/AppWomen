@@ -29,8 +29,9 @@ public class ListProduct extends Fragment {
     RecyclerView listProduct;
     List<Product> listData;
     private static final String urlData3 = "https://shoplady668.000webhostapp.com//allproducts.php";
-    /* private static final String urlData3 = "http://192.168.1.108/wmshop/allproducts.php";*/
 
+    /*private static final String urlData3 = "http://192.168.1.108/wmshop/allproducts.php";
+     */
     public ListProduct() {
     }
 

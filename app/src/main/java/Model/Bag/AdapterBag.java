@@ -24,6 +24,8 @@ import com.bumptech.glide.Glide;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import Model.BrandProductDetal.BottomAdapImage;
@@ -33,6 +35,7 @@ import Model.Product;
 import Model.RetrofitO;
 import Model.ServiceApi;
 import Model.SoLuong;
+import Model.State;
 import lucky.dev.tu.devandroid.MainActivity;
 import lucky.dev.tu.devandroid.R;
 import retrofit2.Call;
@@ -58,9 +61,11 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private ConstraintLayout checkOut;
     TextView priceCheck;
     String nameUser;
-    float priceUp;
     int s;
-
+    float tong;
+    int id;
+    int cout = 0;
+    int dem;
     public int tongSoLuong() {
         s = 0;
         for (int i = 0; i < data.size(); i++) {
@@ -68,6 +73,31 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
         return s;
     }
+
+    public float tongGia() {
+        tong = 0;
+        for (int i = 0; i < data.size(); i++) {
+            Log.i("poi", "tongGia1: " + data.get(i).getNumber() + " " + data.get(i).getPrice());
+            tong = tong + data.get(i).getNumber() * data.get(i).getPrice();
+        }
+        return tong;
+    }
+    /*public void capNhatGia(){
+        final ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
+        Call<List<SoLuong>> call2 = serviceApi.getPriceCheck(nameUser);
+        call2.enqueue(new Callback<List<SoLuong>>() {
+            @Override
+            public void onResponse(Call<List<SoLuong>> call, Response<List<SoLuong>> response) {
+                Log.i("mop", "" + response.body().get(0).getGia());
+                priceCheck.setText("" + response.body().get(0).getGia() + "$");
+                //get price
+            }
+            @Override
+            public void onFailure(Call<List<SoLuong>> call, Throwable t) {
+            }
+        });
+
+    }*/
 
     public AdapterBag(Context mcontext, List<OrderP> data, ConstraintLayout updateProduct, ConstraintLayout check, TextView priceCheck) {
         this.mcontext = mcontext;
@@ -91,27 +121,17 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
-        ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
-        Call<List<SoLuong>> call2 = serviceApi.getPriceCheck(nameUser);
-        call2.enqueue(new Callback<List<SoLuong>>() {
-            @Override
-            public void onResponse(Call<List<SoLuong>> call, Response<List<SoLuong>> response) {
-                Log.i("mop", "" + response.body().get(0).getGia());
-                priceCheck.setText("" + response.body().get(0).getGia() + "$");
-                //get price
-            }
-
-            @Override
-            public void onFailure(Call<List<SoLuong>> call, Throwable t) {
-            }
-        });
+        dem = i;
+        id = data.get(i).getId();
+        final SoLuong soLuong = new SoLuong();
+        //capNhatGia();
         final ViewHolderBag holder = (ViewHolderBag) viewHolder;
         Glide.with(mcontext).load(RetrofitO.url + data.get(i).getImagebag()).into(holder.imageBag);
         holder.textEdit.setText(data.get(i).getSizebag());
+        //khi nguoi dung click + hoac tru qua nhanh dan den viec chua kip inset xong(van con dang isert) vao host free da bi xoa mat id gay ra
+        //loi outofindex .giai quet tao id chung
         holder.amount.setText("" + data.get(i).getNumber());
-        final SoLuong soLuong = new SoLuong();
-        Log.i("mn", "" + data.get(i).getIdProductb());
-        int id = data.get(i).getIdProductb();
+        final int id = data.get(i).getIdProductb();
         if (data.get(i).getNumber() == 1) {
             holder.sub.setVisibility(View.GONE);
             holder.delete.setVisibility(View.VISIBLE);
@@ -126,7 +146,8 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             @Override
             public void onResponse(Call<List<Product>> call, retrofit2.Response<List<Product>> response) {
                 dataProduct = response.body();
-                soLuong.setGia(dataProduct.get(0).getPrice());
+                setGia(dataProduct.get(0).getPrice());
+                Log.i("pi", " " + dataProduct.get(0).getPrice());
                 holder.priceBag.setText(dataProduct.get(0).getName());
                 holder.originPriBag.setText(dataProduct.get(0).getOriginprice());
                 holder.originPriBag.setPaintFlags(holder.originPriBag.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
@@ -143,9 +164,25 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (data.get(i).getNumber() == 1) {
-                    holder.amount.setText(" " + data.get(i).getNumber());
-                }
+                ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
+                Call<Void> call = serviceApi.deleteOrder(data.get(i).getId());
+                Log.i("cc", "onResponse:lololo ");
+                call.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        Log.i("cc", "onResponse: " + response);
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Log.i("cc", "onRes: " + t.getMessage());
+                    }
+                });
+                Log.i("pp1", "onCl: " + i);
+                data.remove(i);
+                notifyDataSetChanged();
+                ((MainActivity) mcontext).number.setText("" + tongSoLuong());
+                // capNhatGia();
             }
         });
         holder.plus.setOnClickListener(new View.OnClickListener() {
@@ -153,10 +190,15 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             public void onClick(View v) {
                 int k = data.get(i).getNumber();
                 k++;
+                if (k > 1) {
+                    holder.delete.setVisibility(View.GONE);
+                    holder.sub.setVisibility(View.VISIBLE);
+                }
+                holder.amount.setText("" + k);
                 data.get(i).setNumber(k);
-                priceUp = (k * soLuong.getGia());
                 ((MainActivity) mcontext).number.setText("" + tongSoLuong());
-                new Asyn().execute(i, k);
+                priceCheck.setText("" + tongGia() + "$");
+                new Asyn().execute(k);
 
             }
         });
@@ -165,13 +207,22 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             public void onClick(View v) {
                 int k = data.get(i).getNumber();
                 k--;
-                ((MainActivity) mcontext).number.setText("" + k);
+                if (k == 1) {
+                    k = 1;
+                    holder.sub.setVisibility(View.GONE);
+                    holder.delete.setVisibility(View.VISIBLE);
+                }
+                holder.amount.setText("" + k);
                 data.get(i).setNumber(k);
-                priceUp = (k * soLuong.getGia());
                 ((MainActivity) mcontext).number.setText("" + tongSoLuong());
-                new Asyn().execute(i, k);
+                priceCheck.setText("" + tongGia() + "$");
+                new Asyn().execute(k);
             }
         });
+        data.get(dem).setPrice(State.price);
+        Log.i("co", "setGia: " + data.get(dem).getPrice());
+        priceCheck.setText("" + tongGia() + "$");
+        Log.i("pop", "onBindViewHolder: " + tongGia());
         holder.imageEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -280,11 +331,13 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         call.enqueue(new Callback<List<String>>() {
                             @Override
                             public void onResponse(Call<List<String>> call, retrofit2.Response<List<String>> response) {
-                                int slected = response.body().indexOf(data.get(i).getSizebag());
-                                GridLayoutManager gridLayoutManager = new GridLayoutManager(mcontext, 5);
-                                BottomAdapSize adapSize = new BottomAdapSize(mcontext, response.body(), orderP, sizeDes, slected);
-                                size.setLayoutManager(gridLayoutManager);
-                                size.setAdapter(adapSize);
+                                if (response.isSuccessful()) {
+                                    int slected = response.body().indexOf(data.get(i).getSizebag());
+                                    GridLayoutManager gridLayoutManager = new GridLayoutManager(mcontext, 5);
+                                    BottomAdapSize adapSize = new BottomAdapSize(mcontext, response.body(), orderP, sizeDes, slected);
+                                    size.setLayoutManager(gridLayoutManager);
+                                    size.setAdapter(adapSize);
+                                }
 
                             }
 
@@ -333,24 +386,49 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 updateProduct.setVisibility(View.VISIBLE);
             }
         });
+
     }
+
+    private void setGia(float price) {
+        State.addPrice(price);
+        cout++;
+
+        Log.i("om", "setGia: " + State.price);
+    }
+
+  /*  public void capNhat(int i, int k){
+        SharedPreferences sharedPref = mcontext.getSharedPreferences(
+                "Orders", Context.MODE_PRIVATE);
+        float gia= sharedPref.getFloat(""+data.get(i).getId(),0);
+        ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
+        Call<Void> call = serviceApi.upNumberPrice(data.get(i).getId(),k,gia);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
+
+    }*/
 
     class Asyn extends AsyncTask<Integer, Void, Void> {
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            notifyDataSetChanged();
-        }
-
-        @Override
         protected Void doInBackground(Integer... integers) {
             ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
-            Call<Void> call = serviceApi.upNumberPrice(data.get(integers[0]).getId(), integers[1], priceUp);
+            Call<Void> call = serviceApi.upNumberPrice(id, integers[0]);
             try {
-                call.execute();
+                Response<Void> response = call.execute();
+                Log.i("dd", "doInBackground: " + response);
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
             return null;
         }
     }

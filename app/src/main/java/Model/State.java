@@ -5,8 +5,13 @@ import java.util.List;
 
 public class State {
     public int on;
+    public static float price;
     public static List<Product> ids = new ArrayList<>();
     public static List<Product> products;
+
+    public static void addPrice(float p) {
+        price = p;
+    }
 
     public static void addP(Product p) {
         ids.add(p);

@@ -63,6 +63,7 @@
         android:background="@drawable/backg_card"
         android:gravity="center"
         android:textColor="@color/white"
+        android:text="0"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/bagd"

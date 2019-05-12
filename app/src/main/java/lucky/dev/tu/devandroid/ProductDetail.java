@@ -42,6 +42,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -170,6 +171,7 @@ public class ProductDetail extends AppCompatActivity {
         cancel = findViewById(R.id.cancel_d);
         toBag = findViewById(R.id.to_bag);
         count = findViewById(R.id.count);
+        count.setVisibility(GONE);
         fab = findViewById(R.id.fab);
         appbar = findViewById(R.id.app_bar_layout);
         fab.hide();
@@ -321,7 +323,6 @@ public class ProductDetail extends AppCompatActivity {
                     callOrder.enqueue(new Callback<List<OrderP>>() {
                         @Override
                         public void onResponse(Call<List<OrderP>> call, retrofit2.Response<List<OrderP>> response) {
-                            Toast.makeText(ProductDetail.this, " hhh", Toast.LENGTH_LONG).show();
                             //chua co gi response is empty
                             Log.i("hh", " " + response.body());
                             temp = response.body();
@@ -389,6 +390,7 @@ public class ProductDetail extends AppCompatActivity {
                 //kiem tra dau vao truoc khi add nhu id,image,size de update number
                 switch (test) {
                     case 0:
+                        int m = 0;
                         for (int i = 0; i < temp.size(); i++) {
                             /* Toast.makeText(ProductDetail.this, "nna nanh", Toast.LENGTH_LONG).show();*/
                             if (temp.get(i).getIdProductb() == orderP.getIdProductb() && temp.get(i).getImagebag()
@@ -396,10 +398,10 @@ public class ProductDetail extends AppCompatActivity {
                                 Log.i("pl", " davao day" + temp.get(i).getId());
                                 /*  Toast.makeText(ProductDetail.this, "tao ra", Toast.LENGTH_LONG).show();*/
                                 test = 2;
+                                m = i;
                                 addNumber = temp.get(i).getNumber() + orderP.getNumber();
-                                float price = (addNumber * soLuong.getGia());
                                 ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
-                                Call<Void> call = serviceApi.upNumberPrice(temp.get(i).getId(), addNumber, price);
+                                Call<Void> call = serviceApi.upNumberPrice(temp.get(i).getId(), addNumber);
                                 call.enqueue(new Callback<Void>() {
                                     @Override
                                     public void onResponse(Call<Void> call, retrofit2.Response<Void> response) {
@@ -415,41 +417,54 @@ public class ProductDetail extends AppCompatActivity {
                             }
                         }
                         if (test == 2) {
-                            toBag.setVisibility(VISIBLE);
+                            final KProgressHUD kProgressHUD = KProgressHUD.create(ProductDetail.this)
+                                    .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                                    .setCancellable(true)
+                                    .setBackgroundColor(Color.GRAY)
+                                    .setAnimationSpeed(2)
+                                    .setSize(100, 100)
+                                    .setDimAmount(0.5f)
+                                    .show();
                             Glide.with(ProductDetail.this).load(RetrofitO.url + orderP.getImagebag())
                                     .into(toBag);
-                            Animation animation = AnimationUtils.loadAnimation(ProductDetail.this, R.anim.to_bag);
-                            toBag.startAnimation(animation);
-                            new Handler().postDelayed(new Runnable() {
+                            final int finalM = m;
+                            ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
+                            Call<List<SoLuong>> call = serviceApi.getSoLuong(name);
+                            //trean da up to db
+                            call.enqueue(new Callback<List<SoLuong>>() {
                                 @Override
-                                public void run() {
-                                    toBag.setVisibility(GONE);
-                                    ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
-                                    Call<List<SoLuong>> call = serviceApi.getSoLuong(name);
-                                    call.enqueue(new Callback<List<SoLuong>>() {
-                                        @Override
-                                        public void onResponse(Call<List<SoLuong>> call, retrofit2.Response<List<SoLuong>> response) {
-                                            count.setText("" + response.body().get(0).getSoLuong());
-                                            //trean da up to db
-                                            Animation animation = AnimationUtils.loadAnimation(ProductDetail.this, R.anim.count);
-                                            count.startAnimation(animation);
-                                        }
+                                public void onResponse(Call<List<SoLuong>> call, final retrofit2.Response<List<SoLuong>> response) {
+                                    kProgressHUD.dismiss();
+                                    if (temp.get(finalM).getNumber() == response.body().get(0).getSoLuong()) {
+                                        Toast.makeText(ProductDetail.this, "Có một lỗi xảy ra", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        toBag.setVisibility(VISIBLE);
+                                        Animation animation = AnimationUtils.loadAnimation(ProductDetail.this, R.anim.to_bag);
+                                        toBag.startAnimation(animation);
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                toBag.setVisibility(GONE);
+                                                count.setText("" + response.body().get(0).getSoLuong());
+                                                Animation animation = AnimationUtils.loadAnimation(ProductDetail.this, R.anim.count);
+                                                count.startAnimation(animation);
+                                            }
+                                        }, 1200);
+                                    }
+                                }
 
-                                        @Override
-                                        public void onFailure(Call<List<SoLuong>> call, Throwable t) {
-
-                                        }
-                                    });
+                                @Override
+                                public void onFailure(Call<List<SoLuong>> call, Throwable t) {
 
                                 }
-                            }, 1500);
+                            });
+
                             test = 0;
                             toolbar1.setVisibility(VISIBLE);
                             collapsingToolbarLayout.setVisibility(VISIBLE);
                             bottomsheet.setVisibility(GONE);
                             break;
                         }
-
                     case 1:
                         Log.i("an", "haha");
                         final ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
@@ -466,46 +481,35 @@ public class ProductDetail extends AppCompatActivity {
                                     .setSize(100, 100)
                                     .setDimAmount(0.5f)
                                     .show();
-                            float price = (orderP.getNumber() * soLuong.getGia());
-                            Call<List<OrderP>> callInsert = serviceApi.setOrder(orderP.getIdProductb(), name, orderP.getImagebag(), orderP.getSizebag(), orderP.getNumber(), price);
-                            callInsert.enqueue(new Callback<List<OrderP>>() {
+                            Call<Void> callInsert = serviceApi.setOrder(orderP.getIdProductb(), name, orderP.getImagebag(), orderP.getSizebag(), orderP.getNumber());
+                            callInsert.enqueue(new Callback<Void>() {
                                 @Override
-                                public void onResponse(Call<List<OrderP>> call, retrofit2.Response<List<OrderP>> response) {
-
-                                }
-
-                                @Override
-                                public void onFailure(Call<List<OrderP>> call, Throwable t) {
-
-                                }
-                            });
-
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    kProgressHUD.dismiss();
-                                    toBag.setVisibility(VISIBLE);
-                                    Glide.with(ProductDetail.this).load(RetrofitO.url + orderP.getImagebag())
-                                            .into(toBag);
-                                    Animation animation = AnimationUtils.loadAnimation(ProductDetail.this, R.anim.to_bag);
-                                    toBag.startAnimation(animation);
-                                    toolbar1.setVisibility(VISIBLE);
-                                    collapsingToolbarLayout.setVisibility(VISIBLE);
-                                    bottomsheet.setVisibility(GONE);
-                                    new Handler().postDelayed(new Runnable() {
+                                public void onResponse(Call<Void> call, retrofit2.Response<Void> response) {
+                                    ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
+                                    Call<List<SoLuong>> call2 = serviceApi.getSoLuong(name);
+                                    call2.enqueue(new Callback<List<SoLuong>>() {
                                         @Override
-                                        public void run() {
-                                            toBag.setVisibility(GONE);
-                                            ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
-                                            Call<List<SoLuong>> call = serviceApi.getSoLuong(name);
-                                            call.enqueue(new Callback<List<SoLuong>>() {
+                                        public void onResponse(Call<List<SoLuong>> call, final retrofit2.Response<List<SoLuong>> response) {
+                                            count.setVisibility(VISIBLE);
+                                            //tren da up to db
+                                            toBag.setVisibility(VISIBLE);
+                                            kProgressHUD.dismiss();
+                                            Glide.with(ProductDetail.this).load(RetrofitO.url + orderP.getImagebag())
+                                                    .into(toBag);
+                                            Animation animation = AnimationUtils.loadAnimation(ProductDetail.this, R.anim.to_bag);
+                                            toBag.startAnimation(animation);
+                                            toolbar1.setVisibility(VISIBLE);
+                                            collapsingToolbarLayout.setVisibility(VISIBLE);
+                                            bottomsheet.setVisibility(GONE);
+                                            new Handler().postDelayed(new Runnable() {
                                                 @Override
-                                                public void onResponse(Call<List<SoLuong>> call, retrofit2.Response<List<SoLuong>> response) {
-                                                    count.setVisibility(VISIBLE);
+                                                public void run() {
+                                                    toBag.setVisibility(GONE);
                                                     count.setText("" + response.body().get(0).getSoLuong());
-                                                    //tren da up to db
                                                     Animation animation = AnimationUtils.loadAnimation(ProductDetail.this, R.anim.count);
                                                     count.startAnimation(animation);
+                                                }
+                                            }, 1200);
                                                 }
 
                                                 @Override
@@ -514,9 +518,14 @@ public class ProductDetail extends AppCompatActivity {
                                                 }
                                             });
                                         }
-                                    }, 1500);
+
+                                @Override
+                                public void onFailure(Call<Void> call, Throwable t) {
+                                    Log.i("lop", "onResponse: kdkdkd " + t.getMessage());
+
                                 }
-                            }, 1500);
+                            });
+
                         }
                         test = 0;
                 }

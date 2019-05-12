@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         actionBar = findViewById(R.id.action_bar);
         search = findViewById(R.id.search_a);
         number = findViewById(R.id.text_number);
+        number.setVisibility(GONE);
         SharedPreferences preferences = this.getSharedPreferences("Accout", this.MODE_PRIVATE);
         name = preferences.getString("idName", "khong");
         ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);

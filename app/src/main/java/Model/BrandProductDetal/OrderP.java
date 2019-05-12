@@ -19,9 +19,16 @@ public class OrderP {
     @SerializedName("number")
     @Expose
     int number;
-    @SerializedName("price")
-    @Expose
     float price;
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
     @SerializedName("checked")
     @Expose
     int checked;

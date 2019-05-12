@@ -95,10 +95,15 @@ public class Bag extends Fragment implements Dialog.NoticeDialogListener {
         checkOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog = new Dialog();
-                dialog.setTargetFragment(Bag.this, 1);
-                dialog.show(getActivity().getSupportFragmentManager(), "chon di");
-
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("Accout", Context.MODE_PRIVATE);
+                String name = sharedPreferences.getString("idName", "khong");
+                if (name.equals("khong")) {
+                    Toast.makeText(getActivity(), "Bạn chưa đăng nhập", Toast.LENGTH_SHORT).show();
+                } else {
+                    dialog = new Dialog();
+                    dialog.setTargetFragment(Bag.this, 1);
+                    dialog.show(getActivity().getSupportFragmentManager(), "chon di");
+                }
             }
         });
         return view;
