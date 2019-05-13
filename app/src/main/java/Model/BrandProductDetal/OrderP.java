@@ -19,6 +19,8 @@ public class OrderP {
     @SerializedName("number")
     @Expose
     int number;
+    @SerializedName("price")
+    @Expose
     float price;
 
     public void setPrice(float price) {

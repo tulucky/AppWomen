@@ -63,7 +63,7 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     String nameUser;
     int s;
     float tong;
-    int id;
+    int ide;
     int cout = 0;
     int dem;
     public int tongSoLuong() {
@@ -82,6 +82,14 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
         return tong;
     }
+  /*  public float tongGia2() {
+        tong = 0;
+        for (int i = 0; i < data.size(); i++) {
+            Log.i("poi", "tongGia1: " + data.get(i).getNumber() + " " + data.get(i).getPrice());
+            tong = tong + data.get(i).getNumber() * data.get(i).getPrice();
+        }
+        return tong;
+    }*/
     /*public void capNhatGia(){
         final ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
         Call<List<SoLuong>> call2 = serviceApi.getPriceCheck(nameUser);
@@ -121,8 +129,8 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
+        Log.i("poi", "Gia1: " + data.get(i).getPrice());
         dem = i;
-        id = data.get(i).getId();
         final SoLuong soLuong = new SoLuong();
         //capNhatGia();
         final ViewHolderBag holder = (ViewHolderBag) viewHolder;
@@ -146,7 +154,6 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             @Override
             public void onResponse(Call<List<Product>> call, retrofit2.Response<List<Product>> response) {
                 dataProduct = response.body();
-                setGia(dataProduct.get(0).getPrice());
                 Log.i("pi", " " + dataProduct.get(0).getPrice());
                 holder.priceBag.setText(dataProduct.get(0).getName());
                 holder.originPriBag.setText(dataProduct.get(0).getOriginprice());
@@ -182,7 +189,9 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 data.remove(i);
                 notifyDataSetChanged();
                 ((MainActivity) mcontext).number.setText("" + tongSoLuong());
-                // capNhatGia();
+                if (data.size() == 0) {
+                    priceCheck.setText("" + 0.0 + "$");
+                }
             }
         });
         holder.plus.setOnClickListener(new View.OnClickListener() {
@@ -196,9 +205,11 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
                 holder.amount.setText("" + k);
                 data.get(i).setNumber(k);
+                //dung tao ide de ko truyen data.get(i).get(id) vao asytask nguoi dung xoa nhanh trong khi insert vao db se gay ra loi vi no mat id.
+                ide = data.get(i).getId();
                 ((MainActivity) mcontext).number.setText("" + tongSoLuong());
                 priceCheck.setText("" + tongGia() + "$");
-                new Asyn().execute(k);
+                new Asyn().execute(ide, k);
 
             }
         });
@@ -214,13 +225,12 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
                 holder.amount.setText("" + k);
                 data.get(i).setNumber(k);
+                ide = data.get(i).getId();
                 ((MainActivity) mcontext).number.setText("" + tongSoLuong());
                 priceCheck.setText("" + tongGia() + "$");
-                new Asyn().execute(k);
+                new Asyn().execute(ide, k);
             }
         });
-        data.get(dem).setPrice(State.price);
-        Log.i("co", "setGia: " + data.get(dem).getPrice());
         priceCheck.setText("" + tongGia() + "$");
         Log.i("pop", "onBindViewHolder: " + tongGia());
         holder.imageEdit.setOnClickListener(new View.OnClickListener() {
@@ -284,12 +294,11 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                             public void onClick(View v) {
                                 ((MainActivity) mcontext).number.setText("" + tongSoLuong());
                                 Toast.makeText(mcontext, "hhahah", Toast.LENGTH_LONG).show();
-                                float price = (data.get(i).getNumber() * soLuong.getGia());
                                 ServiceApi serviceApi1 = RetrofitO.getmRetrofit().create(ServiceApi.class);
                                 Log.i("ji", "" + data.get(i).getId() + " " + data.get(i).getImagebag() + " " + data.get(i).getSizebag() + " " +
                                         data.get(i).getNumber());
                                 Call<List<OrderP>> call = serviceApi1.updateOrderProduct(data.get(i).getId(), data.get(i).getImagebag(),
-                                        data.get(i).getSizebag(), data.get(i).getNumber(), price
+                                        data.get(i).getSizebag(), data.get(i).getNumber()
                                         //update by id of the orders
                                 );
                                 call.enqueue(new Callback<List<OrderP>>() {
@@ -389,13 +398,6 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     }
 
-    private void setGia(float price) {
-        State.addPrice(price);
-        cout++;
-
-        Log.i("om", "setGia: " + State.price);
-    }
-
   /*  public void capNhat(int i, int k){
         SharedPreferences sharedPref = mcontext.getSharedPreferences(
                 "Orders", Context.MODE_PRIVATE);
@@ -421,7 +423,7 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @Override
         protected Void doInBackground(Integer... integers) {
             ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
-            Call<Void> call = serviceApi.upNumberPrice(id, integers[0]);
+            Call<Void> call = serviceApi.upNumberPrice(integers[0], integers[1]);
             try {
                 Response<Void> response = call.execute();
                 Log.i("dd", "doInBackground: " + response);

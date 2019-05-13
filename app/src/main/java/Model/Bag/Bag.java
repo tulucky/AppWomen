@@ -122,7 +122,7 @@ public class Bag extends Fragment implements Dialog.NoticeDialogListener {
                     bagBag.setVisibility(View.VISIBLE);
                     textBag.setVisibility(View.VISIBLE);
                 }
-                Log.i("hh", " " + response.body());
+                // Log.i("hh", " " + response.body().get(0).getPrice());
                 daTa = response.body();
                 listOrder.setNestedScrollingEnabled(false);
                 AdapterBag adapterBag = new AdapterBag(getActivity(), daTa, updateProduct, layoutCheck, priceCheck);

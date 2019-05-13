@@ -61,7 +61,7 @@ public interface ServiceApi {
 
     @FormUrlEncoded
     @POST("orders.php")
-    Call<Void> setOrder(@Field("idProduct") int id, @Field("name") String name, @Field("image") String image, @Field("size") String size, @Field("number") int number);
+    Call<Void> setOrder(@Field("idProduct") int id, @Field("name") String name, @Field("image") String image, @Field("size") String size, @Field("number") int number, @Field("price") float price);
     //the value of a Field is option as long as match with $_post[value]
     @FormUrlEncoded
     @POST("listorders.php")
@@ -73,7 +73,7 @@ public interface ServiceApi {
 
     @FormUrlEncoded
     @POST("updateorder.php")
-    Call<List<OrderP>> updateOrderProduct(@Field("id") int id, @Field("image") String image, @Field("size") String size, @Field("number") int number, @Field("price") float price);
+    Call<List<OrderP>> updateOrderProduct(@Field("id") int id, @Field("image") String image, @Field("size") String size, @Field("number") int number);
 
     @FormUrlEncoded
     @POST("login.php")
