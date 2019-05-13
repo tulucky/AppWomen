@@ -72,11 +72,20 @@ public class Home extends Fragment {
     ImageView news;
     CircleImageView dressdress;
     CircleImageView tops;
+    ImageView intro0;
+    ImageView intro1;
+    ImageView intro2;
+    ImageView intro3;
+    ImageView intro4;
+    ImageView intro5;
+    ImageView intro6;
+    ImageView intro7;
+    ImageView intro8;
     android.support.design.widget.FloatingActionButton fab;
 
     public NestedScrollView nestMain;
     private static final String urlData0 = "http://192.168.1.109/wmshop/tops.php";
-    int[] sampleImages = {R.drawable.image_3, R.drawable.image_4, R.drawable.image_2, R.drawable.image_3};
+    int[] sampleImages = {0, 0, 0, 0};
 
     public Home() {
         super();
@@ -98,6 +107,15 @@ public class Home extends Fragment {
         news = view.findViewById(R.id.news);
         news.setImageResource(R.drawable.slide2);
         fab.hide();
+        intro0 = view.findViewById(R.id.intro0);
+        intro1 = view.findViewById(R.id.intro1);
+        intro2 = view.findViewById(R.id.intro2);
+        intro3 = view.findViewById(R.id.intro3);
+        intro4 = view.findViewById(R.id.intro4);
+        intro5 = view.findViewById(R.id.intro5);
+        intro6 = view.findViewById(R.id.intro6);
+        intro7 = view.findViewById(R.id.intro7);
+        intro8 = view.findViewById(R.id.intro8);
         final ProgressBar progressBar = view.findViewById(R.id.spin_kit);
         Sprite foldingCube = new FoldingCube();
         progressBar.setIndeterminateDrawable(foldingCube);
@@ -125,6 +143,15 @@ public class Home extends Fragment {
         carouselView = (CarouselView) view.findViewById(R.id.carouselView);
         carouselView.setPageCount(sampleImages.length);
         carouselView.setImageListener(imageListener);
+        Glide.with(getActivity()).load(R.drawable.lolo).into(intro0);
+        Glide.with(getActivity()).load(R.drawable.intro5).into(intro1);
+        Glide.with(getActivity()).load(R.drawable.hi).into(intro2);
+        Glide.with(getActivity()).load(R.drawable.ff).into(intro3);
+        Glide.with(getActivity()).load(R.drawable.intro6).into(intro4);
+        Glide.with(getActivity()).load(R.drawable.intro3).into(intro5);
+        Glide.with(getActivity()).load(R.drawable.intro2).into(intro6);
+        Glide.with(getActivity()).load(R.drawable.ff).into(intro7);
+        Glide.with(getActivity()).load(R.drawable.intro6).into(intro8);
         final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         GridProduct gridProduct = new GridProduct();

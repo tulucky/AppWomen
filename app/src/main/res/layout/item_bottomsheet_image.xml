@@ -11,6 +11,5 @@
         android:id="@+id/image_color"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/vay1e" />
+        android:scaleType="centerCrop" />
 </android.support.constraint.ConstraintLayout>

@@ -34,7 +34,9 @@ public class Brand extends Fragment {
     int pagePosition;
     CarouselView carouselView;
     RecyclerView recycleBrand;
-    int[] sampleImages = {R.drawable.image_3, R.drawable.image_2, R.drawable.image_3};
+    ImageView intro1b;
+    ImageView intro2b;
+    int[] sampleImages = {0, 0, 0};
 
     public Brand() {
         super();
@@ -48,6 +50,10 @@ public class Brand extends Fragment {
         carouselView = view.findViewById(R.id.carouselView);
         carouselView.setPageCount(sampleImages.length);
         carouselView.setImageListener(imageListener);
+        intro1b = view.findViewById(R.id.intro1_b);
+        intro2b = view.findViewById(R.id.intro2_b);
+        Glide.with(getActivity()).load(R.drawable.intro2).into(intro1b);
+        Glide.with(getActivity()).load(R.drawable.intro3).into(intro2b);
         ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
         Call<List<BrandModel>> call = serviceApi.brandList();
         call.enqueue(new Callback<List<BrandModel>>() {

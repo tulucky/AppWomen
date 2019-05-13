@@ -17,15 +17,14 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/imageView14"
+                android:id="@+id/intro2_b"
                 android:layout_width="175dp"
                 android:layout_height="123dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView13"
-                app:layout_constraintTop_toBottomOf="@+id/imageView16"
-                app:srcCompat="@drawable/intro3" />
+                app:layout_constraintStart_toEndOf="@+id/intro1_b"
+                app:layout_constraintTop_toBottomOf="@+id/imageView16" />
 
             <com.synnapps.carouselview.CarouselView
                 android:id="@+id/carouselView"
@@ -79,15 +78,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
             <ImageView
-                android:id="@+id/imageView13"
+                android:id="@+id/intro1_b"
                 android:layout_width="175dp"
                 android:layout_height="123dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toStartOf="@+id/imageView14"
+                app:layout_constraintEnd_toStartOf="@+id/intro2_b"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageView16"
-                app:srcCompat="@drawable/intro2" />
+                app:layout_constraintTop_toBottomOf="@id/imageView16" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/list_brand"
@@ -97,7 +95,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView13" />
+                app:layout_constraintTop_toBottomOf="@+id/intro1_b" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>
 </android.support.constraint.ConstraintLayout>
