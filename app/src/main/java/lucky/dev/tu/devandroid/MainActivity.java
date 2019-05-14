@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
@@ -146,28 +147,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 account.setImageResource(R.drawable.avatar1);
                 tAccount.setTextColor(getResources().getColor(R.color.pink));
                 fragmentManager.beginTransaction().replace(R.id.container, resum).commit();
+                active = resum;
                 break;
             case 5:
-                if (accountM.isHidden()) {
-                    fragmentManager.beginTransaction().hide(active).show(accountM).commit();
-                    active = accountM;
-                    actionBar.setVisibility(View.GONE);
-                    bag.setImageResource(R.drawable.bag);
-                    tBag.setTextColor(getResources().getColor(R.color.black));
-                    introhome.setImageResource(R.drawable.home);
-                    tHome.setTextColor(getResources().getColor(R.color.black));
-                    brand.setImageResource(R.drawable.crow);
-                    active = accountM;
-                    tBrand.setTextColor(getResources().getColor(R.color.black));
-                    account.setImageResource(R.drawable.avatar1);
-                    tAccount.setTextColor(getResources().getColor(R.color.pink));
-                }
+                actionBar.setVisibility(View.GONE);
+                bag.setImageResource(R.drawable.bag);
+                tBag.setTextColor(getResources().getColor(R.color.black));
+                introhome.setImageResource(R.drawable.home);
+                tHome.setTextColor(getResources().getColor(R.color.black));
+                brand.setImageResource(R.drawable.crow);
+                tBrand.setTextColor(getResources().getColor(R.color.black));
+                account.setImageResource(R.drawable.avatar1);
+                tAccount.setTextColor(getResources().getColor(R.color.pink));
+                fragmentManager.beginTransaction().replace(R.id.container, accountM).commit();
+                active = accountM;
                 break;
             default:
-                active = home;
                 FragmentTransaction transaction3 = fragmentManager.beginTransaction();
                 transaction3.add(R.id.container, home);
                 transaction3.commit();
+                active = home;
         }
 
 
@@ -228,8 +227,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bag:
                 if (bagM.isHidden()) {
+                    // neu de day active = bagM no se an bag dang dung tai dong duoi
                     fragmentManager.beginTransaction().hide(active).show(bagM).commit();
-                    //chu y active phai o sau dong nay khi do frament da dc them vao
+                    //chu y active phai o sau dong nay
                     active = bagM;
                     actionBar.setVisibility(View.GONE);
                     bag.setImageResource(R.drawable.bag1);
@@ -337,6 +337,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     tBrand.setTextColor(getResources().getColor(R.color.black));
                     account.setImageResource(R.drawable.avatar);
                     tAccount.setTextColor(getResources().getColor(R.color.black));
+                } else if (!home.isAdded()) {
+                    fragmentManager.beginTransaction().hide(active).commit();
+                    active = home;
+                    actionBar.setVisibility(View.VISIBLE);
+                    bag.setImageResource(R.drawable.bag);
+                    tBag.setTextColor(getResources().getColor(R.color.black));
+                    introhome.setImageResource(R.drawable.home1);
+                    tHome.setTextColor(getResources().getColor(R.color.pink));
+                    brand.setImageResource(R.drawable.crow);
+                    tBrand.setTextColor(getResources().getColor(R.color.black));
+                    account.setImageResource(R.drawable.avatar);
+                    tAccount.setTextColor(getResources().getColor(R.color.black));
+                    fragmentManager.beginTransaction().add(R.id.container, home).commit();
                 }
                 break;
         }
