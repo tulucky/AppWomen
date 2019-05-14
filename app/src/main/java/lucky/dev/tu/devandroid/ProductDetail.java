@@ -568,7 +568,6 @@ public class ProductDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent(ProductDetail.this, MainActivity.class);
-                intent1.putExtra("ide", 1);
                 ProductDetail.this.startActivity(intent1);
             }
         });
