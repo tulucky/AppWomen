@@ -84,7 +84,7 @@ public interface ServiceApi {
     Call<List<Alter>> signUp(@Field("name") String namne, @Field("pass") String pass);
     @FormUrlEncoded
     @POST("checkout.php")
-    Call<List<String>> checkOut(@Field("name") String namne, @Field("idorder") int id, @Field("status") String status);
+    Call<Void> checkOut(@Field("name") String namne, @Field("idorder") int id, @Field("status") String status);
 
     @FormUrlEncoded
     @POST("orderedproducts.php")

@@ -156,43 +156,45 @@ public class Bag extends Fragment implements Dialog.NoticeDialogListener {
         call.enqueue(new Callback<List<OrderP>>() {
             @Override
             public void onResponse(Call<List<OrderP>> call, Response<List<OrderP>> response) {
+                final int size = response.body().size();
+                final KProgressHUD kProgressHUD = KProgressHUD.create(getActivity())
+                        .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                        .setCancellable(true)
+                        .setBackgroundColor(Color.GRAY)
+                        .setAnimationSpeed(2)
+                        .setSize(100, 100)
+                        .setDimAmount(0.5f)
+                        .show();
                 for (int i = 0; i < response.body().size(); i++) {
                     int idOrder = response.body().get(i).getId();
                     ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
-                    Call<List<String>> callCheck = serviceApi.checkOut(name, idOrder, "checked");
-                    callCheck.enqueue(new Callback<List<String>>() {
+                    Call<Void> callCheck = serviceApi.checkOut(name, idOrder, "checked");
+                    final int finalI = i;
+                    callCheck.enqueue(new Callback<Void>() {
                         @Override
-                        public void onResponse(Call<List<String>> call, Response<List<String>> response) {
-
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            if (finalI == size - 1) {
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Log.i("ooo", name);
+                                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                                        intent.putExtra("ide", 3);
+                                        getActivity().startActivity(intent);
+                                        kProgressHUD.dismiss();
+                                    }
+                                }, 1000);
+                            }
                         }
 
                         @Override
-                        public void onFailure(Call<List<String>> call, Throwable t) {
+                        public void onFailure(Call<Void> call, Throwable t) {
 
                         }
                     });
-                    if (i == response.body().size() - 1) {
-                        final KProgressHUD kProgressHUD = KProgressHUD.create(getActivity())
-                                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                                .setCancellable(true)
-                                .setBackgroundColor(Color.GRAY)
-                                .setAnimationSpeed(2)
-                                .setSize(100, 100)
-                                .setDimAmount(0.5f)
-                                .show();
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                Log.i("ooo", name);
-                                Intent intent = new Intent(getActivity(), MainActivity.class);
-                                intent.putExtra("ide", 3);
-                                getActivity().startActivity(intent);
-                                kProgressHUD.dismiss();
-                            }
-                        }, 2000);
-                    }
+
                 }
-            }
+                }
 
             @Override
             public void onFailure(Call<List<OrderP>> call, Throwable t) {

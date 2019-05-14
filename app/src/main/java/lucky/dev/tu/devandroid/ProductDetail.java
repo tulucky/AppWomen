@@ -473,7 +473,7 @@ public class ProductDetail extends AppCompatActivity {
                         Log.i("an", "haha");
                         final ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
                         //Toast.makeText(ProductDetail.this, "vao tao roi", Toast.LENGTH_LONG).show();
-                        Toast.makeText(ProductDetail.this, " " + orderP.getIdProductb() + " " + orderP.getImagebag() + " " + orderP.getSizebag() + orderP.getNumber(), Toast.LENGTH_SHORT).show();
+                        /*Toast.makeText(ProductDetail.this, " " + orderP.getIdProductb() + " " + orderP.getImagebag() + " " + orderP.getSizebag() + orderP.getNumber(), Toast.LENGTH_SHORT).show();*/
                         if (orderP.getImagebag() == null | orderP.getSizebag() == null) {
                             Toast.makeText(ProductDetail.this, "Vui lòng chọn màu sắc và kích thước !", Toast.LENGTH_SHORT).show();
                         } else {
