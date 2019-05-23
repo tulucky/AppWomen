@@ -62,17 +62,17 @@ public class BrandAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 Glide.with(mcontext)
                         .load(RetrofitO.url + response.body().get(0).getImage())
                         .into(holder.item1);
-                holder.price1.setText(response.body().get(0).getName());
+                holder.price1.setText(response.body().get(0).getNameB() + "-" + response.body().get(0).getOriginprice() + "$");
                 holder.sale1.setText(response.body().get(0).getSale());
                 Glide.with(mcontext)
                         .load(RetrofitO.url + response.body().get(1).getImage())
                         .into(holder.item2);
-                holder.price2.setText(response.body().get(1).getName());
+                holder.price2.setText(response.body().get(1).getNameB() + "-" + response.body().get(1).getOriginprice() + "$");
                 holder.sale2.setText(response.body().get(1).getSale());
                 Glide.with(mcontext)
                         .load(RetrofitO.url + response.body().get(2).getImage())
                         .into(holder.item3);
-                holder.price3.setText(response.body().get(2).getName());
+                holder.price3.setText(response.body().get(2).getNameB() + "-" + response.body().get(2).getOriginprice() + "$");
                 holder.sale3.setText(response.body().get(2).getSale());
 
                 holder.item1.setOnClickListener(new View.OnClickListener() {

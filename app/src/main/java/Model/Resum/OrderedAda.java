@@ -37,7 +37,7 @@ public class OrderedAda extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         Holder holder = (Holder) viewHolder;
         Glide.with(mcontext).load(RetrofitO.url + products.get(i).getImage())
                 .into(holder.image);
-        holder.name.setText(products.get(i).getName());
+        holder.name.setText(products.get(i).getNameb() + "-" + products.get(i).getPrice());
         holder.size.setText(products.get(i).getSize());
         holder.number.setText(products.get(i).getNumber());
         holder.date.setText(products.get(i).getTime());

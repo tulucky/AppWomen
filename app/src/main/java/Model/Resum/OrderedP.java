@@ -12,6 +12,12 @@ public class OrderedP {
     @SerializedName("name")
     @Expose
     private String name;
+    @SerializedName("price")
+    @Expose
+    private float price;
+    @SerializedName("nameb")
+    @Expose
+    private String nameb;
     @SerializedName("size")
     @Expose
     private String size;
@@ -21,6 +27,14 @@ public class OrderedP {
     @SerializedName("time")
     @Expose
     private String time;
+
+    public float getPrice() {
+        return price;
+    }
+
+    public String getNameb() {
+        return nameb;
+    }
 
     public String getImage() {
         return image;

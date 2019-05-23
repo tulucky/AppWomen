@@ -94,7 +94,7 @@ public class SearchAda extends RecyclerView.Adapter<RecyclerView.ViewHolder> imp
                     Log.i("lp", " " + filterPattern);
 
                     for (Product item : temp) {
-                        String convert = Normalizer.normalize(item.getTitle(), Normalizer.Form.NFD);
+                        String convert = Normalizer.normalize(item.getName(), Normalizer.Form.NFD);
                         Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
                         String khongDau = pattern.matcher(convert).replaceAll("");
                         if (khongDau.toLowerCase().contains(filterPattern)) {
