@@ -118,23 +118,25 @@ public class Product {
     public Product() {
     }
 
-    public Product(int id, String image, String name, String originprice, String sale) {
+    public Product(int id, String image, String nameb, double price, String originprice, String sale) {
         super();
         this.id = id;
-        this.name = name;
+        this.nameB = nameb;
         this.originprice = originprice;
         this.sale = sale;
+        this.price = (float) price;
         this.image = image;
     }
 
-    public Product(int id, String title, String image, String name, String originprice, String sale) {
+    public Product(int id, String name, String image, String nameb, double price, String originprice, String sale) {
         super();
         this.id = id;
-        this.name = name;
+        this.nameB = nameb;
         this.originprice = originprice;
         this.sale = sale;
         this.image = image;
-        this.title = title;
+        this.title = name;
+        this.price = (float) price;
     }
 
     public String getNameB() {

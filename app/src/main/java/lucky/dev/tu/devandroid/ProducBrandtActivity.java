@@ -257,24 +257,24 @@ public class ProducBrandtActivity extends AppCompatActivity {
                 Glide.with(ProducBrandtActivity.this)
                         .load(RetrofitO.url + response.body().get(0).getImage())
                         .into(image1p);
-                gia1p.setText(response.body().get(0).getName());
+                gia1p.setText(response.body().get(0).getNameB() + "-" + response.body().get(0).getPrice() + "$");
                 sale1p.setText(response.body().get(0).getSale());
-                giagoc1p.setText(response.body().get(0).getOriginprice());
+                giagoc1p.setText(response.body().get(0).getNameB() + "" + response.body().get(0).getOriginprice() + "$");
                 giagoc1p.setPaintFlags(giagoc1p.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 //null do ko chon cot originprice trong file php
                 Glide.with(ProducBrandtActivity.this)
                         .load(RetrofitO.url + response.body().get(1).getImage())
                         .into(image2p);
-                gia2p.setText(response.body().get(1).getName());
+                gia2p.setText(response.body().get(1).getNameB() + "-" + response.body().get(1).getPrice() + "$");
                 sale2p.setText(response.body().get(1).getSale());
-                giagoc2p.setText(response.body().get(1).getOriginprice());
+                giagoc2p.setText(response.body().get(1).getNameB() + "" + response.body().get(1).getOriginprice() + "$");
                 giagoc2p.setPaintFlags(giagoc2p.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 Glide.with(ProducBrandtActivity.this)
                         .load(RetrofitO.url + response.body().get(2).getImage())
                         .into(image3p);
-                gia3p.setText(response.body().get(2).getName());
+                gia3p.setText(response.body().get(2).getNameB() + "-" + response.body().get(2).getPrice() + "$");
                 sale3p.setText(response.body().get(2).getSale());
-                giagoc3p.setText(response.body().get(2).getOriginprice());
+                giagoc3p.setText(response.body().get(2).getNameB() + "" + response.body().get(2).getOriginprice() + "$");
                 giagoc3p.setPaintFlags(giagoc3p.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
                 image1p.setOnClickListener(new View.OnClickListener() {

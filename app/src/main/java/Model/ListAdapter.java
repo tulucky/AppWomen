@@ -45,8 +45,8 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 .load(RetrofitO.url + listProduct.get(position).getImage())
                 .into(mholder.mImage);
         mholder.titleName.setText(listProduct.get(position).getTitle());
-        mholder.mPrice.setText(listProduct.get(position).getName());
-        mholder.mGiaGoc.setText(listProduct.get(position).getOriginprice());
+        mholder.mPrice.setText(listProduct.get(position).getNameB() + "-" + listProduct.get(position).getPrice() + "$");
+        mholder.mGiaGoc.setText(listProduct.get(position).getNameB() + "" + listProduct.get(position).getOriginprice() + "$");
         mholder.phanTram.setText(listProduct.get(position).getSale());
         mholder.mGiaGoc.setPaintFlags( mholder.mGiaGoc.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         mholder.mImage.setOnClickListener(new View.OnClickListener() {

@@ -3,18 +3,23 @@ package Model;
 public class ItemRecy0 {
     private int id;
     private String image;
-    private String price;
+    private float price;
+    private String nameb;
     private String giaGoc;
     private String phanTram;
 
 
-    public ItemRecy0(int id, String image, String price, String phanTram) {
+    public ItemRecy0(int id, String image, String nameb, double price, String phanTram) {
         this.id = id;
         this.image = image;
-        this.price = price;
+        this.nameb = nameb;
+        this.price = (float) price;
         this.phanTram = phanTram;
     }
 
+    public String getNameb() {
+        return nameb;
+    }
     public int getId() {
         return id;
     }
@@ -23,7 +28,7 @@ public class ItemRecy0 {
         return image;
     }
 
-    public String getPrice() {
+    public float getPrice() {
         return price;
     }
 

@@ -78,8 +78,8 @@ public class Adapterpb extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
             });
         }
-        mholder.mPrice.setText(listProduct.get(position).getName());
-        mholder.mGiaGoc.setText(listProduct.get(position).getOriginprice());
+        mholder.mPrice.setText(listProduct.get(position).getNameB() + "-" + listProduct.get(position).getPrice() + "$");
+        mholder.mGiaGoc.setText(listProduct.get(position).getNameB() + "" + listProduct.get(position).getOriginprice() + "$");
         mholder.phanTram.setText(listProduct.get(position).getSale());
         mholder.mGiaGoc.setPaintFlags(mholder.mGiaGoc.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         final State state = new State();

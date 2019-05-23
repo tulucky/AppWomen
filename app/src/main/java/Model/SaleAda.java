@@ -34,7 +34,7 @@ public class SaleAda extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         ViewHolder holder = (ViewHolder) viewHolder;
-        holder.name.setText(products.get(i).getName());
+        holder.name.setText(products.get(i).getNameB() + "-" + products.get(i).getPrice() + "$");
         holder.sale.setText(products.get(i).getSale());
         Glide.with(context).load(RetrofitO.url + products.get(i).getImage()).into(holder.image);
 

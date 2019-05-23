@@ -155,8 +155,8 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             public void onResponse(Call<List<Product>> call, retrofit2.Response<List<Product>> response) {
                 dataProduct = response.body();
                 Log.i("pi", " " + dataProduct.get(0).getPrice());
-                holder.priceBag.setText(dataProduct.get(0).getName());
-                holder.originPriBag.setText(dataProduct.get(0).getOriginprice());
+                holder.priceBag.setText(dataProduct.get(0).getNameB() + "-" + dataProduct.get(0).getPrice() + "$");
+                holder.originPriBag.setText(dataProduct.get(0).getNameB() + "-" + dataProduct.get(0).getOriginprice() + "$");
                 holder.originPriBag.setPaintFlags(holder.originPriBag.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 holder.sale.setText(dataProduct.get(0).getSale());
                 holder.desBag.setText(dataProduct.get(0).getDestile());
@@ -254,8 +254,8 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         subUp = updateProduct.findViewById(R.id.sub_up);
                         plusUp = updateProduct.findViewById(R.id.plus_up);
                         update = updateProduct.findViewById(R.id.bottom_update);
-                        price.setText(response.body().get(0).getName());
-                        originPrice.setText(response.body().get(0).getOriginprice());
+                        price.setText(response.body().get(0).getNameB() + "-" + response.body().get(0).getPrice() + "$");
+                        originPrice.setText(response.body().get(0).getNameB() + "-" + response.body().get(0).getOriginprice() + "$");
                         originPrice.setPaintFlags(originPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                         name.setText(response.body().get(0).getDestile());
                         number.setText("" + data.get(i).getNumber());

@@ -65,9 +65,10 @@ public class ListProduct extends Fragment {
                             for (int i = 0; i < aray.length(); i++) {
                                 // chu y du lieu tra ve tu url len de la acsoc thi ta moi getdc jsonobject
                                 JSONObject a = aray.getJSONObject(i);
-                                listData.add(new Product(a.getInt("id"), a.getString("title"),
+                                listData.add(new Product(a.getInt("id"), a.getString("name"),
                                         a.getString("image"),
-                                        a.getString("name"),
+                                        a.getString("nameb"),
+                                        a.getDouble("price"),
                                         a.getString("originprice"),
                                         a.getString("sale"))
                                 );

@@ -606,13 +606,13 @@ public class ProductDetail extends AppCompatActivity {
                 Log.i("pd", " " + daTa);
                 soLuong.setGia(aProduct.get(0).getPrice());
                 nameB.setText(aProduct.get(0).getNameB());
-                aProductDes.setText(aProduct.get(0).getTitle());
-                aProductName.setText(aProduct.get(0).getName());
-                originPrice.setText(aProduct.get(0).getOriginprice());
+                aProductDes.setText(aProduct.get(0).getName());
+                aProductName.setText(aProduct.get(0).getNameB() + "-" + aProduct.get(0).getPrice() + "$");
+                originPrice.setText(aProduct.get(0).getNameB() + "-" + aProduct.get(0).getOriginprice() + "$");
                 originPrice.setPaintFlags(originPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 sale.setText(aProduct.get(0).getSale());
-                priceB.setText(aProduct.get(0).getName());
-                originPriceB.setText(aProduct.get(0).getOriginprice());
+                priceB.setText(aProduct.get(0).getNameB() + "-" + aProduct.get(0).getPrice() + "$");
+                originPriceB.setText(aProduct.get(0).getNameB() + "-" + aProduct.get(0).getOriginprice() + "$");
                 originPriceB.setPaintFlags(originPriceB.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 desscriptionB.setText(aProduct.get(0).getDestile());
 
@@ -679,7 +679,8 @@ public class ProductDetail extends AppCompatActivity {
                                 // chu y du lieu tra ve tu url len de la acsoc thi ta moi getdc jsonobject
                                 JSONObject a = aray.getJSONObject(i);
                                 list.add(new Product(a.getInt("id"), a.getString("image"),
-                                        a.getString("name"),
+                                        a.getString("nameb"),
+                                        a.getDouble("price"),
                                         a.getString("originprice"),
                                         a.getString("sale"))
                                 );

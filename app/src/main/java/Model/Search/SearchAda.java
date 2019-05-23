@@ -51,9 +51,9 @@ public class SearchAda extends RecyclerView.Adapter<RecyclerView.ViewHolder> imp
         HolderView holder = (HolderView) viewHolder;
         Glide.with(context).load(RetrofitO.url + products.get(i).getImage())
                 .into(holder.image);
-        holder.name.setText(products.get(i).getTitle());
+        holder.name.setText(products.get(i).getName());
         holder.sale.setText(products.get(i).getSale());
-        holder.price.setText(products.get(i).getName());
+        holder.price.setText(products.get(i).getNameB() + "-" + products.get(i).getPrice() + "$");
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

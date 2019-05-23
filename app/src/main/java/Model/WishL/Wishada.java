@@ -43,10 +43,10 @@ public class Wishada extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         Holder holder = (Holder) viewHolder;
         Glide.with(mcontext).load(RetrofitO.url + products.get(i).getImage())
                 .into(holder.imageWl);
-        holder.nameWl.setText(products.get(i).getTitle());
-        holder.oPriceWl.setText(products.get(i).getOriginprice());
+        holder.nameWl.setText(products.get(i).getName());
+        holder.oPriceWl.setText(products.get(i).getNameB() + "-" + products.get(i).getOriginprice() + "$");
         holder.oPriceWl.setPaintFlags(holder.oPriceWl.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        holder.priceWl.setText(products.get(i).getName());
+        holder.priceWl.setText(products.get(i).getNameB() + "-" + products.get(i).getPrice() + "$");
         holder.saleWl.setText(products.get(i).getSale());
         holder.lovedwl.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -47,8 +47,8 @@ public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         Glide.with(mcontext)
                 .load(RetrofitO.url + listProduct.get(position).getImage())
                 .into(mholder.mImage);
-        mholder.mPrice.setText(listProduct.get(position).getName());
-        mholder.mGiaGoc.setText(listProduct.get(position).getOriginprice());
+        mholder.mPrice.setText(listProduct.get(position).getNameB() + "-" + listProduct.get(position).getPrice() + "$");
+        mholder.mGiaGoc.setText(listProduct.get(position).getNameB() + "" + listProduct.get(position).getOriginprice() + "$");
         mholder.phanTram.setText(listProduct.get(position).getSale());
         mholder.mGiaGoc.setPaintFlags(mholder.mGiaGoc.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         final State state = new State();

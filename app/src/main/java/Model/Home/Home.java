@@ -84,7 +84,7 @@ public class Home extends Fragment {
     android.support.design.widget.FloatingActionButton fab;
 
     public NestedScrollView nestMain;
-    private static final String urlData0 = "http://192.168.1.109/wmshop/tops.php";
+    private static final String urlData0 = "https://shoplady668.000webhostapp.com//allproducts.php";
     int[] sampleImages = {0, 0, 0, 0};
 
     public Home() {
@@ -246,7 +246,8 @@ public class Home extends Fragment {
                                 // chu y du lieu tra ve tu url len de la acsoc thi ta moi getdc jsonobject
                                 JSONObject a = aray.getJSONObject(i);
                                 containerZezo.add(new ItemRecy0(a.getInt("id"), a.getString("image"),
-                                        a.getString("name"),
+                                        a.getString("nameb"),
+                                        a.getDouble("price"),
                                         a.getString("sale"))
                                 );
                             }

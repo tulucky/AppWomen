@@ -45,7 +45,7 @@ public class AdapterZezo extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         Glide.with(mcontext)
                 .load(RetrofitO.url + mitem.get(position).getImage())
                 .into(mholder.mImage);
-        mholder.mPrice.setText(mitem.get(position).getPrice());
+        mholder.mPrice.setText(mitem.get(position).getNameb() + "-" + mitem.get(position).getPrice() + "$");
         mholder.phanTram.setText(mitem.get(position).getPhanTram());
         mholder.mImage.setOnClickListener(new View.OnClickListener() {
             @Override
