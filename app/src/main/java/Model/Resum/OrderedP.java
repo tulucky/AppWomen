@@ -24,7 +24,7 @@ public class OrderedP {
     @SerializedName("number")
     @Expose
     private String number;
-    @SerializedName("time")
+    @SerializedName("thoigiandatmua")
     @Expose
     private String time;
 

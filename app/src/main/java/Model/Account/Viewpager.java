@@ -19,11 +19,13 @@ public class Viewpager extends FragmentPagerAdapter {
     public Fragment getItem(int i) {
         return fragments.get(i);
     }
+    //tra ve item tai vi tri i
 
     @Override
     public int getCount() {
         return fragments.size();
     }
+    // tra ve so luong item muon hien thi tren viewpager
 
     @Nullable
     @Override

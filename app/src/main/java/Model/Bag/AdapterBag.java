@@ -79,8 +79,9 @@ public class AdapterBag extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         for (int i = 0; i < data.size(); i++) {
             Log.i("poi", "tongGia1: " + data.get(i).getNumber() + " " + data.get(i).getPrice());
             tong = tong + data.get(i).getNumber() * data.get(i).getPrice();
+
         }
-        return tong;
+        return Math.round(tong);
     }
   /*  public float tongGia2() {
         tong = 0;

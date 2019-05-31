@@ -168,7 +168,7 @@ public class Bag extends Fragment implements Dialog.NoticeDialogListener {
                 for (int i = 0; i < response.body().size(); i++) {
                     int idOrder = response.body().get(i).getId();
                     ServiceApi serviceApi = RetrofitO.getmRetrofit().create(ServiceApi.class);
-                    Call<Void> callCheck = serviceApi.checkOut(name, idOrder, "checked");
+                    Call<Void> callCheck = serviceApi.checkOut(idOrder);
                     final int finalI = i;
                     callCheck.enqueue(new Callback<Void>() {
                         @Override
